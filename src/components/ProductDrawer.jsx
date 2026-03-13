@@ -70,7 +70,7 @@ export default function ProductDrawer({ product, onClose }) {
             background: `linear-gradient(135deg, ${hex}, ${hex}dd)`,
           }}
         >
-          <ShoeIcon light={!light} className="w-40 h-28" />
+          <ShoeIcon light={!light} className="w-40 h-28" category={product.category} />
         </div>
 
         {/* Product info */}

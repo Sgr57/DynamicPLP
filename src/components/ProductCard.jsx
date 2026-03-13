@@ -60,7 +60,7 @@ export default function ProductCard({ product, onCardClick }) {
           background: `linear-gradient(135deg, ${hex}, ${hex}dd)`,
         }}
       >
-        <ShoeIcon light={!light} />
+        <ShoeIcon light={!light} category={product.category} />
       </div>
 
       <div className="p-3">
