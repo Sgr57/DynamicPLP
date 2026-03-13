@@ -27,12 +27,12 @@ export default function ModelLoader({ progress, isOverlay, onSkip }) {
         <p className="text-xs text-gray-500 mt-2 truncate">{text}</p>
       </div>
 
-      {isOverlay && onSkip && (
+      {onSkip && (
         <button
           onClick={onSkip}
           className="text-sm text-gray-400 hover:text-white transition-colors underline"
         >
-          Naviga mentre scarica
+          {isOverlay ? 'Naviga mentre scarica' : 'Salta caricamento modello'}
         </button>
       )}
     </div>

@@ -44,10 +44,11 @@ export default function App() {
         setHasPreWeights(true)
       }
       setStoreReady(true)
+      refreshProducts()
       setAppState('model_loading')
     })
 
-    if ('serviceWorker' in navigator) {
+    if ('serviceWorker' in navigator && import.meta.env.PROD) {
       navigator.serviceWorker.register('/sw.js')
     }
   }, [])
@@ -102,7 +103,7 @@ export default function App() {
   }
 
   if (appState === 'model_loading' && !hasPreWeights) {
-    return <ModelLoader progress={progress} isOverlay={false} />
+    return <ModelLoader progress={progress} isOverlay={false} onSkip={() => setAppState('browsing')} />
   }
 
   return (
