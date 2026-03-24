@@ -6,14 +6,38 @@
     "category": "running",
     "price": 89,
     "gender": "uomo",
-    "styles": ["casual", "urban"],
+    "styles": [
+      "casual",
+      "urban"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "arancione", "hex": "#F97316", "inStock": 0 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      },
+      {
+        "color": "rosso",
+        "hex": "#E53E3E",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "arancione",
+        "hex": "#F97316",
+        "inStock": 0
+      }
+    ],
+    "design": "solid"
   },
   {
     "id": "shoe_002",
@@ -22,14 +46,38 @@
     "category": "running",
     "price": 129,
     "gender": "unisex",
-    "styles": ["sporty", "minimal"],
+    "styles": [
+      "sporty",
+      "minimal"
+    ],
     "variants": [
-      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "verde", "hex": "#10B981", "inStock": 1 },
-      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
-    ]
+      {
+        "color": "grigio chiaro",
+        "hex": "#D1D5DB",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "verde",
+        "hex": "#10B981",
+        "inStock": 1
+      },
+      {
+        "color": "celeste",
+        "hex": "#67E8F9",
+        "inStock": 1
+      },
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      }
+    ],
+    "design": "stripe"
   },
   {
     "id": "shoe_003",
@@ -38,13 +86,33 @@
     "category": "running",
     "price": 149,
     "gender": "uomo",
-    "styles": ["sporty", "urban"],
+    "styles": [
+      "sporty",
+      "urban"
+    ],
     "variants": [
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
-      { "color": "arancione", "hex": "#F97316", "inStock": 1 }
-    ]
+      {
+        "color": "rosso",
+        "hex": "#E53E3E",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "blu",
+        "hex": "#3B82F6",
+        "inStock": 1
+      },
+      {
+        "color": "arancione",
+        "hex": "#F97316",
+        "inStock": 1
+      }
+    ],
+    "design": "dots"
   },
   {
     "id": "shoe_004",
@@ -53,14 +121,38 @@
     "category": "running",
     "price": 79,
     "gender": "donna",
-    "styles": ["casual", "minimal"],
+    "styles": [
+      "casual",
+      "minimal"
+    ],
     "variants": [
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "verde", "hex": "#10B981", "inStock": 1 },
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
-      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
-      { "color": "corallo", "hex": "#F87171", "inStock": 0 }
-    ]
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      },
+      {
+        "color": "verde",
+        "hex": "#10B981",
+        "inStock": 1
+      },
+      {
+        "color": "blu",
+        "hex": "#3B82F6",
+        "inStock": 1
+      },
+      {
+        "color": "rosa",
+        "hex": "#EC4899",
+        "inStock": 1
+      },
+      {
+        "color": "corallo",
+        "hex": "#F87171",
+        "inStock": 0
+      }
+    ],
+    "design": "mesh"
   },
   {
     "id": "shoe_005",
@@ -69,14 +161,37 @@
     "category": "running",
     "price": 159,
     "gender": "unisex",
-    "styles": ["sporty"],
+    "styles": [
+      "sporty"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
-      { "color": "giallo", "hex": "#EAB308", "inStock": 1 },
-      { "color": "verde", "hex": "#10B981", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "rosso",
+        "hex": "#E53E3E",
+        "inStock": 1
+      },
+      {
+        "color": "blu",
+        "hex": "#3B82F6",
+        "inStock": 1
+      },
+      {
+        "color": "giallo",
+        "hex": "#EAB308",
+        "inStock": 1
+      },
+      {
+        "color": "verde",
+        "hex": "#10B981",
+        "inStock": 1
+      }
+    ],
+    "design": "zigzag"
   },
   {
     "id": "shoe_006",
@@ -85,13 +200,33 @@
     "category": "running",
     "price": 119,
     "gender": "uomo",
-    "styles": ["urban", "minimal"],
+    "styles": [
+      "urban",
+      "minimal"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 },
-      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "blu scuro",
+        "hex": "#1E3A5F",
+        "inStock": 1
+      },
+      {
+        "color": "viola",
+        "hex": "#8B5CF6",
+        "inStock": 1
+      }
+    ],
+    "design": "gradient"
   },
   {
     "id": "shoe_007",
@@ -100,14 +235,38 @@
     "category": "running",
     "price": 99,
     "gender": "donna",
-    "styles": ["casual", "urban"],
+    "styles": [
+      "casual",
+      "urban"
+    ],
     "variants": [
-      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
-      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 },
-      { "color": "corallo", "hex": "#F87171", "inStock": 1 }
-    ]
+      {
+        "color": "rosa",
+        "hex": "#EC4899",
+        "inStock": 1
+      },
+      {
+        "color": "celeste",
+        "hex": "#67E8F9",
+        "inStock": 1
+      },
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      },
+      {
+        "color": "viola",
+        "hex": "#8B5CF6",
+        "inStock": 1
+      },
+      {
+        "color": "corallo",
+        "hex": "#F87171",
+        "inStock": 1
+      }
+    ],
+    "design": "band"
   },
   {
     "id": "shoe_008",
@@ -116,13 +275,33 @@
     "category": "running",
     "price": 85,
     "gender": "unisex",
-    "styles": ["casual", "minimal"],
+    "styles": [
+      "casual",
+      "minimal"
+    ],
     "variants": [
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 },
-      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 }
-    ]
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "grigio chiaro",
+        "hex": "#D1D5DB",
+        "inStock": 1
+      },
+      {
+        "color": "oliva",
+        "hex": "#6B7C3F",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      }
+    ],
+    "design": "speckle"
   },
   {
     "id": "shoe_009",
@@ -131,14 +310,38 @@
     "category": "hiking_boot",
     "price": 219,
     "gender": "uomo",
-    "styles": ["sporty", "casual"],
+    "styles": [
+      "sporty",
+      "casual"
+    ],
     "variants": [
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 0 },
-      { "color": "verde scuro", "hex": "#065F46", "inStock": 1 },
-      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 }
-    ]
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 0
+      },
+      {
+        "color": "verde scuro",
+        "hex": "#065F46",
+        "inStock": 1
+      },
+      {
+        "color": "cuoio",
+        "hex": "#C68E5B",
+        "inStock": 1
+      }
+    ],
+    "design": "solid"
   },
   {
     "id": "shoe_010",
@@ -147,13 +350,33 @@
     "category": "hiking_boot",
     "price": 189,
     "gender": "uomo",
-    "styles": ["urban", "casual"],
+    "styles": [
+      "urban",
+      "casual"
+    ],
     "variants": [
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
-      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 }
-    ]
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "oliva",
+        "hex": "#6B7C3F",
+        "inStock": 1
+      },
+      {
+        "color": "cammello",
+        "hex": "#C19A6B",
+        "inStock": 1
+      }
+    ],
+    "design": "stripe"
   },
   {
     "id": "shoe_011",
@@ -162,14 +385,38 @@
     "category": "hiking_boot",
     "price": 239,
     "gender": "uomo",
-    "styles": ["sporty", "urban"],
+    "styles": [
+      "sporty",
+      "urban"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 },
-      { "color": "arancione", "hex": "#F97316", "inStock": 1 },
-      { "color": "verde scuro", "hex": "#065F46", "inStock": 0 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "blu scuro",
+        "hex": "#1E3A5F",
+        "inStock": 1
+      },
+      {
+        "color": "arancione",
+        "hex": "#F97316",
+        "inStock": 1
+      },
+      {
+        "color": "verde scuro",
+        "hex": "#065F46",
+        "inStock": 0
+      }
+    ],
+    "design": "dots"
   },
   {
     "id": "shoe_012",
@@ -178,13 +425,33 @@
     "category": "hiking_boot",
     "price": 209,
     "gender": "unisex",
-    "styles": ["casual", "sporty"],
+    "styles": [
+      "casual",
+      "sporty"
+    ],
     "variants": [
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "verde", "hex": "#10B981", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 }
-    ]
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "verde",
+        "hex": "#10B981",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone chiaro",
+        "hex": "#B8860B",
+        "inStock": 1
+      }
+    ],
+    "design": "mesh"
   },
   {
     "id": "shoe_013",
@@ -193,13 +460,33 @@
     "category": "hiking_boot",
     "price": 169,
     "gender": "donna",
-    "styles": ["sporty", "casual"],
+    "styles": [
+      "sporty",
+      "casual"
+    ],
     "variants": [
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
-      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 }
-    ]
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "rosa",
+        "hex": "#EC4899",
+        "inStock": 1
+      },
+      {
+        "color": "celeste",
+        "hex": "#67E8F9",
+        "inStock": 1
+      }
+    ],
+    "design": "zigzag"
   },
   {
     "id": "shoe_014",
@@ -208,14 +495,37 @@
     "category": "hiking_boot",
     "price": 249,
     "gender": "uomo",
-    "styles": ["sporty"],
+    "styles": [
+      "sporty"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
-      { "color": "arancione", "hex": "#F97316", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "oliva",
+        "hex": "#6B7C3F",
+        "inStock": 1
+      },
+      {
+        "color": "arancione",
+        "hex": "#F97316",
+        "inStock": 1
+      }
+    ],
+    "design": "gradient"
   },
   {
     "id": "shoe_015",
@@ -224,13 +534,33 @@
     "category": "hiking_boot",
     "price": 199,
     "gender": "unisex",
-    "styles": ["casual", "urban"],
+    "styles": [
+      "casual",
+      "urban"
+    ],
     "variants": [
-      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "verde scuro", "hex": "#065F46", "inStock": 1 },
-      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 0 }
-    ]
+      {
+        "color": "cuoio",
+        "hex": "#C68E5B",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "verde scuro",
+        "hex": "#065F46",
+        "inStock": 1
+      },
+      {
+        "color": "marrone chiaro",
+        "hex": "#B8860B",
+        "inStock": 0
+      }
+    ],
+    "design": "band"
   },
   {
     "id": "shoe_016",
@@ -239,14 +569,38 @@
     "category": "hiking_boot",
     "price": 179,
     "gender": "donna",
-    "styles": ["sporty", "minimal"],
+    "styles": [
+      "sporty",
+      "minimal"
+    ],
     "variants": [
-      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 },
-      { "color": "verde", "hex": "#10B981", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "corallo", "hex": "#F87171", "inStock": 1 }
-    ]
+      {
+        "color": "grigio chiaro",
+        "hex": "#D1D5DB",
+        "inStock": 1
+      },
+      {
+        "color": "verde",
+        "hex": "#10B981",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "corallo",
+        "hex": "#F87171",
+        "inStock": 1
+      }
+    ],
+    "design": "speckle"
   },
   {
     "id": "shoe_017",
@@ -255,13 +609,33 @@
     "category": "womans_boot",
     "price": 199,
     "gender": "donna",
-    "styles": ["elegant", "classic"],
+    "styles": [
+      "elegant",
+      "classic"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      }
+    ],
+    "design": "solid"
   },
   {
     "id": "shoe_018",
@@ -270,14 +644,38 @@
     "category": "womans_boot",
     "price": 179,
     "gender": "donna",
-    "styles": ["elegant", "minimal"],
+    "styles": [
+      "elegant",
+      "minimal"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "panna", "hex": "#FFF8E7", "inStock": 0 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "marrone chiaro",
+        "hex": "#B8860B",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "panna",
+        "hex": "#FFF8E7",
+        "inStock": 0
+      }
+    ],
+    "design": "stripe"
   },
   {
     "id": "shoe_019",
@@ -286,13 +684,33 @@
     "category": "womans_boot",
     "price": 229,
     "gender": "donna",
-    "styles": ["urban", "casual"],
+    "styles": [
+      "urban",
+      "casual"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "blu scuro",
+        "hex": "#1E3A5F",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      }
+    ],
+    "design": "dots"
   },
   {
     "id": "shoe_020",
@@ -301,14 +719,38 @@
     "category": "womans_boot",
     "price": 189,
     "gender": "donna",
-    "styles": ["classic", "elegant"],
+    "styles": [
+      "classic",
+      "elegant"
+    ],
     "variants": [
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 0 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
-      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 }
-    ]
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 0
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "rosa",
+        "hex": "#EC4899",
+        "inStock": 1
+      },
+      {
+        "color": "cuoio",
+        "hex": "#C68E5B",
+        "inStock": 1
+      }
+    ],
+    "design": "mesh"
   },
   {
     "id": "shoe_021",
@@ -317,13 +759,33 @@
     "category": "womans_boot",
     "price": 149,
     "gender": "donna",
-    "styles": ["urban", "casual"],
+    "styles": [
+      "urban",
+      "casual"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 },
-      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "rosso",
+        "hex": "#E53E3E",
+        "inStock": 1
+      },
+      {
+        "color": "marrone chiaro",
+        "hex": "#B8860B",
+        "inStock": 1
+      },
+      {
+        "color": "grigio chiaro",
+        "hex": "#D1D5DB",
+        "inStock": 1
+      }
+    ],
+    "design": "zigzag"
   },
   {
     "id": "shoe_022",
@@ -332,14 +794,38 @@
     "category": "womans_boot",
     "price": 209,
     "gender": "donna",
-    "styles": ["classic", "elegant"],
+    "styles": [
+      "classic",
+      "elegant"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
-      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "viola", "hex": "#8B5CF6", "inStock": 0 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      },
+      {
+        "color": "cammello",
+        "hex": "#C19A6B",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "viola",
+        "hex": "#8B5CF6",
+        "inStock": 0
+      }
+    ],
+    "design": "gradient"
   },
   {
     "id": "shoe_023",
@@ -348,13 +834,33 @@
     "category": "womans_boot",
     "price": 219,
     "gender": "donna",
-    "styles": ["elegant", "urban"],
+    "styles": [
+      "elegant",
+      "urban"
+    ],
     "variants": [
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 }
-    ]
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "blu scuro",
+        "hex": "#1E3A5F",
+        "inStock": 1
+      }
+    ],
+    "design": "band"
   },
   {
     "id": "shoe_024",
@@ -363,14 +869,38 @@
     "category": "womans_boot",
     "price": 159,
     "gender": "donna",
-    "styles": ["casual", "classic"],
+    "styles": [
+      "casual",
+      "classic"
+    ],
     "variants": [
-      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
-      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 }
-    ]
+      {
+        "color": "cuoio",
+        "hex": "#C68E5B",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "oliva",
+        "hex": "#6B7C3F",
+        "inStock": 1
+      },
+      {
+        "color": "cammello",
+        "hex": "#C19A6B",
+        "inStock": 1
+      },
+      {
+        "color": "rosso",
+        "hex": "#E53E3E",
+        "inStock": 1
+      }
+    ],
+    "design": "speckle"
   },
   {
     "id": "shoe_025",
@@ -379,14 +909,38 @@
     "category": "mans_shoe",
     "price": 169,
     "gender": "uomo",
-    "styles": ["classic", "elegant"],
+    "styles": [
+      "classic",
+      "elegant"
+    ],
     "variants": [
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 0 },
-      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 }
-    ]
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 0
+      },
+      {
+        "color": "cuoio",
+        "hex": "#C68E5B",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      }
+    ],
+    "design": "solid"
   },
   {
     "id": "shoe_026",
@@ -395,13 +949,33 @@
     "category": "mans_shoe",
     "price": 199,
     "gender": "uomo",
-    "styles": ["elegant", "minimal"],
+    "styles": [
+      "elegant",
+      "minimal"
+    ],
     "variants": [
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 },
-      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 }
-    ]
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "blu scuro",
+        "hex": "#1E3A5F",
+        "inStock": 1
+      },
+      {
+        "color": "marrone chiaro",
+        "hex": "#B8860B",
+        "inStock": 1
+      }
+    ],
+    "design": "stripe"
   },
   {
     "id": "shoe_027",
@@ -410,14 +984,38 @@
     "category": "mans_shoe",
     "price": 159,
     "gender": "uomo",
-    "styles": ["urban", "classic"],
+    "styles": [
+      "urban",
+      "classic"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
-      { "color": "oliva", "hex": "#6B7C3F", "inStock": 0 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "cammello",
+        "hex": "#C19A6B",
+        "inStock": 1
+      },
+      {
+        "color": "oliva",
+        "hex": "#6B7C3F",
+        "inStock": 0
+      }
+    ],
+    "design": "dots"
   },
   {
     "id": "shoe_028",
@@ -426,13 +1024,33 @@
     "category": "mans_shoe",
     "price": 219,
     "gender": "uomo",
-    "styles": ["elegant", "classic"],
+    "styles": [
+      "elegant",
+      "classic"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
-      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      },
+      {
+        "color": "cuoio",
+        "hex": "#C68E5B",
+        "inStock": 1
+      }
+    ],
+    "design": "mesh"
   },
   {
     "id": "shoe_029",
@@ -441,14 +1059,38 @@
     "category": "mans_shoe",
     "price": 139,
     "gender": "uomo",
-    "styles": ["casual", "classic"],
+    "styles": [
+      "casual",
+      "classic"
+    ],
     "variants": [
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
-      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 }
-    ]
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "cammello",
+        "hex": "#C19A6B",
+        "inStock": 1
+      },
+      {
+        "color": "blu scuro",
+        "hex": "#1E3A5F",
+        "inStock": 1
+      }
+    ],
+    "design": "zigzag"
   },
   {
     "id": "shoe_030",
@@ -457,13 +1099,33 @@
     "category": "mans_shoe",
     "price": 179,
     "gender": "uomo",
-    "styles": ["urban", "elegant"],
+    "styles": [
+      "urban",
+      "elegant"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "marrone chiaro",
+        "hex": "#B8860B",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      }
+    ],
+    "design": "gradient"
   },
   {
     "id": "shoe_031",
@@ -472,14 +1134,38 @@
     "category": "mans_shoe",
     "price": 189,
     "gender": "uomo",
-    "styles": ["classic", "elegant"],
+    "styles": [
+      "classic",
+      "elegant"
+    ],
     "variants": [
-      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 0 }
-    ]
+      {
+        "color": "cuoio",
+        "hex": "#C68E5B",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 0
+      }
+    ],
+    "design": "band"
   },
   {
     "id": "shoe_032",
@@ -488,13 +1174,33 @@
     "category": "mans_shoe",
     "price": 209,
     "gender": "uomo",
-    "styles": ["elegant", "minimal"],
+    "styles": [
+      "elegant",
+      "minimal"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
-      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      },
+      {
+        "color": "cammello",
+        "hex": "#C19A6B",
+        "inStock": 1
+      }
+    ],
+    "design": "speckle"
   },
   {
     "id": "shoe_033",
@@ -503,13 +1209,33 @@
     "category": "flat",
     "price": 69,
     "gender": "donna",
-    "styles": ["casual", "minimal"],
+    "styles": [
+      "casual",
+      "minimal"
+    ],
     "variants": [
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
-      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 }
-    ]
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      },
+      {
+        "color": "rosa",
+        "hex": "#EC4899",
+        "inStock": 1
+      },
+      {
+        "color": "panna",
+        "hex": "#FFF8E7",
+        "inStock": 1
+      }
+    ],
+    "design": "solid"
   },
   {
     "id": "shoe_034",
@@ -518,14 +1244,38 @@
     "category": "flat",
     "price": 89,
     "gender": "donna",
-    "styles": ["elegant", "casual"],
+    "styles": [
+      "elegant",
+      "casual"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
-      { "color": "panna", "hex": "#FFF8E7", "inStock": 0 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "rosso",
+        "hex": "#E53E3E",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      },
+      {
+        "color": "panna",
+        "hex": "#FFF8E7",
+        "inStock": 0
+      }
+    ],
+    "design": "stripe"
   },
   {
     "id": "shoe_035",
@@ -534,14 +1284,38 @@
     "category": "flat",
     "price": 79,
     "gender": "donna",
-    "styles": ["casual", "urban"],
+    "styles": [
+      "casual",
+      "urban"
+    ],
     "variants": [
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "verde", "hex": "#10B981", "inStock": 1 },
-      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 },
-      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 }
-    ]
+      {
+        "color": "blu",
+        "hex": "#3B82F6",
+        "inStock": 1
+      },
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      },
+      {
+        "color": "verde",
+        "hex": "#10B981",
+        "inStock": 1
+      },
+      {
+        "color": "celeste",
+        "hex": "#67E8F9",
+        "inStock": 1
+      },
+      {
+        "color": "viola",
+        "hex": "#8B5CF6",
+        "inStock": 1
+      }
+    ],
+    "design": "dots"
   },
   {
     "id": "shoe_036",
@@ -550,13 +1324,33 @@
     "category": "flat",
     "price": 119,
     "gender": "unisex",
-    "styles": ["classic", "minimal"],
+    "styles": [
+      "classic",
+      "minimal"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
-      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 1
+      },
+      {
+        "color": "cuoio",
+        "hex": "#C68E5B",
+        "inStock": 1
+      },
+      {
+        "color": "cammello",
+        "hex": "#C19A6B",
+        "inStock": 1
+      }
+    ],
+    "design": "mesh"
   },
   {
     "id": "shoe_037",
@@ -565,13 +1359,33 @@
     "category": "flat",
     "price": 59,
     "gender": "unisex",
-    "styles": ["casual", "minimal"],
+    "styles": [
+      "casual",
+      "minimal"
+    ],
     "variants": [
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 },
-      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
-    ]
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "grigio chiaro",
+        "hex": "#D1D5DB",
+        "inStock": 1
+      },
+      {
+        "color": "oliva",
+        "hex": "#6B7C3F",
+        "inStock": 1
+      },
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      }
+    ],
+    "design": "zigzag"
   },
   {
     "id": "shoe_038",
@@ -580,14 +1394,38 @@
     "category": "flat",
     "price": 99,
     "gender": "donna",
-    "styles": ["elegant", "minimal"],
+    "styles": [
+      "elegant",
+      "minimal"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "viola", "hex": "#8B5CF6", "inStock": 0 },
-      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "rosa",
+        "hex": "#EC4899",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "viola",
+        "hex": "#8B5CF6",
+        "inStock": 0
+      },
+      {
+        "color": "panna",
+        "hex": "#FFF8E7",
+        "inStock": 1
+      }
+    ],
+    "design": "gradient"
   },
   {
     "id": "shoe_039",
@@ -596,13 +1434,33 @@
     "category": "flat",
     "price": 75,
     "gender": "donna",
-    "styles": ["casual", "urban"],
+    "styles": [
+      "casual",
+      "urban"
+    ],
     "variants": [
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "giallo", "hex": "#EAB308", "inStock": 1 },
-      { "color": "corallo", "hex": "#F87171", "inStock": 1 },
-      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 }
-    ]
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      },
+      {
+        "color": "giallo",
+        "hex": "#EAB308",
+        "inStock": 1
+      },
+      {
+        "color": "corallo",
+        "hex": "#F87171",
+        "inStock": 1
+      },
+      {
+        "color": "celeste",
+        "hex": "#67E8F9",
+        "inStock": 1
+      }
+    ],
+    "design": "band"
   },
   {
     "id": "shoe_040",
@@ -611,14 +1469,38 @@
     "category": "flat",
     "price": 109,
     "gender": "donna",
-    "styles": ["classic", "casual"],
+    "styles": [
+      "classic",
+      "casual"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 },
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "marrone chiaro",
+        "hex": "#B8860B",
+        "inStock": 1
+      },
+      {
+        "color": "blu",
+        "hex": "#3B82F6",
+        "inStock": 1
+      },
+      {
+        "color": "rosso",
+        "hex": "#E53E3E",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      }
+    ],
+    "design": "speckle"
   },
   {
     "id": "shoe_041",
@@ -627,13 +1509,33 @@
     "category": "high_heel",
     "price": 179,
     "gender": "donna",
-    "styles": ["elegant", "classic"],
+    "styles": [
+      "elegant",
+      "classic"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
-      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      },
+      {
+        "color": "panna",
+        "hex": "#FFF8E7",
+        "inStock": 1
+      }
+    ],
+    "design": "solid"
   },
   {
     "id": "shoe_042",
@@ -642,14 +1544,38 @@
     "category": "high_heel",
     "price": 199,
     "gender": "donna",
-    "styles": ["elegant", "urban"],
+    "styles": [
+      "elegant",
+      "urban"
+    ],
     "variants": [
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
-      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
-      { "color": "corallo", "hex": "#F87171", "inStock": 0 }
-    ]
+      {
+        "color": "rosso",
+        "hex": "#E53E3E",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      },
+      {
+        "color": "rosa",
+        "hex": "#EC4899",
+        "inStock": 1
+      },
+      {
+        "color": "corallo",
+        "hex": "#F87171",
+        "inStock": 0
+      }
+    ],
+    "design": "stripe"
   },
   {
     "id": "shoe_043",
@@ -658,13 +1584,33 @@
     "category": "high_heel",
     "price": 189,
     "gender": "donna",
-    "styles": ["elegant", "classic"],
+    "styles": [
+      "elegant",
+      "classic"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 },
-      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      },
+      {
+        "color": "viola",
+        "hex": "#8B5CF6",
+        "inStock": 1
+      },
+      {
+        "color": "blu scuro",
+        "hex": "#1E3A5F",
+        "inStock": 1
+      }
+    ],
+    "design": "dots"
   },
   {
     "id": "shoe_044",
@@ -673,14 +1619,38 @@
     "category": "high_heel",
     "price": 159,
     "gender": "donna",
-    "styles": ["casual", "elegant"],
+    "styles": [
+      "casual",
+      "elegant"
+    ],
     "variants": [
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
-      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
-      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
-    ]
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "blu",
+        "hex": "#3B82F6",
+        "inStock": 1
+      },
+      {
+        "color": "rosa",
+        "hex": "#EC4899",
+        "inStock": 1
+      },
+      {
+        "color": "cammello",
+        "hex": "#C19A6B",
+        "inStock": 1
+      },
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      }
+    ],
+    "design": "mesh"
   },
   {
     "id": "shoe_045",
@@ -689,13 +1659,33 @@
     "category": "high_heel",
     "price": 119,
     "gender": "donna",
-    "styles": ["urban", "elegant"],
+    "styles": [
+      "urban",
+      "elegant"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "grigio",
+        "hex": "#6B7280",
+        "inStock": 1
+      },
+      {
+        "color": "rosso",
+        "hex": "#E53E3E",
+        "inStock": 1
+      },
+      {
+        "color": "viola",
+        "hex": "#8B5CF6",
+        "inStock": 1
+      }
+    ],
+    "design": "zigzag"
   },
   {
     "id": "shoe_046",
@@ -704,14 +1694,38 @@
     "category": "high_heel",
     "price": 189,
     "gender": "donna",
-    "styles": ["elegant", "classic"],
+    "styles": [
+      "elegant",
+      "classic"
+    ],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
-      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
-      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 0 }
-    ]
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "bordeaux",
+        "hex": "#7F1D1D",
+        "inStock": 1
+      },
+      {
+        "color": "rosa",
+        "hex": "#EC4899",
+        "inStock": 1
+      },
+      {
+        "color": "panna",
+        "hex": "#FFF8E7",
+        "inStock": 1
+      },
+      {
+        "color": "marrone",
+        "hex": "#92400E",
+        "inStock": 0
+      }
+    ],
+    "design": "gradient"
   },
   {
     "id": "shoe_047",
@@ -720,13 +1734,33 @@
     "category": "high_heel",
     "price": 139,
     "gender": "donna",
-    "styles": ["casual", "urban"],
+    "styles": [
+      "casual",
+      "urban"
+    ],
     "variants": [
-      { "color": "corallo", "hex": "#F87171", "inStock": 1 },
-      { "color": "giallo", "hex": "#EAB308", "inStock": 1 },
-      { "color": "arancione", "hex": "#F97316", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
-    ]
+      {
+        "color": "corallo",
+        "hex": "#F87171",
+        "inStock": 1
+      },
+      {
+        "color": "giallo",
+        "hex": "#EAB308",
+        "inStock": 1
+      },
+      {
+        "color": "arancione",
+        "hex": "#F97316",
+        "inStock": 1
+      },
+      {
+        "color": "bianco",
+        "hex": "#F5F5F5",
+        "inStock": 1
+      }
+    ],
+    "design": "band"
   },
   {
     "id": "shoe_048",
@@ -735,13 +1769,37 @@
     "category": "high_heel",
     "price": 169,
     "gender": "donna",
-    "styles": ["elegant", "minimal"],
+    "styles": [
+      "elegant",
+      "minimal"
+    ],
     "variants": [
-      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 }
-    ]
+      {
+        "color": "panna",
+        "hex": "#FFF8E7",
+        "inStock": 1
+      },
+      {
+        "color": "nero",
+        "hex": "#1A1A1A",
+        "inStock": 1
+      },
+      {
+        "color": "celeste",
+        "hex": "#67E8F9",
+        "inStock": 1
+      },
+      {
+        "color": "beige",
+        "hex": "#D4A574",
+        "inStock": 1
+      },
+      {
+        "color": "grigio chiaro",
+        "hex": "#D1D5DB",
+        "inStock": 1
+      }
+    ],
+    "design": "speckle"
   }
 ]

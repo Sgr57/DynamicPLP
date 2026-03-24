@@ -50,7 +50,7 @@ export default function ProductCard({ product, onCardClick }) {
         {(() => {
           const Icon = CATEGORY_ICON_MAP[product.category] || CATEGORY_ICON_MAP.running
           return (
-            <ColoredShoeIcon primaryColor={hex} className="w-32 h-32">
+            <ColoredShoeIcon primaryColor={hex} design={product.design} category={product.category} className="w-32 h-32">
               <Icon className="w-full h-full" />
             </ColoredShoeIcon>
           )

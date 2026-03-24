@@ -60,7 +60,7 @@ export default function ProductDrawer({ product, onClose }) {
           {(() => {
             const Icon = CATEGORY_ICON_MAP[product.category] || CATEGORY_ICON_MAP.running
             return (
-              <ColoredShoeIcon primaryColor={hex} className="w-48 h-48">
+              <ColoredShoeIcon primaryColor={hex} design={product.design} category={product.category} className="w-48 h-48">
                 <Icon className="w-full h-full" />
               </ColoredShoeIcon>
             )

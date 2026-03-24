@@ -2,7 +2,7 @@ import { createStore } from 'tinybase'
 import { createIndexedDbPersister } from 'tinybase/persisters/persister-indexed-db'
 import catalog from '../data/products.json'
 
-const CATALOG_VERSION = 3
+const CATALOG_VERSION = 4
 
 export const store = createStore()
 
