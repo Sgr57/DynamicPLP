@@ -1,15 +1,23 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import ColoredShoeIcon from './ColoredShoeIcon'
 import { CATEGORY_ICON_MAP } from './icons'
 import { useDrawerTracker } from '../hooks/useDrawerTracker'
 
-export default function ProductDrawer({ product, onClose }) {
-  const [activeVariantIndex, setActiveVariantIndex] = useState(0)
+export default function ProductDrawer({ product, initialVariantIndex = 0, onClose }) {
+  const [activeVariantIndex, setActiveVariantIndex] = useState(initialVariantIndex)
   const activeVariant = product.variants[activeVariantIndex]
   const hex = activeVariant?.hex || '#6B7280'
 
   const { onVariantHover, onVariantClick } = useDrawerTracker(product, true)
+
+  useEffect(() => {
+    function handleKeyDown(e) {
+      if (e.key === 'Escape') onClose()
+    }
+    window.addEventListener('keydown', handleKeyDown)
+    return () => window.removeEventListener('keydown', handleKeyDown)
+  }, [onClose])
 
   function handleVariantClick(color, index) {
     onVariantClick(color)

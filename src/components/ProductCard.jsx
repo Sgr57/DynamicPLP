@@ -25,7 +25,7 @@ export default function ProductCard({ product, onCardClick }) {
 
   function handleCardClick() {
     tracker.onClick()
-    if (onCardClick) onCardClick(product)
+    if (onCardClick) onCardClick(product, activeVariantIndex)
   }
 
   function handleSwatchClick(color, index) {

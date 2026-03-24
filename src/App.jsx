@@ -19,6 +19,7 @@ export default function App() {
   const [storeReady, setStoreReady] = useState(false)
   const [hasPreWeights, setHasPreWeights] = useState(false)
   const [drawerProduct, setDrawerProduct] = useState(null)
+  const [drawerVariantIndex, setDrawerVariantIndex] = useState(0)
   const [aiEnabled, setAiEnabled] = useState(true)
 
   const { status: modelStatus, progress, generate } = useModelLoader()
@@ -91,7 +92,10 @@ export default function App() {
     refreshProducts()
   }, [refreshProducts])
 
-  const openDrawer = useCallback((product) => { setDrawerProduct(product) }, [])
+  const openDrawer = useCallback((product, variantIndex = 0) => {
+    setDrawerProduct(product)
+    setDrawerVariantIndex(variantIndex)
+  }, [])
   const closeDrawer = useCallback(() => { setDrawerProduct(null) }, [])
 
   if (appState === 'loading') {
@@ -156,6 +160,7 @@ export default function App() {
           <ProductDrawer
             key={drawerProduct.id}
             product={drawerProduct}
+            initialVariantIndex={drawerVariantIndex}
             onClose={closeDrawer}
           />
         )}
