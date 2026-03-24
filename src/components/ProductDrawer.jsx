@@ -1,21 +1,13 @@
 import { useState } from 'react'
 import { motion } from 'framer-motion'
-import ShoeIcon from './ShoeIcon'
+import ColoredShoeIcon from './ColoredShoeIcon'
+import { CATEGORY_ICON_MAP } from './icons'
 import { useDrawerTracker } from '../hooks/useDrawerTracker'
-
-function isLightColor(hex) {
-  const r = parseInt(hex.slice(1, 3), 16)
-  const g = parseInt(hex.slice(3, 5), 16)
-  const b = parseInt(hex.slice(5, 7), 16)
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-  return luminance > 0.6
-}
 
 export default function ProductDrawer({ product, onClose }) {
   const [activeVariantIndex, setActiveVariantIndex] = useState(0)
   const activeVariant = product.variants[activeVariantIndex]
   const hex = activeVariant?.hex || '#6B7280'
-  const light = isLightColor(hex)
 
   const { onVariantHover, onVariantClick } = useDrawerTracker(product, true)
 
@@ -64,13 +56,15 @@ export default function ProductDrawer({ product, onClose }) {
         </div>
 
         {/* Image area */}
-        <div
-          className="aspect-square flex items-center justify-center"
-          style={{
-            background: `linear-gradient(135deg, ${hex}, ${hex}dd)`,
-          }}
-        >
-          <ShoeIcon light={!light} className="w-40 h-28" />
+        <div className="aspect-square flex items-center justify-center bg-gray-50">
+          {(() => {
+            const Icon = CATEGORY_ICON_MAP[product.category] || CATEGORY_ICON_MAP.running
+            return (
+              <ColoredShoeIcon primaryColor={hex} className="w-48 h-48">
+                <Icon className="w-full h-full" />
+              </ColoredShoeIcon>
+            )
+          })()}
         </div>
 
         {/* Product info */}

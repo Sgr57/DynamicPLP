@@ -1,22 +1,14 @@
 import { useState, useRef, useEffect, useMemo } from 'react'
 import { motion } from 'framer-motion'
 import ColorSwatch from './ColorSwatch'
-import ShoeIcon from './ShoeIcon'
+import ColoredShoeIcon from './ColoredShoeIcon'
+import { CATEGORY_ICON_MAP } from './icons'
 import { createPLPTracker, createScrollObserver } from '../tracking/trackingEngine'
-
-function isLightColor(hex) {
-  const r = parseInt(hex.slice(1, 3), 16)
-  const g = parseInt(hex.slice(3, 5), 16)
-  const b = parseInt(hex.slice(5, 7), 16)
-  const luminance = (0.299 * r + 0.587 * g + 0.114 * b) / 255
-  return luminance > 0.6
-}
 
 export default function ProductCard({ product, onCardClick }) {
   const [activeVariantIndex, setActiveVariantIndex] = useState(0)
   const activeVariant = product.variants[activeVariantIndex]
   const hex = activeVariant?.hex || '#6B7280'
-  const light = isLightColor(hex)
   const cardRef = useRef(null)
 
   const tracker = useMemo(
@@ -54,13 +46,15 @@ export default function ProductCard({ product, onCardClick }) {
       onMouseLeave={tracker.onMouseLeave}
       onClick={handleCardClick}
     >
-      <div
-        className="aspect-[4/3] flex items-center justify-center"
-        style={{
-          background: `linear-gradient(135deg, ${hex}, ${hex}dd)`,
-        }}
-      >
-        <ShoeIcon light={!light} />
+      <div className="aspect-[4/3] flex items-center justify-center bg-gray-50">
+        {(() => {
+          const Icon = CATEGORY_ICON_MAP[product.category] || CATEGORY_ICON_MAP.running
+          return (
+            <ColoredShoeIcon primaryColor={hex} className="w-32 h-32">
+              <Icon className="w-full h-full" />
+            </ColoredShoeIcon>
+          )
+        })()}
       </div>
 
       <div className="p-3">

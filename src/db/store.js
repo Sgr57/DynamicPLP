@@ -2,13 +2,15 @@ import { createStore } from 'tinybase'
 import { createIndexedDbPersister } from 'tinybase/persisters/persister-indexed-db'
 import catalog from '../data/products.json'
 
+const CATALOG_VERSION = 3
+
 export const store = createStore()
 
 let persister = null
 
-function seedIfEmpty() {
-  const products = store.getTable('products')
-  if (Object.keys(products).length > 0) return
+function seedProducts() {
+  store.delTable('products')
+  store.delTable('variants')
 
   catalog.forEach((product, index) => {
     const { variants, ...productData } = product
@@ -26,12 +28,21 @@ function seedIfEmpty() {
       })
     })
   })
+
+  store.setCell('aiMemory', 'catalog', 'version', CATALOG_VERSION)
+}
+
+function seedIfNeeded() {
+  const storedVersion = store.getCell('aiMemory', 'catalog', 'version') || 0
+  if (storedVersion < CATALOG_VERSION) {
+    seedProducts()
+  }
 }
 
 export async function initStore() {
   persister = createIndexedDbPersister(store, 'plp_demo')
   await persister.startAutoLoad()
   await persister.startAutoSave()
-  seedIfEmpty()
+  seedIfNeeded()
   return store
 }

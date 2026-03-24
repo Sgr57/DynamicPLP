@@ -3,408 +3,745 @@
     "id": "shoe_001",
     "name": "Urban Runner",
     "brand": "StreetKicks",
-    "category": "sneaker",
+    "category": "running",
     "price": 89,
     "gender": "uomo",
     "styles": ["casual", "urban"],
     "variants": [
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
       { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 0 }
+      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "arancione", "hex": "#F97316", "inStock": 0 }
     ]
   },
   {
     "id": "shoe_002",
-    "name": "Metro Dash",
-    "brand": "StreetKicks",
-    "category": "sneaker",
-    "price": 109,
-    "gender": "donna",
-    "styles": ["sporty", "urban"],
+    "name": "Cloud Stride",
+    "brand": "SportFlex",
+    "category": "running",
+    "price": 129,
+    "gender": "unisex",
+    "styles": ["sporty", "minimal"],
     "variants": [
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
+      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 },
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "verde", "hex": "#10B981", "inStock": 1 },
+      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 },
       { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
     ]
   },
   {
     "id": "shoe_003",
-    "name": "Cloud Stride",
-    "brand": "SportFlex",
-    "category": "sneaker",
-    "price": 129,
-    "gender": "unisex",
-    "styles": ["sporty", "minimal"],
-    "variants": [
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "verde", "hex": "#10B981", "inStock": 1 }
-    ]
-  },
-  {
-    "id": "shoe_004",
-    "name": "Retro Vibe",
-    "brand": "StreetKicks",
-    "category": "sneaker",
-    "price": 95,
-    "gender": "uomo",
-    "styles": ["casual", "classic"],
-    "variants": [
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 0 }
-    ]
-  },
-  {
-    "id": "shoe_005",
     "name": "Pulse X",
     "brand": "SportFlex",
-    "category": "sneaker",
+    "category": "running",
     "price": 149,
     "gender": "uomo",
     "styles": ["sporty", "urban"],
     "variants": [
       { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 }
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
+      { "color": "arancione", "hex": "#F97316", "inStock": 1 }
     ]
   },
   {
-    "id": "shoe_006",
+    "id": "shoe_004",
     "name": "Airy Step",
     "brand": "NaturePace",
-    "category": "sneaker",
+    "category": "running",
     "price": 79,
     "gender": "donna",
     "styles": ["casual", "minimal"],
     "variants": [
       { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
       { "color": "verde", "hex": "#10B981", "inStock": 1 },
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 }
-    ]
-  },
-  {
-    "id": "shoe_007",
-    "name": "Night Shift",
-    "brand": "UrbanSole",
-    "category": "sneaker",
-    "price": 119,
-    "gender": "unisex",
-    "styles": ["urban", "minimal"],
-    "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 }
-    ]
-  },
-  {
-    "id": "shoe_008",
-    "name": "Pastel Wave",
-    "brand": "StreetKicks",
-    "category": "sneaker",
-    "price": 99,
-    "gender": "donna",
-    "styles": ["casual", "urban"],
-    "variants": [
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
       { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "verde", "hex": "#10B981", "inStock": 0 }
+      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
+      { "color": "corallo", "hex": "#F87171", "inStock": 0 }
     ]
   },
   {
-    "id": "shoe_009",
+    "id": "shoe_005",
     "name": "Turbo Flex",
-    "brand": "SportFlex",
-    "category": "sneaker",
+    "brand": "StreetKicks",
+    "category": "running",
     "price": 159,
-    "gender": "uomo",
+    "gender": "unisex",
     "styles": ["sporty"],
     "variants": [
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
       { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 }
+      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
+      { "color": "giallo", "hex": "#EAB308", "inStock": 1 },
+      { "color": "verde", "hex": "#10B981", "inStock": 1 }
     ]
   },
   {
-    "id": "shoe_010",
-    "name": "Zen Walker",
+    "id": "shoe_006",
+    "name": "Night Shift",
+    "brand": "UrbanSole",
+    "category": "running",
+    "price": 119,
+    "gender": "uomo",
+    "styles": ["urban", "minimal"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 },
+      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_007",
+    "name": "Pastel Dash",
     "brand": "NaturePace",
-    "category": "sneaker",
+    "category": "running",
+    "price": 99,
+    "gender": "donna",
+    "styles": ["casual", "urban"],
+    "variants": [
+      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
+      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 },
+      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
+      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 },
+      { "color": "corallo", "hex": "#F87171", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_008",
+    "name": "Zen Walker",
+    "brand": "StreetKicks",
+    "category": "running",
     "price": 85,
     "gender": "unisex",
     "styles": ["casual", "minimal"],
     "variants": [
       { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 }
-    ]
-  },
-  {
-    "id": "shoe_011",
-    "name": "Iron Trail",
-    "brand": "UrbanSole",
-    "category": "boot",
-    "price": 189,
-    "gender": "uomo",
-    "styles": ["urban", "casual"],
-    "variants": [
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 },
+      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 }
     ]
   },
   {
-    "id": "shoe_012",
+    "id": "shoe_009",
     "name": "Alpine Grip",
     "brand": "NaturePace",
-    "category": "boot",
+    "category": "hiking_boot",
     "price": 219,
     "gender": "uomo",
     "styles": ["sporty", "casual"],
     "variants": [
       { "color": "marrone", "hex": "#92400E", "inStock": 1 },
       { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 0 }
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 0 },
+      { "color": "verde scuro", "hex": "#065F46", "inStock": 1 },
+      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 }
     ]
   },
   {
-    "id": "shoe_013",
-    "name": "Chelsea Noir",
-    "brand": "ElegantWalk",
-    "category": "boot",
-    "price": 199,
-    "gender": "donna",
-    "styles": ["elegant", "classic"],
+    "id": "shoe_010",
+    "name": "Iron Trail",
+    "brand": "UrbanSole",
+    "category": "hiking_boot",
+    "price": 189,
+    "gender": "uomo",
+    "styles": ["urban", "casual"],
     "variants": [
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 }
+      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
+      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 }
     ]
   },
   {
-    "id": "shoe_014",
+    "id": "shoe_011",
     "name": "Storm Breaker",
     "brand": "SportFlex",
-    "category": "boot",
+    "category": "hiking_boot",
     "price": 239,
     "gender": "uomo",
     "styles": ["sporty", "urban"],
     "variants": [
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 }
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 },
+      { "color": "arancione", "hex": "#F97316", "inStock": 1 },
+      { "color": "verde scuro", "hex": "#065F46", "inStock": 0 }
+    ]
+  },
+  {
+    "id": "shoe_012",
+    "name": "Frontier Lace",
+    "brand": "NaturePace",
+    "category": "hiking_boot",
+    "price": 209,
+    "gender": "unisex",
+    "styles": ["casual", "sporty"],
+    "variants": [
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "verde", "hex": "#10B981", "inStock": 1 },
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_013",
+    "name": "Summit Ridge",
+    "brand": "StreetKicks",
+    "category": "hiking_boot",
+    "price": 169,
+    "gender": "donna",
+    "styles": ["sporty", "casual"],
+    "variants": [
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
+      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_014",
+    "name": "Boulder Peak",
+    "brand": "SportFlex",
+    "category": "hiking_boot",
+    "price": 249,
+    "gender": "uomo",
+    "styles": ["sporty"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
+      { "color": "arancione", "hex": "#F97316", "inStock": 1 }
     ]
   },
   {
     "id": "shoe_015",
-    "name": "Velvet Ankle",
-    "brand": "ElegantWalk",
-    "category": "boot",
-    "price": 179,
-    "gender": "donna",
-    "styles": ["elegant", "minimal"],
+    "name": "Terra Firma",
+    "brand": "UrbanSole",
+    "category": "hiking_boot",
+    "price": 199,
+    "gender": "unisex",
+    "styles": ["casual", "urban"],
     "variants": [
+      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 }
+      { "color": "verde scuro", "hex": "#065F46", "inStock": 1 },
+      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 0 }
     ]
   },
   {
     "id": "shoe_016",
-    "name": "Frontier Lace",
-    "brand": "UrbanSole",
-    "category": "boot",
-    "price": 209,
-    "gender": "unisex",
-    "styles": ["casual", "classic"],
+    "name": "Wildwood Trek",
+    "brand": "NaturePace",
+    "category": "hiking_boot",
+    "price": 179,
+    "gender": "donna",
+    "styles": ["sporty", "minimal"],
     "variants": [
+      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 },
+      { "color": "verde", "hex": "#10B981", "inStock": 1 },
       { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 }
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "corallo", "hex": "#F87171", "inStock": 1 }
     ]
   },
   {
     "id": "shoe_017",
-    "name": "Penny Classic",
-    "brand": "ClassicStep",
-    "category": "loafer",
-    "price": 139,
-    "gender": "uomo",
-    "styles": ["classic", "elegant"],
+    "name": "Chelsea Noir",
+    "brand": "ElegantWalk",
+    "category": "womans_boot",
+    "price": 199,
+    "gender": "donna",
+    "styles": ["elegant", "classic"],
     "variants": [
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 0 }
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 }
     ]
   },
   {
     "id": "shoe_018",
-    "name": "Suede Glide",
+    "name": "Velvet Ankle",
     "brand": "ElegantWalk",
-    "category": "loafer",
-    "price": 159,
+    "category": "womans_boot",
+    "price": 179,
     "gender": "donna",
     "styles": ["elegant", "minimal"],
     "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
       { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 }
+      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 },
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "panna", "hex": "#FFF8E7", "inStock": 0 }
     ]
   },
   {
     "id": "shoe_019",
-    "name": "Deck Cruiser",
-    "brand": "NaturePace",
-    "category": "loafer",
-    "price": 99,
-    "gender": "uomo",
-    "styles": ["casual", "classic"],
+    "name": "Midnight Rider",
+    "brand": "UrbanSole",
+    "category": "womans_boot",
+    "price": 229,
+    "gender": "donna",
+    "styles": ["urban", "casual"],
     "variants": [
-      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 }
     ]
   },
   {
     "id": "shoe_020",
-    "name": "Tassel Luxe",
+    "name": "Rosa Haute",
     "brand": "ClassicStep",
-    "category": "loafer",
-    "price": 169,
-    "gender": "uomo",
-    "styles": ["elegant", "classic"],
+    "category": "womans_boot",
+    "price": 189,
+    "gender": "donna",
+    "styles": ["classic", "elegant"],
     "variants": [
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "beige", "hex": "#D4A574", "inStock": 0 },
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 }
+      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
+      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 }
     ]
   },
   {
     "id": "shoe_021",
-    "name": "Soft Touch",
-    "brand": "ElegantWalk",
-    "category": "loafer",
-    "price": 129,
+    "name": "Soho Zip",
+    "brand": "StreetKicks",
+    "category": "womans_boot",
+    "price": 149,
     "gender": "donna",
-    "styles": ["casual", "elegant"],
+    "styles": ["urban", "casual"],
     "variants": [
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
       { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 }
+      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 },
+      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 }
     ]
   },
   {
     "id": "shoe_022",
-    "name": "Breeze Open",
-    "brand": "NaturePace",
-    "category": "sandalo",
-    "price": 69,
+    "name": "Vienna Lace",
+    "brand": "ClassicStep",
+    "category": "womans_boot",
+    "price": 209,
     "gender": "donna",
-    "styles": ["casual", "minimal"],
+    "styles": ["classic", "elegant"],
     "variants": [
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
+      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "viola", "hex": "#8B5CF6", "inStock": 0 }
     ]
   },
   {
     "id": "shoe_023",
-    "name": "Shore Walker",
-    "brand": "NaturePace",
-    "category": "sandalo",
-    "price": 59,
-    "gender": "uomo",
-    "styles": ["casual"],
+    "name": "Frost Suede",
+    "brand": "ElegantWalk",
+    "category": "womans_boot",
+    "price": 219,
+    "gender": "donna",
+    "styles": ["elegant", "urban"],
     "variants": [
-      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "verde", "hex": "#10B981", "inStock": 1 }
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 }
     ]
   },
   {
     "id": "shoe_024",
-    "name": "Sunset Slide",
-    "brand": "StreetKicks",
-    "category": "sandalo",
-    "price": 49,
-    "gender": "unisex",
-    "styles": ["casual", "urban"],
+    "name": "Boho Spirit",
+    "brand": "NaturePace",
+    "category": "womans_boot",
+    "price": 159,
+    "gender": "donna",
+    "styles": ["casual", "classic"],
     "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
-      { "color": "blu", "hex": "#3B82F6", "inStock": 0 }
+      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
+      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
+      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 }
     ]
   },
   {
     "id": "shoe_025",
-    "name": "Elegance Strap",
-    "brand": "ElegantWalk",
-    "category": "sandalo",
-    "price": 119,
-    "gender": "donna",
-    "styles": ["elegant", "minimal"],
-    "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 }
-    ]
-  },
-  {
-    "id": "shoe_026",
-    "name": "Napoli Slip",
+    "name": "Penny Classic",
     "brand": "ClassicStep",
-    "category": "mocassino",
-    "price": 149,
+    "category": "mans_shoe",
+    "price": 169,
     "gender": "uomo",
     "styles": ["classic", "elegant"],
     "variants": [
       { "color": "marrone", "hex": "#92400E", "inStock": 1 },
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 }
+      { "color": "beige", "hex": "#D4A574", "inStock": 0 },
+      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 }
     ]
   },
   {
-    "id": "shoe_027",
-    "name": "Dolce Vita",
-    "brand": "ElegantWalk",
-    "category": "mocassino",
-    "price": 179,
-    "gender": "donna",
-    "styles": ["elegant", "classic"],
-    "variants": [
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
-      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 }
-    ]
-  },
-  {
-    "id": "shoe_028",
+    "id": "shoe_026",
     "name": "Lago Como",
     "brand": "ClassicStep",
-    "category": "mocassino",
+    "category": "mans_shoe",
     "price": 199,
     "gender": "uomo",
     "styles": ["elegant", "minimal"],
     "variants": [
       { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 }
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 },
+      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 }
     ]
   },
   {
-    "id": "shoe_029",
-    "name": "Riviera Soft",
-    "brand": "NaturePace",
-    "category": "mocassino",
-    "price": 119,
-    "gender": "unisex",
-    "styles": ["casual", "classic"],
-    "variants": [
-      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
-      { "color": "blu", "hex": "#3B82F6", "inStock": 0 }
-    ]
-  },
-  {
-    "id": "shoe_030",
+    "id": "shoe_027",
     "name": "Milano Drive",
     "brand": "UrbanSole",
-    "category": "mocassino",
+    "category": "mans_shoe",
     "price": 159,
     "gender": "uomo",
     "styles": ["urban", "classic"],
     "variants": [
       { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
       { "color": "marrone", "hex": "#92400E", "inStock": 1 },
-      { "color": "grigio", "hex": "#6B7280", "inStock": 1 }
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
+      { "color": "oliva", "hex": "#6B7C3F", "inStock": 0 }
+    ]
+  },
+  {
+    "id": "shoe_028",
+    "name": "Oxford Elite",
+    "brand": "ElegantWalk",
+    "category": "mans_shoe",
+    "price": 219,
+    "gender": "uomo",
+    "styles": ["elegant", "classic"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
+      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_029",
+    "name": "Napoli Slip",
+    "brand": "ElegantWalk",
+    "category": "mans_shoe",
+    "price": 139,
+    "gender": "uomo",
+    "styles": ["casual", "classic"],
+    "variants": [
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
+      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_030",
+    "name": "Torino Derby",
+    "brand": "UrbanSole",
+    "category": "mans_shoe",
+    "price": 179,
+    "gender": "uomo",
+    "styles": ["urban", "elegant"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_031",
+    "name": "Roma Brogue",
+    "brand": "ClassicStep",
+    "category": "mans_shoe",
+    "price": 189,
+    "gender": "uomo",
+    "styles": ["classic", "elegant"],
+    "variants": [
+      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "grigio", "hex": "#6B7280", "inStock": 0 }
+    ]
+  },
+  {
+    "id": "shoe_032",
+    "name": "Firenze Monk",
+    "brand": "ElegantWalk",
+    "category": "mans_shoe",
+    "price": 209,
+    "gender": "uomo",
+    "styles": ["elegant", "minimal"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
+      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_033",
+    "name": "Breeze Ballet",
+    "brand": "NaturePace",
+    "category": "flat",
+    "price": 69,
+    "gender": "donna",
+    "styles": ["casual", "minimal"],
+    "variants": [
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
+      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
+      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_034",
+    "name": "Soft Touch",
+    "brand": "ElegantWalk",
+    "category": "flat",
+    "price": 89,
+    "gender": "donna",
+    "styles": ["elegant", "casual"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
+      { "color": "panna", "hex": "#FFF8E7", "inStock": 0 }
+    ]
+  },
+  {
+    "id": "shoe_035",
+    "name": "Pastel Wave",
+    "brand": "StreetKicks",
+    "category": "flat",
+    "price": 79,
+    "gender": "donna",
+    "styles": ["casual", "urban"],
+    "variants": [
+      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
+      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
+      { "color": "verde", "hex": "#10B981", "inStock": 1 },
+      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 },
+      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_036",
+    "name": "Dolce Vita",
+    "brand": "ClassicStep",
+    "category": "flat",
+    "price": 119,
+    "gender": "unisex",
+    "styles": ["classic", "minimal"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 1 },
+      { "color": "cuoio", "hex": "#C68E5B", "inStock": 1 },
+      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_037",
+    "name": "Riviera Slip",
+    "brand": "NaturePace",
+    "category": "flat",
+    "price": 59,
+    "gender": "unisex",
+    "styles": ["casual", "minimal"],
+    "variants": [
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 },
+      { "color": "oliva", "hex": "#6B7C3F", "inStock": 1 },
+      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_038",
+    "name": "Aurora Point",
+    "brand": "ElegantWalk",
+    "category": "flat",
+    "price": 99,
+    "gender": "donna",
+    "styles": ["elegant", "minimal"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "viola", "hex": "#8B5CF6", "inStock": 0 },
+      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_039",
+    "name": "Linen Ease",
+    "brand": "StreetKicks",
+    "category": "flat",
+    "price": 75,
+    "gender": "donna",
+    "styles": ["casual", "urban"],
+    "variants": [
+      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
+      { "color": "giallo", "hex": "#EAB308", "inStock": 1 },
+      { "color": "corallo", "hex": "#F87171", "inStock": 1 },
+      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_040",
+    "name": "Canvas Chic",
+    "brand": "ClassicStep",
+    "category": "flat",
+    "price": 109,
+    "gender": "donna",
+    "styles": ["classic", "casual"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "marrone chiaro", "hex": "#B8860B", "inStock": 1 },
+      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
+      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_041",
+    "name": "Elegance Strap",
+    "brand": "ElegantWalk",
+    "category": "high_heel",
+    "price": 179,
+    "gender": "donna",
+    "styles": ["elegant", "classic"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
+      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_042",
+    "name": "Scarlet Luxe",
+    "brand": "ElegantWalk",
+    "category": "high_heel",
+    "price": 199,
+    "gender": "donna",
+    "styles": ["elegant", "urban"],
+    "variants": [
+      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
+      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
+      { "color": "corallo", "hex": "#F87171", "inStock": 0 }
+    ]
+  },
+  {
+    "id": "shoe_043",
+    "name": "Gala Night",
+    "brand": "ClassicStep",
+    "category": "high_heel",
+    "price": 189,
+    "gender": "donna",
+    "styles": ["elegant", "classic"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 },
+      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 },
+      { "color": "blu scuro", "hex": "#1E3A5F", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_044",
+    "name": "Riviera Chic",
+    "brand": "ClassicStep",
+    "category": "high_heel",
+    "price": 159,
+    "gender": "donna",
+    "styles": ["casual", "elegant"],
+    "variants": [
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "blu", "hex": "#3B82F6", "inStock": 1 },
+      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
+      { "color": "cammello", "hex": "#C19A6B", "inStock": 1 },
+      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_045",
+    "name": "Noir Stiletto",
+    "brand": "StreetKicks",
+    "category": "high_heel",
+    "price": 119,
+    "gender": "donna",
+    "styles": ["urban", "elegant"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "grigio", "hex": "#6B7280", "inStock": 1 },
+      { "color": "rosso", "hex": "#E53E3E", "inStock": 1 },
+      { "color": "viola", "hex": "#8B5CF6", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_046",
+    "name": "Opéra Glam",
+    "brand": "ElegantWalk",
+    "category": "high_heel",
+    "price": 189,
+    "gender": "donna",
+    "styles": ["elegant", "classic"],
+    "variants": [
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "bordeaux", "hex": "#7F1D1D", "inStock": 1 },
+      { "color": "rosa", "hex": "#EC4899", "inStock": 1 },
+      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 },
+      { "color": "marrone", "hex": "#92400E", "inStock": 0 }
+    ]
+  },
+  {
+    "id": "shoe_047",
+    "name": "Sunset Pump",
+    "brand": "StreetKicks",
+    "category": "high_heel",
+    "price": 139,
+    "gender": "donna",
+    "styles": ["casual", "urban"],
+    "variants": [
+      { "color": "corallo", "hex": "#F87171", "inStock": 1 },
+      { "color": "giallo", "hex": "#EAB308", "inStock": 1 },
+      { "color": "arancione", "hex": "#F97316", "inStock": 1 },
+      { "color": "bianco", "hex": "#F5F5F5", "inStock": 1 }
+    ]
+  },
+  {
+    "id": "shoe_048",
+    "name": "Crystal Sling",
+    "brand": "ClassicStep",
+    "category": "high_heel",
+    "price": 169,
+    "gender": "donna",
+    "styles": ["elegant", "minimal"],
+    "variants": [
+      { "color": "panna", "hex": "#FFF8E7", "inStock": 1 },
+      { "color": "nero", "hex": "#1A1A1A", "inStock": 1 },
+      { "color": "celeste", "hex": "#67E8F9", "inStock": 1 },
+      { "color": "beige", "hex": "#D4A574", "inStock": 1 },
+      { "color": "grigio chiaro", "hex": "#D1D5DB", "inStock": 1 }
     ]
   }
 ]
