@@ -28,6 +28,8 @@ function extractFirstJSON(text) {
  */
 function repairJSON(text) {
   let fixed = text
+  // Fix missing closing quote before colon: "urban:0.8 → "urban":0.8
+  fixed = fixed.replace(/"([a-zA-ZÀ-ÿ_][a-zA-ZÀ-ÿ0-9_ ]*):/g, '"$1":')
   // Fix unquoted property names: `  roso: 0.3` → `"roso": 0.3`
   fixed = fixed.replace(/([{,]\s*)([a-zA-ZÀ-ÿ_][a-zA-ZÀ-ÿ0-9_ ]*)\s*:/g, (_, prefix, key) => {
     return `${prefix}"${key.trim()}":`
