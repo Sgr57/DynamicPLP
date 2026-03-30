@@ -9,6 +9,7 @@ import {
   getWeights,
   saveWeights,
   saveStatsSnapshot,
+  getStatsSnapshot,
   setMemoryValue,
   getMemoryValue,
 } from '../db/aiMemoryRepo'
@@ -18,6 +19,7 @@ export function useReranker(generate, engineReady, drawerProductId) {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
   const [lastReasoning, setLastReasoning] = useState('')
   const [products, setProducts] = useState(() => getProducts())
+  const [currentWeights, setCurrentWeights] = useState(() => getWeights())
   const isAnalyzingRef = useRef(false)
 
   // Pre-ranking on mount using last_weights
@@ -49,7 +51,16 @@ export function useReranker(generate, engineReady, drawerProductId) {
       try {
         const stats = aggregateStats()
         if (stats.totalInteractions === 0) return
+
+        console.log('[DynamicPLP] Stats:', {
+          interactions: stats.totalInteractions,
+          colors: stats.colorAffinity,
+          styles: stats.styleAffinity,
+          categories: stats.categoryAffinity,
+        })
+
         if (!shouldTrigger(stats)) return
+        console.log('[DynamicPLP] Trigger fired — calling LLM')
 
         isAnalyzingRef.current = true
         setIsAnalyzing(true)
@@ -62,16 +73,24 @@ export function useReranker(generate, engineReady, drawerProductId) {
           { role: 'user', content: user },
         ]
 
+        console.log('[DynamicPLP] Prompt sent to LLM:')
+        console.log('[DynamicPLP]   System:', system)
+        console.log('[DynamicPLP]   User:', user)
+
         let weights
         try {
           const text = await generate(messages)
+          console.log('[DynamicPLP] Raw LLM output:', text)
           weights = parseLLMResponse(text, getWeights())
-        } catch {
+        } catch (err) {
+          console.error('[DynamicPLP] LLM generate() error:', err)
           weights = getWeights()
         }
 
         if (weights) {
+          console.log('[DynamicPLP] LLM weights:', weights)
           saveWeights(weights)
+          setCurrentWeights(weights)
           if (weights.user_profile) {
             setMemoryValue('user_profile', weights.user_profile)
           }
@@ -110,5 +129,5 @@ export function useReranker(generate, engineReady, drawerProductId) {
     return () => clearInterval(interval)
   }, [engineReady, generate, drawerProductId])
 
-  return { isAnalyzing, lastReasoning, products, refreshProducts }
+  return { isAnalyzing, lastReasoning, products, refreshProducts, currentWeights }
 }

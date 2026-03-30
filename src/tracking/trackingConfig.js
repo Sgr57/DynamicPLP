@@ -8,6 +8,17 @@ export const TRACKING_CONFIG = {
   decay: {
     enabled: true,
     halfLifeSeconds: 120,
+    quantitative: {
+      enabled: true,
+      eventsPerDecayCycle: 15,
+      decayFactor: 0.7,
+    },
+  },
+  caps: {
+    perProductTotal: 25,
+    perProductColor: 12,
+    perProductStyle: 10,
+    perProductCategory: 15,
   },
   plp: {
     cardHover:     { enabled: true,  weight: 2,  minDurationMs: 1500 },

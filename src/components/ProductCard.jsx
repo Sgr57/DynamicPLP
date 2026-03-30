@@ -5,9 +5,22 @@ import ColoredShoeIcon from './ColoredShoeIcon'
 import { CATEGORY_ICON_MAP } from './icons'
 import { createPLPTracker, createScrollObserver } from '../tracking/trackingEngine'
 
-export default function ProductCard({ product, onCardClick }) {
-  const [activeVariantIndex, setActiveVariantIndex] = useState(0)
+export default function ProductCard({ product, onCardClick, preferredColors }) {
+  const bestVariantIndex = useMemo(() => {
+    if (!preferredColors || preferredColors.length === 0) return 0
+    for (const color of preferredColors) {
+      const idx = product.variants.findIndex(v => v.color === color)
+      if (idx !== -1) return idx
+    }
+    return 0
+  }, [preferredColors, product.variants])
+
+  const [activeVariantIndex, setActiveVariantIndex] = useState(bestVariantIndex)
   const activeVariant = product.variants[activeVariantIndex]
+
+  useEffect(() => {
+    setActiveVariantIndex(bestVariantIndex)
+  }, [bestVariantIndex])
   const hex = activeVariant?.hex || '#6B7280'
   const cardRef = useRef(null)
 

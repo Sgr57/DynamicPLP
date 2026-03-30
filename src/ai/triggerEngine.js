@@ -9,24 +9,45 @@ export function shouldTrigger(currentStats) {
   const events = getDelta()
 
   // 1. Minimum interactions
-  if (events.length < minInteractions) return false
+  if (events.length < minInteractions) {
+    console.log(`[DynamicPLP] Trigger: not enough events (${events.length}/${minInteractions})`)
+    return false
+  }
 
   // 2. Inactivity check: user must be idle for at least inactivitySeconds
   const now = Date.now()
   const lastEventTime = Math.max(...events.map(e => e.createdAt))
-  const inactivityMs = now - lastEventTime
-  if (inactivityMs < inactivitySeconds * 1000) return false
+  const idleSeconds = Math.round((now - lastEventTime) / 1000)
+  if (idleSeconds < inactivitySeconds) {
+    console.log(`[DynamicPLP] Trigger: user still active (${idleSeconds}s idle, need ${inactivitySeconds}s)`)
+    return false
+  }
 
   // 3. Cooldown since last analysis
   const lastAnalysisAt = getMemoryValue('last_analysis_at')
-  if (lastAnalysisAt && (now - lastAnalysisAt) < cooldownAfterAnalysis * 1000) return false
+  if (lastAnalysisAt) {
+    const cooldownRemaining = Math.round((cooldownAfterAnalysis * 1000 - (now - lastAnalysisAt)) / 1000)
+    if (cooldownRemaining > 0) {
+      console.log(`[DynamicPLP] Trigger: cooldown active (${cooldownRemaining}s remaining)`)
+      return false
+    }
+  }
 
   // 4. Significant delta: at least one attribute changed > significantDelta points vs snapshot
   const lastSnapshot = getStatsSnapshot()
-  if (!lastSnapshot) return true // First analysis, always significant
+  if (!lastSnapshot) {
+    console.log('[DynamicPLP] Trigger: PASS (first analysis, no previous snapshot)')
+    return true
+  }
 
   const hasSigDelta = checkSignificantDelta(currentStats, lastSnapshot)
-  return hasSigDelta
+  if (!hasSigDelta) {
+    console.log('[DynamicPLP] Trigger: no significant delta vs last snapshot')
+    return false
+  }
+
+  console.log('[DynamicPLP] Trigger: PASS (all conditions met)')
+  return true
 }
 
 function checkSignificantDelta(current, previous) {

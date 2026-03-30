@@ -21,6 +21,13 @@ export function getDelta() {
     .sort((a, b) => a.createdAt - b.createdAt)
 }
 
+export function getAllEvents() {
+  const events = store.getTable('trackingEvents')
+  return Object.entries(events)
+    .map(([id, e]) => ({ ...e, id }))
+    .sort((a, b) => a.createdAt - b.createdAt)
+}
+
 export function markAnalyzed() {
   const events = store.getTable('trackingEvents')
   Object.entries(events).forEach(([id, e]) => {

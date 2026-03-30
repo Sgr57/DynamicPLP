@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { AnimatePresence } from 'framer-motion'
 import { initStore, store } from './db/store'
 import { getProducts, updatePositions } from './db/productsRepo'
@@ -25,7 +25,7 @@ export default function App() {
   const { status: modelStatus, progress, generate } = useModelLoader()
   const engineReady = modelStatus === 'ready'
 
-  const { isAnalyzing, lastReasoning, products, refreshProducts } = useReranker(
+  const { isAnalyzing, lastReasoning, products, refreshProducts, currentWeights } = useReranker(
     aiEnabled ? generate : null,
     aiEnabled && engineReady,
     drawerProduct?.id
@@ -92,6 +92,14 @@ export default function App() {
     refreshProducts()
   }, [refreshProducts])
 
+  const preferredColors = useMemo(() => {
+    if (!currentWeights?.color_weights) return []
+    return Object.entries(currentWeights.color_weights)
+      .filter(([, w]) => w > 0)
+      .sort((a, b) => b[1] - a[1])
+      .map(([color]) => color)
+  }, [currentWeights])
+
   const openDrawer = useCallback((product, variantIndex = 0) => {
     setDrawerProduct(product)
     setDrawerVariantIndex(variantIndex)
@@ -112,26 +120,27 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
-      <header className="bg-white shadow-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <div>
-              <h1 className="text-2xl font-bold text-gray-900">DynamicPLP</h1>
-              <p className="text-sm text-gray-500">{products.length} prodotti</p>
+      <div className="sticky top-0 z-10">
+        <header className="bg-white shadow-sm">
+          <div className="max-w-7xl mx-auto px-4 py-2">
+            <div className="flex items-center justify-between">
+              <h1 className="text-lg font-bold text-gray-900">DynamicPLP</h1>
+              <span className="text-xs text-gray-400">{products.length} prodotti</span>
             </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      <AIReasoningPanel
-        isAnalyzing={isAnalyzing}
-        lastReasoning={lastReasoning}
-        aiEnabled={aiEnabled}
-        onToggleAI={handleToggleAI}
-      />
+        <AIReasoningPanel
+          isAnalyzing={isAnalyzing}
+          lastReasoning={lastReasoning}
+          aiEnabled={aiEnabled}
+          onToggleAI={handleToggleAI}
+          onResetEvents={resetPreferences}
+        />
+      </div>
 
       <main className="max-w-7xl mx-auto px-4 py-6 flex-1 w-full">
-        <PLPGrid products={products} onCardClick={openDrawer} />
+        <PLPGrid products={products} onCardClick={openDrawer} preferredColors={preferredColors} />
       </main>
 
       <footer className="bg-gray-900 text-gray-400">
