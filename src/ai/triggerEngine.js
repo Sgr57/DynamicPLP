@@ -2,7 +2,7 @@ import { getDelta } from '../db/trackingRepo'
 import { getMemoryValue, getStatsSnapshot } from '../db/aiMemoryRepo'
 import { TRACKING_CONFIG } from '../tracking/trackingConfig'
 
-const { minInteractions, inactivitySeconds, cooldownAfterAnalysis, significantDelta } =
+const { minInteractions, cooldownAfterAnalysis, significantDelta } =
   TRACKING_CONFIG.triggers
 
 export function shouldTrigger(currentStats) {
@@ -14,16 +14,8 @@ export function shouldTrigger(currentStats) {
     return false
   }
 
-  // 2. Inactivity check: user must be idle for at least inactivitySeconds
+  // 2. Cooldown since last analysis
   const now = Date.now()
-  const lastEventTime = Math.max(...events.map(e => e.createdAt))
-  const idleSeconds = Math.round((now - lastEventTime) / 1000)
-  if (idleSeconds < inactivitySeconds) {
-    console.log(`[DynamicPLP] Trigger: user still active (${idleSeconds}s idle, need ${inactivitySeconds}s)`)
-    return false
-  }
-
-  // 3. Cooldown since last analysis
   const lastAnalysisAt = getMemoryValue('last_analysis_at')
   if (lastAnalysisAt) {
     const cooldownRemaining = Math.round((cooldownAfterAnalysis * 1000 - (now - lastAnalysisAt)) / 1000)
@@ -33,7 +25,7 @@ export function shouldTrigger(currentStats) {
     }
   }
 
-  // 4. Significant delta: at least one attribute changed > significantDelta points vs snapshot
+  // 3. Significant delta: at least one attribute changed > significantDelta points vs snapshot
   const lastSnapshot = getStatsSnapshot()
   if (!lastSnapshot) {
     console.log('[DynamicPLP] Trigger: PASS (first analysis, no previous snapshot)')

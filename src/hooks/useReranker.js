@@ -14,6 +14,10 @@ import {
   getMemoryValue,
 } from '../db/aiMemoryRepo'
 import { markAnalyzed } from '../db/trackingRepo'
+import { isUserIdle } from '../tracking/mouseActivityTracker'
+import { TRACKING_CONFIG } from '../tracking/trackingConfig'
+
+const { reorderInactivitySeconds } = TRACKING_CONFIG.triggers
 
 export function useReranker(generate, engineReady, drawerProductId) {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
@@ -21,6 +25,7 @@ export function useReranker(generate, engineReady, drawerProductId) {
   const [products, setProducts] = useState(() => getProducts())
   const [currentWeights, setCurrentWeights] = useState(() => getWeights())
   const isAnalyzingRef = useRef(false)
+  const pendingReorderRef = useRef(false)
 
   // Pre-ranking on mount using last_weights
   useEffect(() => {
@@ -41,7 +46,7 @@ export function useReranker(generate, engineReady, drawerProductId) {
     setProducts(getProducts())
   }, [])
 
-  // Pipeline loop
+  // Flow A: LLM invocation pipeline
   useEffect(() => {
     if (!engineReady || !generate) return
 
@@ -92,25 +97,13 @@ export function useReranker(generate, engineReady, drawerProductId) {
           setMemoryValue('last_analysis_at', Date.now())
           markAnalyzed()
 
-          const currentProducts = getProducts()
-          const orderedIds = rankProducts(currentProducts, weights)
-
-          // Anchor the drawer product: exclude from reorder
-          if (drawerProductId) {
-            const drawerIdx = orderedIds.indexOf(drawerProductId)
-            if (drawerIdx !== -1) {
-              orderedIds.splice(drawerIdx, 1)
-              const currentPos = currentProducts.find(p => p.id === drawerProductId)?.position || 0
-              orderedIds.splice(currentPos, 0, drawerProductId)
-            }
-          }
-
-          updatePositions(orderedIds)
-          setProducts(getProducts())
-
           if (weights.reasoning) {
             setLastReasoning(weights.reasoning)
           }
+
+          // Mark reorder as pending — will apply when user is idle
+          pendingReorderRef.current = true
+          console.log('[DynamicPLP] Weights saved, reorder pending (waiting for user idle)')
         }
       } catch {
         // Silent error handling
@@ -121,7 +114,39 @@ export function useReranker(generate, engineReady, drawerProductId) {
     }, 2000)
 
     return () => clearInterval(interval)
-  }, [engineReady, generate, drawerProductId])
+  }, [engineReady, generate])
+
+  // Flow B: Reorder when user is idle
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (!pendingReorderRef.current) return
+      if (!isUserIdle(reorderInactivitySeconds)) return
+
+      console.log('[DynamicPLP] Reorder applied (user idle)')
+      pendingReorderRef.current = false
+
+      const weights = getWeights()
+      if (!weights) return
+
+      const currentProducts = getProducts()
+      const orderedIds = rankProducts(currentProducts, weights)
+
+      // Anchor the drawer product: exclude from reorder
+      if (drawerProductId) {
+        const drawerIdx = orderedIds.indexOf(drawerProductId)
+        if (drawerIdx !== -1) {
+          orderedIds.splice(drawerIdx, 1)
+          const currentPos = currentProducts.find(p => p.id === drawerProductId)?.position || 0
+          orderedIds.splice(currentPos, 0, drawerProductId)
+        }
+      }
+
+      updatePositions(orderedIds)
+      setProducts(getProducts())
+    }, 1000)
+
+    return () => clearInterval(interval)
+  }, [drawerProductId])
 
   return { isAnalyzing, lastReasoning, products, refreshProducts, currentWeights }
 }

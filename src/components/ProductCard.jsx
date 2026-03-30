@@ -71,9 +71,18 @@ export default function ProductCard({ product, onCardClick, preferredColors }) {
       </div>
 
       <div className="p-3">
-        <h3 className="font-semibold text-gray-900 text-sm leading-tight">{product.name}</h3>
+        <div className="flex justify-between items-baseline">
+          <h3 className="font-semibold text-gray-900 text-sm leading-tight">{product.name}</h3>
+          <span className="font-bold text-indigo-600 text-sm">&euro;{product.price}</span>
+        </div>
         <p className="text-xs text-gray-500 mt-0.5">{product.brand}</p>
-        <p className="font-bold text-indigo-600 mt-1">&euro;{product.price}</p>
+
+        <div className="flex flex-wrap gap-1 mt-1.5">
+          <span className="bg-indigo-50 text-indigo-700 text-[10px] px-1.5 py-0.5 rounded-full font-medium">{product.category}</span>
+          {product.styles.map(s => (
+            <span key={s} className="bg-gray-100 text-gray-600 text-[10px] px-1.5 py-0.5 rounded-full font-medium">{s}</span>
+          ))}
+        </div>
 
         <div className="flex gap-1.5 mt-2">
           {product.variants.map((v, i) => (

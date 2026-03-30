@@ -4,6 +4,7 @@ import { initStore, store } from './db/store'
 import { getProducts, updatePositions } from './db/productsRepo'
 import { getWeights } from './db/aiMemoryRepo'
 import { rankProducts } from './lib/reranker'
+import { startMouseTracking, stopMouseTracking } from './tracking/mouseActivityTracker'
 import { useModelLoader } from './hooks/useModelLoader'
 import { useReranker } from './hooks/useReranker'
 import { exportData } from './lib/dbExporter'
@@ -30,6 +31,11 @@ export default function App() {
     aiEnabled && engineReady,
     drawerProduct?.id
   )
+
+  useEffect(() => {
+    startMouseTracking()
+    return () => stopMouseTracking()
+  }, [])
 
   useEffect(() => {
     initStore().then(() => {
