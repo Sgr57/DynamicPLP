@@ -3,4 +3,5 @@ export const MODEL_CONFIG = {
   temperature: 0.2,
   top_p: 0.9,
   max_tokens: 300,
+  inferenceTimeout: 30000,
 }

@@ -39,7 +39,7 @@ export function useModelLoader() {
     if (!engineRef.current) throw new Error('Engine not ready')
 
     const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('LLM inference timeout')), 15000)
+      setTimeout(() => reject(new Error('LLM inference timeout')), MODEL_CONFIG.inferenceTimeout)
     )
 
     const inferencePromise = engineRef.current.chat.completions.create({
