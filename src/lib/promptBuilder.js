@@ -1,15 +1,36 @@
 const SYSTEM_PROMPT = `Sei un motore di profilazione per un e-commerce di scarpe. Ricevi punteggi di interesse utente (0-100) per colori, stili e categorie.
 
 Compiti:
-1. user_profile: scrivi 1-2 frasi che descrivono i gusti ATTUALI dell'utente. Se c'e' un profilo precedente, AGGIORNALO: descrivi cosa e' cambiato. Se i nuovi dati contraddicono il profilo, riscrivilo.
-2. Pesi: da -1.0 a 1.0. Punteggi alti = peso positivo, bassi = peso negativo o 0.
-3. reasoning: 1 frase breve in italiano.
+1. PROFILE: scrivi 1-2 frasi sui gusti ATTUALI. Se c'e' un profilo precedente, aggiornalo.
+2. COLOR, STYLE, CATEGORY: converti i punteggi in pesi. Regola: 100→1.0, 50→0.0, 0→-1.0. Usa SOLO le chiavi presenti nei dati.
+3. REASON: 1 frase breve in italiano.
 
-Rispondi SOLO con JSON valido.`
+Formato (5 righe, nient'altro):
+PROFILE: <descrizione gusti>
+COLOR <chiave>=<peso>, <chiave>=<peso>
+STYLE <chiave>=<peso>, <chiave>=<peso>
+CATEGORY <chiave>=<peso>, <chiave>=<peso>
+REASON: <motivazione>`
 
-const EXAMPLE_NO_PROFILE = `{"user_profile":"Preferisce scarpe nere sportive, stile urban e running","color_weights":{"nero":0.9,"rosso":0.3},"style_weights":{"urban":0.8,"sporty":0.7,"casual":0.1},"category_weights":{"running":0.9,"hiking_boot":0.3},"reasoning":"Interesse chiaro per scarpe nere sportive"}`
+// Few-shot example uses synthetic keys that never appear in real catalog
+const FEWSHOT_USER = `Profilo precedente: nessuno. Crea un nuovo profilo basato sui dati.
 
-const EXAMPLE_WITH_PROFILE = `{"user_profile":"Passato da sneakers casual a stivali eleganti. Ora preferisce nero e marrone, stile classic","color_weights":{"nero":0.8,"marrone":0.6,"bianco":-0.3},"style_weights":{"classic":0.8,"elegant":0.6,"casual":-0.2},"category_weights":{"mans_shoe":0.8,"hiking_boot":0.4,"running":-0.3},"reasoning":"Shift da casual a elegante, colori scuri"}`
+Interessi utente attuali:
+Colori: giallo 100, argento 45, turchese 20
+Stili: elegante 100, boho 60
+Categorie: sandal 100, mocassino 55
+
+Rispondi con le 5 righe:`
+
+const FEWSHOT_ASSISTANT = `PROFILE: Predilige sandali eleganti in giallo, con interesse per mocassini boho
+COLOR giallo=1.0, argento=-0.1, turchese=-0.6
+STYLE elegante=1.0, boho=0.2
+CATEGORY sandal=1.0, mocassino=0.1
+REASON: Forte preferenza per sandali gialli eleganti`
+
+function normalizeKey(key) {
+  return key.replace(/ /g, '_')
+}
 
 function normalizeToPercent(obj) {
   const entries = Object.entries(obj)
@@ -17,13 +38,12 @@ function normalizeToPercent(obj) {
   const maxVal = Math.max(...entries.map(([, v]) => Math.abs(v)), 1)
   return entries
     .sort((a, b) => b[1] - a[1])
-    .map(([k, v]) => `${k} ${Math.round((v / maxVal) * 100)}`)
+    .map(([k, v]) => `${normalizeKey(k)} ${Math.round((v / maxVal) * 100)}`)
     .join(', ')
 }
 
 export function buildPrompt(stats, userProfile) {
   const hasProfile = userProfile && userProfile.length > 0
-  const example = hasProfile ? EXAMPLE_WITH_PROFILE : EXAMPLE_NO_PROFILE
 
   const profileSection = hasProfile
     ? `Profilo precedente: "${userProfile}"\nAGGIORNA il profilo in base ai nuovi interessi. Descrivi cosa e' cambiato.`
@@ -36,13 +56,12 @@ Colori: ${normalizeToPercent(stats.colorAffinity)}
 Stili: ${normalizeToPercent(stats.styleAffinity)}
 Categorie: ${normalizeToPercent(stats.categoryAffinity)}
 
-Esempio formato (usa i dati sopra, NON copiare questi valori):
-${example}
+Rispondi con le 5 righe:`
 
-Ora rispondi con JSON usando i dati reali sopra:`
-
-  return {
-    system: SYSTEM_PROMPT,
-    user: userMessage,
-  }
+  return [
+    { role: 'system', content: SYSTEM_PROMPT },
+    { role: 'user', content: FEWSHOT_USER },
+    { role: 'assistant', content: FEWSHOT_ASSISTANT },
+    { role: 'user', content: userMessage },
+  ]
 }

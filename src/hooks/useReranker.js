@@ -2,7 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react'
 import { aggregateStats } from '../ai/statsAggregator'
 import { shouldTrigger } from '../ai/triggerEngine'
 import { buildPrompt } from '../lib/promptBuilder'
-import { parseLLMResponse } from '../lib/jsonParser'
+import { parseResponse } from '../lib/responseParser'
 import { rankProducts } from '../lib/reranker'
 import { getProducts, updatePositions } from '../db/productsRepo'
 import {
@@ -66,22 +66,16 @@ export function useReranker(generate, engineReady, drawerProductId) {
         setIsAnalyzing(true)
 
         const userProfile = getMemoryValue('user_profile') || ''
-        const { system, user } = buildPrompt(stats, userProfile)
-
-        const messages = [
-          { role: 'system', content: system },
-          { role: 'user', content: user },
-        ]
+        const messages = buildPrompt(stats, userProfile)
 
         console.log('[DynamicPLP] Prompt sent to LLM:')
-        console.log('[DynamicPLP]   System:', system)
-        console.log('[DynamicPLP]   User:', user)
+        messages.forEach(m => console.log(`[DynamicPLP]   ${m.role}:`, m.content))
 
         let weights
         try {
           const text = await generate(messages)
           console.log('[DynamicPLP] Raw LLM output:', text)
-          weights = parseLLMResponse(text, getWeights())
+          weights = parseResponse(text, getWeights())
         } catch (err) {
           console.error('[DynamicPLP] LLM generate() error:', err)
           weights = getWeights()
