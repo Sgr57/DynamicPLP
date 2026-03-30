@@ -20,11 +20,13 @@ User Interaction
  [triggerEngine]           Check: 10+ events, 8s idle, 30s cooldown, delta > 2
        |
        v
- [promptBuilder]           Format stats + profile + delta (~980 tokens)
+ [promptBuilder]           Format stats normalized 0-100 + profile (~400 tokens)
        |
        v
- [WebLLM]                  Llama 3.2 1B via WebGPU
-       |                   Returns weights (-1.0 to 1.0) + user profile
+ [WebLLM]                  Qwen 2.5 3B via WebGPU
+       |                   Returns weights (-1.0 to 1.0) + evolving user profile
+       v
+ [jsonParser]              Balanced extraction + auto-repair + validation
        v
  [reranker]                Score products: color*40 + style*20 + category*30 + stock*5
        |
@@ -149,38 +151,54 @@ All four conditions must be met simultaneously:
 
 **File:** `src/lib/promptBuilder.js`
 
-### Structure (~980 tokens total)
+### Model
+
+**Qwen 2.5 3B Instruct** (q4f32_1 quantization) via WebGPU. Configured in `src/data/modelConfig.js` (temperature: 0.2, top_p: 0.9, max_tokens: 300). Model weights are cached in IndexedDB after first download (~2.5 GB).
+
+### Structure (~400 tokens total)
 
 ```
-System: Role definition + profiling rules
-        [TOP]/[TREND]/[CONF] format for user_profile
-        Emphasis on changes vs previous profile
+System: Role (1 sentence) + profiling instructions
+        - Update user_profile if previous exists, describe changes
+        - Weights -1.0 to 1.0 based on interest scores
+        - JSON only, no extra text
 
-User:   Previous user profile (or "first analysis")
-        Delta since last analysis (only significant changes)
-        Current affinities (color, style, category)
-        Negative signals
-        Top 8 products by interaction score
-        JSON response schema
+User:   Previous profile (with "AGGIORNA" instruction) or "nessuno"
+        Affinities normalized to 0-100 scale (color, style, category)
+        Few-shot example with concrete JSON values
+        "Ora rispondi con JSON usando i dati reali sopra"
 ```
 
-### Key constraint: no catalog in prompt
+### Key design choices
 
-The LLM never sees the product catalog. It receives only aggregated behavioral statistics. This keeps prompt size constant regardless of catalog size.
+- **No catalog in prompt**: LLM receives only aggregated behavioral statistics. Prompt size is constant regardless of catalog size.
+- **Normalized 0-100 scale**: raw affinity scores are normalized to prevent the LLM from copying raw numbers into weights.
+- **Few-shot example**: a concrete JSON example (with different data than the actual input) guides the model on format. Two examples: one for first analysis, one showing profile evolution.
+- **Profile update instruction**: when a previous profile exists, the prompt explicitly asks the LLM to describe what changed.
 
 ### Expected Response
 
 ```json
 {
-  "user_profile": "[TOP] stivali neri, stile urban | [TREND] restringendo | [CONF] media",
+  "user_profile": "Passato da sneakers casual a stivali neri eleganti. Preferisce nero e stile urban.",
   "color_weights": { "nero": 0.8, "rosso": 0.3, "bianco": -0.2 },
   "style_weights": { "urban": 0.6, "casual": 0.3 },
-  "category_weights": { "stivali": 0.7, "sneakers": -0.3 },
+  "category_weights": { "hiking_boot": 0.7, "running": -0.3 },
   "reasoning": "Preferenza chiara per stivali scuri"
 }
 ```
 
-Weights are clamped to [-1.0, 1.0]. Parsing is resilient with fallback to previous weights.
+### JSON Parser
+
+**File:** `src/lib/jsonParser.js`
+
+The parser handles common LLM output issues with a 3-step approach:
+
+1. **Balanced extraction**: counts `{}` depth to extract the first complete JSON object, ignoring trailing garbage text
+2. **Auto-repair**: fixes unquoted property names (`roso:` → `"roso":`), missing closing quotes before colons (`"urban:` → `"urban":`), single quotes, and trailing commas
+3. **Validation**: checks required fields (`color_weights`, `style_weights`, `category_weights`), clamps all weights to [-1.0, 1.0]
+
+Falls back to previous weights if parsing fails completely.
 
 ---
 
@@ -233,3 +251,5 @@ The debug panel polls every 3 seconds but only when expanded (performance optimi
 ## Configuration
 
 All thresholds, weights, and decay parameters are centralized in `src/tracking/trackingConfig.js`. No code changes needed to tune the system.
+
+The LLM model is configured in `src/data/modelConfig.js`. Changing the `model` string switches to a different WebLLM-compatible model (auto-downloads on first use).

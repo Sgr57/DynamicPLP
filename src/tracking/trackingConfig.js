@@ -1,7 +1,7 @@
 export const TRACKING_CONFIG = {
   triggers: {
     minInteractions: 10,
-    inactivitySeconds: 8,
+    inactivitySeconds: 4,
     cooldownAfterAnalysis: 30,
     significantDelta: 2,
   },
