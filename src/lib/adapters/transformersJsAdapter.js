@@ -14,35 +14,46 @@ export class TransformersJsAdapter {
   }
 
   async load(onProgress) {
-    onProgress({ text: 'Loading tokenizer...', percentage: 0 })
+    let lastUpdate = 0
+    let maxPercentage = 0
+    const THROTTLE_MS = 250
+
+    const throttledProgress = (text, percentage) => {
+      percentage = Math.round(percentage)
+      // Ensure monotonic progress
+      if (percentage > maxPercentage) maxPercentage = percentage
+      else percentage = maxPercentage
+
+      const now = Date.now()
+      const isMilestone = percentage === 0 || percentage === 10 || percentage === 100
+      if (!isMilestone && now - lastUpdate < THROTTLE_MS) return
+      lastUpdate = now
+      onProgress({ text, percentage })
+    }
+
+    throttledProgress('Caricamento tokenizer...', 0)
 
     this.tokenizer = await AutoTokenizer.from_pretrained(this.modelId, {
       progress_callback: (p) => {
-        if (p.status === 'progress') {
-          onProgress({
-            text: `Loading tokenizer: ${p.file || ''}`,
-            percentage: Math.round((p.progress || 0) * 0.1),
-          })
+        if (p.status === 'progress_total') {
+          throttledProgress('Caricamento tokenizer...', (p.progress || 0) * 0.1)
         }
       },
     })
 
-    onProgress({ text: 'Loading model weights...', percentage: 10 })
+    throttledProgress('Download pesi del modello...', 10)
 
     this.model = await Gemma4ForConditionalGeneration.from_pretrained(this.modelId, {
       dtype: this.dtype,
       device: this.device,
       progress_callback: (p) => {
-        if (p.status === 'progress') {
-          onProgress({
-            text: p.file ? `Downloading ${p.file}` : 'Loading model...',
-            percentage: 10 + Math.round((p.progress || 0) * 0.9),
-          })
+        if (p.status === 'progress_total') {
+          throttledProgress('Download pesi del modello...', 10 + (p.progress || 0) * 0.9)
         }
       },
     })
 
-    onProgress({ text: 'Model ready', percentage: 100 })
+    throttledProgress('Modello pronto!', 100)
   }
 
   async generate(messages) {

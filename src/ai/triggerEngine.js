@@ -5,7 +5,7 @@ import { logger } from '../lib/logger'
 
 const { minInteractions, cooldownAfterAnalysis } = TRACKING_CONFIG.triggers
 
-const INTENT_COOLDOWNS = { exploring: 45, deciding: 30, focused: 15 }
+const INTENT_COOLDOWNS = { exploring: 0, deciding: 0, focused: 0 }
 
 export function shouldTrigger() {
   const events = getAllEvents()

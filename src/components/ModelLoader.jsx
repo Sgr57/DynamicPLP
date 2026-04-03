@@ -19,11 +19,19 @@ export default function ModelLoader({ progress, isOverlay, onSkip }) {
         </div>
         <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden">
           <motion.div
-            className="h-full bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"
+            className="h-full rounded-full relative overflow-hidden bg-gradient-to-r from-blue-500 to-purple-500"
             initial={{ width: 0 }}
             animate={{ width: `${percentage}%` }}
             transition={{ duration: 0.3, ease: 'easeOut' }}
-          />
+          >
+            <div
+              className="absolute inset-0 animate-shimmer"
+              style={{
+                background: 'linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.25) 50%, transparent 100%)',
+                backgroundSize: '200% 100%',
+              }}
+            />
+          </motion.div>
         </div>
         <p className="text-xs text-gray-500 mt-2 truncate">{text}</p>
       </div>
