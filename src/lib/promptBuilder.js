@@ -12,12 +12,14 @@ Compiti:
    Per i COLORI: puoi aggiungere colori correlati dal catalogo con peso ridotto.
 3. REASON: 1 frase breve in italiano.
 
-Formato (5 righe, nient'altro):
+Formato OBBLIGATORIO (esattamente 5 righe, nient'altro):
 PROFILE: <descrizione gusti>
 COLOR <chiave>=<peso>, <chiave>=<peso>
 STYLE <chiave>=<peso>, <chiave>=<peso>
 CATEGORY <chiave>=<peso>, <chiave>=<peso>
-REASON: <motivazione>`
+REASON: <motivazione>
+
+Rispondi SOLO con le 5 righe nel formato specificato. Nessun testo aggiuntivo.`
 
 // Few-shot example shows the model adding a related color (bordeaux) not in input
 const FEWSHOT_USER = `Profilo precedente: nessuno. Crea un nuovo profilo basato sui dati.

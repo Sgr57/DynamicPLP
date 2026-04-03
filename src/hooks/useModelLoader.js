@@ -1,11 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { CreateMLCEngine } from '@mlc-ai/web-llm'
+import { createModelAdapter } from '../lib/modelAdapter'
 import { MODEL_CONFIG } from '../data/modelConfig'
 
 export function useModelLoader() {
   const [status, setStatus] = useState('idle')
   const [progress, setProgress] = useState({ text: '', percentage: 0 })
-  const engineRef = useRef(null)
+  const adapterRef = useRef(null)
 
   useEffect(() => {
     let cancelled = false
@@ -13,45 +13,42 @@ export function useModelLoader() {
     async function loadModel() {
       setStatus('loading')
       try {
-        const engine = await CreateMLCEngine(MODEL_CONFIG.model, {
-          initProgressCallback: (p) => {
-            if (cancelled) return
-            setProgress({
-              text: p.text || '',
-              percentage: Math.round((p.progress || 0) * 100),
-            })
-          },
+        const adapter = await createModelAdapter()
+        await adapter.load((p) => {
+          if (cancelled) return
+          setProgress(p)
         })
-        if (cancelled) return
-        engineRef.current = engine
+        if (cancelled) {
+          adapter.dispose()
+          return
+        }
+        adapterRef.current = adapter
         setStatus('ready')
       } catch (err) {
         if (cancelled) return
+        console.error('[DynamicPLP] Model loading failed:', err)
         setStatus('error')
       }
     }
 
     loadModel()
-    return () => { cancelled = true }
+    return () => {
+      cancelled = true
+      adapterRef.current?.dispose()
+    }
   }, [])
 
   const generate = useCallback(async (messages) => {
-    if (!engineRef.current) throw new Error('Engine not ready')
+    if (!adapterRef.current) throw new Error('Engine not ready')
 
     const timeoutPromise = new Promise((_, reject) =>
       setTimeout(() => reject(new Error('LLM inference timeout')), MODEL_CONFIG.inferenceTimeout)
     )
 
-    const inferencePromise = engineRef.current.chat.completions.create({
-      messages,
-      temperature: MODEL_CONFIG.temperature,
-      top_p: MODEL_CONFIG.top_p,
-      max_tokens: MODEL_CONFIG.max_tokens,
-    })
+    const inferencePromise = adapterRef.current.generate(messages)
 
-    const reply = await Promise.race([inferencePromise, timeoutPromise])
-    return reply.choices[0].message.content
+    return Promise.race([inferencePromise, timeoutPromise])
   }, [])
 
-  return { status, progress, engine: engineRef.current, generate }
+  return { status, progress, generate }
 }

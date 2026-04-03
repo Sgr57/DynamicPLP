@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.0.1",
     "@mlc-ai/web-llm": "^0.2.82",
     "framer-motion": "^11.0.0",
     "lodash": "^4.17.21",

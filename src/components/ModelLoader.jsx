@@ -1,4 +1,5 @@
 import { motion } from 'framer-motion'
+import { MODEL_LABEL } from '../data/modelConfig'
 
 export default function ModelLoader({ progress, isOverlay, onSkip }) {
   const percentage = progress?.percentage || 0
@@ -13,7 +14,7 @@ export default function ModelLoader({ progress, isOverlay, onSkip }) {
 
       <div className="w-full">
         <div className="flex justify-between text-xs text-gray-400 mb-2">
-          <span>Download modello AI...</span>
+          <span>Download {MODEL_LABEL}...</span>
           <span>{percentage}%</span>
         </div>
         <div className="w-full bg-gray-700 rounded-full h-2.5 overflow-hidden">

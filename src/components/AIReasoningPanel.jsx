@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { getSessionStats } from '../db/trackingRepo'
 import { aggregateAllStats } from '../ai/statsAggregator'
 import { getWeights, getMemoryValue } from '../db/aiMemoryRepo'
+import { MODEL_LABEL } from '../data/modelConfig'
 
 const COLOR_HEX = {
   nero: '#1A1A1A', bianco: '#F5F5F5', rosso: '#E53E3E', grigio: '#6B7280',
@@ -136,6 +137,11 @@ export default function AIReasoningPanel({ isAnalyzing, lastReasoning, aiEnabled
             <span className={`text-xs font-medium ${statusColor}`}>
               {statusLabel}
             </span>
+            {aiEnabled && (
+              <span className="text-[10px] text-gray-400 font-mono">
+                {MODEL_LABEL}
+              </span>
+            )}
             {lastReasoning && aiEnabled && !isOpen && (
               <span className="text-xs text-gray-400 max-w-xs truncate hidden sm:inline">
                 — {lastReasoning}
