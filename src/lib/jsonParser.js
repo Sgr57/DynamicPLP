@@ -1,3 +1,5 @@
+import { logger } from './logger'
+
 /**
  * Extract the first balanced {...} block from text.
  * Handles nested braces correctly unlike greedy regex.
@@ -47,7 +49,7 @@ function tryParse(text) {
 
 export function parseLLMResponse(text, fallbackWeights) {
   if (!text) {
-    console.warn('[DynamicPLP] Empty LLM output')
+    logger.parse(false, 'output LLM vuoto')
     return fallbackWeights || emptyWeights()
   }
 
@@ -65,14 +67,13 @@ export function parseLLMResponse(text, fallbackWeights) {
         const repaired = repairJSON(extracted)
         parsed = tryParse(repaired)
         if (parsed) {
-          console.log('[DynamicPLP] JSON parsed after repair')
+          logger.parse(true, 'JSON parsed dopo repair')
         } else {
-          console.warn('[DynamicPLP] JSON parse failed even after repair')
-          console.warn('[DynamicPLP] Repaired text:', repaired.substring(0, 500))
+          logger.parse(false, 'JSON parse fallito anche dopo repair')
         }
       }
     } else {
-      console.warn('[DynamicPLP] No JSON block found in output')
+      logger.parse(false, 'nessun blocco JSON trovato')
     }
   }
 
@@ -84,13 +85,10 @@ export function parseLLMResponse(text, fallbackWeights) {
     parsed.style_weights &&
     parsed.category_weights
   ) {
-    console.log('[DynamicPLP] Parsed LLM response OK:', {
-      profile: parsed.user_profile?.substring(0, 60),
-      colors: Object.keys(parsed.color_weights).length,
-      styles: Object.keys(parsed.style_weights).length,
-      categories: Object.keys(parsed.category_weights).length,
-      reasoning: parsed.reasoning,
-    })
+    const c = Object.keys(parsed.color_weights).length
+    const s = Object.keys(parsed.style_weights).length
+    const cat = Object.keys(parsed.category_weights).length
+    logger.parse(true, `JSON (${c} color, ${s} style, ${cat} category)`)
     return {
       user_profile: parsed.user_profile || '',
       color_weights: sanitizeWeights(parsed.color_weights),
@@ -101,9 +99,9 @@ export function parseLLMResponse(text, fallbackWeights) {
   }
 
   if (parsed) {
-    console.warn('[DynamicPLP] Parsed JSON but missing required fields:', Object.keys(parsed))
+    logger.parse(false, `JSON valido ma campi mancanti: ${Object.keys(parsed).join(', ')}`)
   }
-  console.warn('[DynamicPLP] Using fallback weights')
+  logger.parse(false, 'uso pesi precedenti')
   return fallbackWeights || emptyWeights()
 }
 

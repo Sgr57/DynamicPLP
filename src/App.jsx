@@ -26,7 +26,7 @@ export default function App() {
   const { status: modelStatus, progress, generate } = useModelLoader()
   const engineReady = modelStatus === 'ready'
 
-  const { isAnalyzing, lastReasoning, products, refreshProducts, currentWeights } = useReranker(
+  const { isAnalyzing, lastMessage, products, refreshProducts, currentWeights } = useReranker(
     aiEnabled ? generate : null,
     aiEnabled && engineReady,
     drawerProduct?.id
@@ -138,7 +138,7 @@ export default function App() {
 
         <AIReasoningPanel
           isAnalyzing={isAnalyzing}
-          lastReasoning={lastReasoning}
+          lastMessage={lastMessage}
           aiEnabled={aiEnabled}
           onToggleAI={handleToggleAI}
           onResetEvents={resetPreferences}

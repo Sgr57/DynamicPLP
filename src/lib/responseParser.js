@@ -10,12 +10,16 @@
  * Falls back to JSON parsing if line-based fails.
  */
 
+import { logger } from './logger'
+
 const LINE_PREFIXES = {
   PROFILE: 'user_profile',
   COLOR: 'color_weights',
   STYLE: 'style_weights',
   CATEGORY: 'category_weights',
-  REASON: 'reasoning',
+  CONFIDENCE: 'confidence',
+  INTENT: 'intent',
+  MESSAGE: 'message',
 }
 
 function denormalizeKey(key) {
@@ -43,7 +47,9 @@ function parseLineBased(text) {
     color_weights: {},
     style_weights: {},
     category_weights: {},
-    reasoning: '',
+    confidence: 0.5,
+    intent: 'deciding',
+    message: '',
   }
 
   let found = 0
@@ -61,6 +67,14 @@ function parseLineBased(text) {
 
       if (field.endsWith('_weights')) {
         result[field] = parseWeightLine(rest)
+      } else if (field === 'confidence') {
+        const val = parseFloat(rest)
+        result[field] = isNaN(val) ? 0.5 : Math.max(0, Math.min(1, val))
+      } else if (field === 'intent') {
+        const normalized = rest.toLowerCase().trim()
+        result[field] = ['exploring', 'deciding', 'focused'].includes(normalized)
+          ? normalized
+          : 'deciding'
       } else {
         result[field] = rest
       }
@@ -94,12 +108,15 @@ function tryJSONFallback(text) {
       if (ch === '}') { depth--; if (depth === 0) {
         const parsed = JSON.parse(text.substring(start, i + 1))
         if (parsed.color_weights && parsed.style_weights && parsed.category_weights) {
+          const conf = parseFloat(parsed.confidence)
           return {
             user_profile: parsed.user_profile || '',
             color_weights: sanitizeWeights(parsed.color_weights),
             style_weights: sanitizeWeights(parsed.style_weights),
             category_weights: sanitizeWeights(parsed.category_weights),
-            reasoning: parsed.reasoning || '',
+            confidence: isNaN(conf) ? 0.5 : Math.max(0, Math.min(1, conf)),
+            intent: ['exploring', 'deciding', 'focused'].includes(parsed.intent) ? parsed.intent : 'deciding',
+            message: parsed.message || '',
           }
         }
         return null
@@ -121,34 +138,35 @@ function sanitizeWeights(weights) {
 }
 
 function emptyWeights() {
-  return { user_profile: '', color_weights: {}, style_weights: {}, category_weights: {}, reasoning: '' }
+  return {
+    user_profile: '', color_weights: {}, style_weights: {},
+    category_weights: {}, confidence: 0.5, intent: 'deciding', message: '',
+  }
 }
 
 export function parseResponse(text, fallbackWeights) {
   if (!text) {
-    console.warn('[DynamicPLP] Empty LLM output')
+    logger.parse(false, 'output LLM vuoto')
     return fallbackWeights || emptyWeights()
   }
 
   // Attempt 1: line-based format
   const lineParsed = parseLineBased(text)
   if (lineParsed) {
-    console.log('[DynamicPLP] Parsed line-based response OK:', {
-      profile: lineParsed.user_profile?.substring(0, 60),
-      colors: Object.keys(lineParsed.color_weights).length,
-      styles: Object.keys(lineParsed.style_weights).length,
-      categories: Object.keys(lineParsed.category_weights).length,
-    })
+    const c = Object.keys(lineParsed.color_weights).length
+    const s = Object.keys(lineParsed.style_weights).length
+    const cat = Object.keys(lineParsed.category_weights).length
+    logger.parse(true, `line-based (${c} color, ${s} style, ${cat} category)`)
     return lineParsed
   }
 
   // Attempt 2: JSON fallback
   const jsonParsed = tryJSONFallback(text)
   if (jsonParsed) {
-    console.log('[DynamicPLP] Parsed JSON fallback response OK')
+    logger.parse(true, 'JSON fallback')
     return jsonParsed
   }
 
-  console.warn('[DynamicPLP] Failed to parse LLM response, using fallback')
+  logger.parse(false, 'parse fallito, uso pesi precedenti')
   return fallbackWeights || emptyWeights()
 }

@@ -31,8 +31,7 @@ export function createPLPTracker(productId, variants) {
           insertEvent({
             eventType: 'plp.cardHoverExit',
             productId,
-            weight: cfg.cardHoverExit.weight,
-          })
+                      })
           return
         }
 
@@ -41,8 +40,7 @@ export function createPLPTracker(productId, variants) {
           insertEvent({
             eventType: 'plp.cardHover',
             productId,
-            weight: cfg.cardHover.weight,
-          })
+                      })
         }
       } catch (_) { /* silent */ }
     },
@@ -55,8 +53,7 @@ export function createPLPTracker(productId, variants) {
           eventType: 'plp.swatchHover',
           productId,
           color,
-          weight: cfg.swatchHover.weight,
-        })
+                  })
       } catch (_) { /* silent */ }
     },
 
@@ -67,8 +64,7 @@ export function createPLPTracker(productId, variants) {
           eventType: 'plp.swatchClick',
           productId,
           color,
-          weight: cfg.swatchClick.weight,
-        })
+                  })
       } catch (_) { /* silent */ }
     },
 
@@ -78,8 +74,7 @@ export function createPLPTracker(productId, variants) {
         insertEvent({
           eventType: 'plp.cardClick',
           productId,
-          weight: cfg.cardClick.weight,
-        })
+                  })
 
         // Check for revisit
         trackCardRevisit(productId)
@@ -120,8 +115,7 @@ export function createScrollObserver(productId, element) {
                 insertEvent({
                   eventType: 'plp.scrollSkip',
                   productId,
-                  weight: cfg.scrollSkip.weight,
-                })
+                                  })
               }
               enterTime = null
             }
@@ -155,8 +149,7 @@ export function trackCardRevisit(productId, color) {
         eventType: 'plp.cardRevisit',
         productId,
         color,
-        weight: cfg.cardRevisit.weight,
-      })
+              })
     } else {
       visitedProducts.add(productId)
     }

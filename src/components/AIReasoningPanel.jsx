@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { getSessionStats } from '../db/trackingRepo'
-import { aggregateAllStats } from '../ai/statsAggregator'
+import { formatEvents } from '../ai/eventFormatter'
 import { getWeights, getMemoryValue } from '../db/aiMemoryRepo'
 import { MODEL_LABEL } from '../data/modelConfig'
 
@@ -12,39 +12,6 @@ const COLOR_HEX = {
   giallo: '#EAB308', 'blu scuro': '#1E3A5F', viola: '#8B5CF6', beige: '#D4A574',
   oliva: '#6B7C3F', marrone: '#92400E', 'verde scuro': '#065F46', cuoio: '#C68E5B',
   cammello: '#C19A6B', 'marrone chiaro': '#B8860B', bordeaux: '#7F1D1D', panna: '#FFF8E7',
-}
-
-function AffinityBars({ title, data, colorMode }) {
-  const entries = Object.entries(data).sort((a, b) => b[1] - a[1])
-  if (entries.length === 0) return null
-  const maxVal = Math.max(...entries.map(([, v]) => Math.abs(v)), 1)
-
-  return (
-    <div>
-      <div className="text-[10px] font-semibold text-gray-500 uppercase mb-1">{title}</div>
-      <div className="space-y-0.5">
-        {entries.map(([key, val]) => {
-          const pct = Math.min(Math.abs(val) / maxVal * 100, 100)
-          const bg = colorMode ? (COLOR_HEX[key] || '#6366f1') : '#6366f1'
-          const needsBorder = colorMode && ['bianco', 'panna', 'grigio chiaro', 'beige'].includes(key)
-          return (
-            <div key={key} className="flex items-center gap-1.5">
-              <span className="text-[10px] text-gray-500 w-20 truncate text-right font-mono">{key}</span>
-              <div className="flex-1 h-3 bg-gray-100 rounded-sm overflow-hidden relative">
-                <div
-                  className={`h-full rounded-sm transition-all duration-500 ${needsBorder ? 'border border-gray-300' : ''}`}
-                  style={{ width: `${pct}%`, backgroundColor: bg, opacity: val < 0 ? 0.4 : 0.8 }}
-                />
-              </div>
-              <span className="text-[10px] font-mono text-gray-600 w-10 text-right">
-                {val > 0 ? '+' : ''}{Math.round(val * 10) / 10}
-              </span>
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
 }
 
 function WeightBars({ title, data, colorMode }) {
@@ -85,21 +52,26 @@ function WeightBars({ title, data, colorMode }) {
   )
 }
 
-export default function AIReasoningPanel({ isAnalyzing, lastReasoning, aiEnabled, onToggleAI, onResetEvents }) {
+export default function AIReasoningPanel({ isAnalyzing, lastMessage, aiEnabled, onToggleAI, onResetEvents }) {
   const [isOpen, setIsOpen] = useState(false)
   const [debugOpen, setDebugOpen] = useState(false)
   const [stats, setStats] = useState({ total: 0, unanalyzed: 0 })
-  const [affinity, setAffinity] = useState(null)
+  const [eventsText, setEventsText] = useState('')
   const [weights, setWeights] = useState(null)
   const [userProfile, setUserProfile] = useState('')
+  const [confidence, setConfidence] = useState(null)
+  const [intent, setIntent] = useState('')
 
   useEffect(() => {
     const update = () => {
       setStats(getSessionStats())
       if (debugOpen) {
-        setAffinity(aggregateAllStats())
+        const { text } = formatEvents()
+        setEventsText(text)
         setWeights(getWeights())
         setUserProfile(getMemoryValue('user_profile') || '')
+        setConfidence(getMemoryValue('confidence'))
+        setIntent(getMemoryValue('intent') || '')
       }
     }
     const interval = setInterval(update, 3000)
@@ -111,7 +83,7 @@ export default function AIReasoningPanel({ isAnalyzing, lastReasoning, aiEnabled
     ? 'Disattivata'
     : isAnalyzing
       ? 'Analisi in corso...'
-      : lastReasoning
+      : lastMessage
         ? 'Personalizzato'
         : 'In attesa'
 
@@ -119,7 +91,7 @@ export default function AIReasoningPanel({ isAnalyzing, lastReasoning, aiEnabled
     ? 'text-gray-400'
     : isAnalyzing
       ? 'text-purple-500'
-      : lastReasoning
+      : lastMessage
         ? 'text-indigo-600'
         : 'text-gray-400'
 
@@ -142,15 +114,15 @@ export default function AIReasoningPanel({ isAnalyzing, lastReasoning, aiEnabled
                 {MODEL_LABEL}
               </span>
             )}
-            {lastReasoning && aiEnabled && !isOpen && (
+            {lastMessage && aiEnabled && !isOpen && (
               <span className="text-xs text-gray-400 max-w-xs truncate hidden sm:inline">
-                — {lastReasoning}
+                — {lastMessage}
               </span>
             )}
           </div>
 
           <div className="flex items-center gap-3">
-            {lastReasoning && aiEnabled && (
+            {lastMessage && aiEnabled && (
               <span className="text-[10px] bg-indigo-100 text-indigo-600 px-1.5 py-0.5 rounded font-medium">
                 AI Pick
               </span>
@@ -174,7 +146,6 @@ export default function AIReasoningPanel({ isAnalyzing, lastReasoning, aiEnabled
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4 text-xs text-gray-500">
                     <span>Eventi tracciati: <strong className="text-gray-700">{stats.total}</strong></span>
-                    <span>Non analizzati: <strong className="text-gray-700">{stats.unanalyzed}</strong></span>
                     {stats.total > 0 && (
                       <button
                         onClick={onResetEvents}
@@ -200,9 +171,9 @@ export default function AIReasoningPanel({ isAnalyzing, lastReasoning, aiEnabled
                   </label>
                 </div>
 
-                {lastReasoning && aiEnabled && (
+                {lastMessage && aiEnabled && (
                   <div className="bg-white/60 rounded-lg p-2.5 text-xs text-gray-600 leading-relaxed">
-                    {lastReasoning}
+                    {lastMessage}
                   </div>
                 )}
 
@@ -230,17 +201,15 @@ export default function AIReasoningPanel({ isAnalyzing, lastReasoning, aiEnabled
                       className="overflow-hidden"
                     >
                       <div className="bg-white/40 rounded-lg border border-gray-200/60 p-3 space-y-3">
-                        {/* Affinities from interactions */}
-                        {affinity && affinity.totalInteractions > 0 && (
+                        {/* Event log */}
+                        {eventsText && (
                           <>
                             <div className="text-[10px] font-bold text-gray-600 uppercase tracking-wider">
-                              Affinit&agrave; (dalle interazioni)
+                              Interazioni ({stats.total} eventi)
                             </div>
-                            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                              <AffinityBars title="Colori" data={affinity.colorAffinity} colorMode />
-                              <AffinityBars title="Stili" data={affinity.styleAffinity} />
-                              <AffinityBars title="Categorie" data={affinity.categoryAffinity} />
-                            </div>
+                            <pre className="text-[10px] text-gray-600 bg-white/60 rounded p-2 leading-relaxed font-mono max-h-40 overflow-y-auto whitespace-pre-wrap">
+                              {eventsText}
+                            </pre>
                           </>
                         )}
 
@@ -270,7 +239,24 @@ export default function AIReasoningPanel({ isAnalyzing, lastReasoning, aiEnabled
                           </div>
                         )}
 
-                        {!affinity?.totalInteractions && !weights && (
+                        {/* AI State: confidence + intent */}
+                        {(confidence != null || intent) && (
+                          <div className="pt-1 border-t border-gray-200/60">
+                            <div className="text-[10px] font-bold text-gray-600 uppercase tracking-wider mb-1">
+                              Stato AI
+                            </div>
+                            <div className="flex gap-4 text-[11px] font-mono text-gray-600">
+                              {confidence != null && (
+                                <span>Confidence: <strong className="text-indigo-600">{Math.round(confidence * 100)}%</strong></span>
+                              )}
+                              {intent && (
+                                <span>Intent: <strong className="text-indigo-600">{intent}</strong></span>
+                              )}
+                            </div>
+                          </div>
+                        )}
+
+                        {!eventsText && !weights && (
                           <div className="text-[10px] text-gray-400 italic">
                             Nessun dato ancora. Interagisci con i prodotti per vedere le affinit&agrave;.
                           </div>

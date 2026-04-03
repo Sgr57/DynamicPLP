@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { createModelAdapter } from '../lib/modelAdapter'
 import { MODEL_CONFIG } from '../data/modelConfig'
+import { logger } from '../lib/logger'
 
 export function useModelLoader() {
   const [status, setStatus] = useState('idle')
@@ -26,7 +27,7 @@ export function useModelLoader() {
         setStatus('ready')
       } catch (err) {
         if (cancelled) return
-        console.error('[DynamicPLP] Model loading failed:', err)
+        logger.modelError(err)
         setStatus('error')
       }
     }

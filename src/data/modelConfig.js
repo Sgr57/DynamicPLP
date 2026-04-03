@@ -19,7 +19,7 @@ export const MODEL_CONFIG = {
   // Shared inference parameters
   temperature: 0.3,
   top_p: 0.9,
-  max_tokens: 150,
+  max_tokens: 200,
   inferenceTimeout: 30000,
 }
 

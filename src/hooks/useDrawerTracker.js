@@ -21,6 +21,7 @@ export function useDrawerTracker(product, isOpen) {
   const visitedVariantsRef = useRef(new Set())
   const cyclingEmittedRef = useRef(false)
   const hoverTimerRef = useRef(null)
+  const openEmittedRef = useRef(false)
 
   // Track open / reopen when the drawer opens
   useEffect(() => {
@@ -31,21 +32,23 @@ export function useDrawerTracker(product, isOpen) {
       visitedVariantsRef.current = new Set()
       cyclingEmittedRef.current = false
 
-      const isReopen = openedProducts.has(product.id)
+      // Guard against StrictMode double-mount: only emit open/reopen once per drawer session
+      if (!openEmittedRef.current) {
+        openEmittedRef.current = true
+        const isReopen = openedProducts.has(product.id)
 
-      if (isReopen && cfg.reopen.enabled) {
-        insertEvent({
-          eventType: 'drawer.reopen',
-          productId: product.id,
-          weight: cfg.reopen.weight,
-        })
-      } else if (cfg.open.enabled) {
-        insertEvent({
-          eventType: 'drawer.open',
-          productId: product.id,
-          weight: cfg.open.weight,
-        })
-        openedProducts.add(product.id)
+        if (isReopen && cfg.reopen.enabled) {
+          insertEvent({
+            eventType: 'drawer.reopen',
+            productId: product.id,
+          })
+        } else if (cfg.open.enabled) {
+          insertEvent({
+            eventType: 'drawer.open',
+            productId: product.id,
+          })
+          openedProducts.add(product.id)
+        }
       }
     } catch (_) { /* silent */ }
 
@@ -59,19 +62,26 @@ export function useDrawerTracker(product, isOpen) {
 
         if (openTimeRef.current === null) return
         const duration = Date.now() - openTimeRef.current
+
+        // Ignore StrictMode phantom cleanups (< 100ms)
+        if (duration < 100) {
+          return
+        }
+
         openTimeRef.current = null
+        openEmittedRef.current = false
 
         if (cfg.quickClose.enabled && duration < cfg.quickClose.maxDurationMs) {
           insertEvent({
             eventType: 'drawer.quickClose',
             productId: product.id,
-            weight: cfg.quickClose.weight,
+            duration,
           })
         } else if (cfg.timeSpent.enabled && duration >= cfg.timeSpent.minDurationMs) {
           insertEvent({
             eventType: 'drawer.timeSpent',
             productId: product.id,
-            weight: cfg.timeSpent.weight,
+            duration,
           })
         }
       } catch (_) { /* silent */ }
@@ -94,7 +104,6 @@ export function useDrawerTracker(product, isOpen) {
               eventType: 'drawer.variantHover',
               productId: product.id,
               color,
-              weight: cfg.variantHover.weight,
             })
           } catch (_) { /* silent */ }
           hoverTimerRef.current = null
@@ -115,7 +124,6 @@ export function useDrawerTracker(product, isOpen) {
             eventType: 'drawer.variantClick',
             productId: product.id,
             color,
-            weight: cfg.variantClick.weight,
           })
         }
 
@@ -130,7 +138,6 @@ export function useDrawerTracker(product, isOpen) {
           insertEvent({
             eventType: 'drawer.variantCycling',
             productId: product.id,
-            weight: cfg.variantCycling.weight,
           })
         }
       } catch (_) { /* silent */ }

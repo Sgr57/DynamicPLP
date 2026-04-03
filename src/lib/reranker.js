@@ -10,6 +10,8 @@ export function rankProducts(products, weights) {
   const styleW = weights.style_weights || {}
   const categoryW = weights.category_weights || {}
 
+  const confidence = weights.confidence ?? 1.0
+
   const scored = products.map(product => {
     // Color score: max weight among product variant colors
     const variantColors = product.variants?.map(v => v.color) || []
@@ -31,8 +33,8 @@ export function rankProducts(products, weights) {
       v => (colorW[v.color] || 0) > 0 && v.inStock === 1
     ) ? 1 : 0
 
-    const score = colorScore * W_COLOR + styleScore * W_STYLE +
-                  categoryScore * W_CATEGORY + stockBonus * W_STOCK
+    const score = (colorScore * W_COLOR + styleScore * W_STYLE +
+                  categoryScore * W_CATEGORY + stockBonus * W_STOCK) * confidence
 
     return { id: product.id, score }
   })

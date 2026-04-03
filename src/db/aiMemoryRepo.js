@@ -25,10 +25,3 @@ export function getWeights() {
   return getMemoryValue('last_weights')
 }
 
-export function saveStatsSnapshot(snapshot) {
-  setMemoryValue('last_stats_snapshot', snapshot)
-}
-
-export function getStatsSnapshot() {
-  return getMemoryValue('last_stats_snapshot')
-}

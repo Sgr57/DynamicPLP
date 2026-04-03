@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { aggregateStats } from '../ai/statsAggregator'
+import { formatEvents } from '../ai/eventFormatter'
 import { shouldTrigger } from '../ai/triggerEngine'
 import { buildPrompt } from '../lib/promptBuilder'
 import { parseResponse } from '../lib/responseParser'
@@ -9,20 +9,18 @@ import { getProducts, updatePositions } from '../db/productsRepo'
 import {
   getWeights,
   saveWeights,
-  saveStatsSnapshot,
-  getStatsSnapshot,
   setMemoryValue,
   getMemoryValue,
 } from '../db/aiMemoryRepo'
-import { markAnalyzed } from '../db/trackingRepo'
 import { isUserIdle } from '../tracking/mouseActivityTracker'
 import { TRACKING_CONFIG } from '../tracking/trackingConfig'
+import { logger } from '../lib/logger'
 
 const { reorderInactivitySeconds } = TRACKING_CONFIG.triggers
 
 export function useReranker(generate, engineReady, drawerProductId) {
   const [isAnalyzing, setIsAnalyzing] = useState(false)
-  const [lastReasoning, setLastReasoning] = useState('')
+  const [lastMessage, setLastMessage] = useState('')
   const [products, setProducts] = useState(() => getProducts())
   const [currentWeights, setCurrentWeights] = useState(() => getWeights())
   const isAnalyzingRef = useRef(false)
@@ -55,62 +53,60 @@ export function useReranker(generate, engineReady, drawerProductId) {
       if (isAnalyzingRef.current) return
 
       try {
-        const stats = aggregateStats()
-        if (stats.totalInteractions === 0) return
+        const { text: eventsText, totalEvents } = formatEvents()
+        if (totalEvents === 0) return
 
-        console.log('[DynamicPLP] Stats:', {
-          interactions: stats.totalInteractions,
-          colors: stats.colorAffinity,
-          styles: stats.styleAffinity,
-          categories: stats.categoryAffinity,
-        })
-
-        if (!shouldTrigger(stats)) return
-        console.log('[DynamicPLP] Trigger fired — calling LLM')
+        if (!shouldTrigger()) return
 
         isAnalyzingRef.current = true
         setIsAnalyzing(true)
 
         const userProfile = getMemoryValue('user_profile') || ''
-        const messages = buildPrompt(stats, userProfile)
+        const messages = buildPrompt(eventsText, userProfile)
 
-        console.log('[DynamicPLP] Prompt sent to LLM:')
-        messages.forEach(m => console.log(`[DynamicPLP]   ${m.role}:`, m.content))
+        logger.llmSend(totalEvents)
+        logger.llmSendDetail(messages)
 
         let weights
+        const t0 = performance.now()
         try {
           const text = await generate(messages)
-          console.log('[DynamicPLP] Raw LLM output:', text)
+          const ms = Math.round(performance.now() - t0)
+          logger.llmRecv(ms)
+          logger.llmRecvDetail(text)
           weights = parseResponse(text, getWeights())
         } catch (err) {
-          console.error('[DynamicPLP] LLM generate() error:', err)
+          logger.llmError(err)
           weights = getWeights()
         }
 
         if (weights) {
-          // Propagate color weights to related colors (families, shades)
           try {
             weights.color_weights = propagateColorWeights(weights.color_weights)
           } catch (err) {
-            console.warn('[DynamicPLP] Color propagation failed, using raw weights:', err)
+            logger.warn('llm', 'color propagation fallita, uso pesi raw')
           }
-          console.log('[DynamicPLP] LLM weights (with propagation):', weights)
+          logger.llmWeights(weights)
           saveWeights(weights)
           setCurrentWeights(weights)
           if (weights.user_profile) {
             setMemoryValue('user_profile', weights.user_profile)
           }
-          saveStatsSnapshot(stats)
           setMemoryValue('last_analysis_at', Date.now())
-          markAnalyzed()
+          setMemoryValue('last_event_count', totalEvents)
 
-          if (weights.reasoning) {
-            setLastReasoning(weights.reasoning)
+          if (weights.confidence != null) {
+            setMemoryValue('confidence', weights.confidence)
+          }
+          if (weights.intent) {
+            setMemoryValue('intent', weights.intent)
+          }
+          if (weights.message) {
+            setMemoryValue('message', weights.message)
+            setLastMessage(weights.message)
           }
 
-          // Mark reorder as pending — will apply when user is idle
           pendingReorderRef.current = true
-          console.log('[DynamicPLP] Weights saved, reorder pending (waiting for user idle)')
         }
       } catch {
         // Silent error handling
@@ -129,7 +125,6 @@ export function useReranker(generate, engineReady, drawerProductId) {
       if (!pendingReorderRef.current) return
       if (!isUserIdle(reorderInactivitySeconds)) return
 
-      console.log('[DynamicPLP] Reorder applied (user idle)')
       pendingReorderRef.current = false
 
       const weights = getWeights()
@@ -138,7 +133,6 @@ export function useReranker(generate, engineReady, drawerProductId) {
       const currentProducts = getProducts()
       const orderedIds = rankProducts(currentProducts, weights)
 
-      // Anchor the drawer product: exclude from reorder
       if (drawerProductId) {
         const drawerIdx = orderedIds.indexOf(drawerProductId)
         if (drawerIdx !== -1) {
@@ -150,10 +144,11 @@ export function useReranker(generate, engineReady, drawerProductId) {
 
       updatePositions(orderedIds)
       setProducts(getProducts())
+      logger.reorder(`applicato (user idle ${reorderInactivitySeconds}s)`)
     }, 1000)
 
     return () => clearInterval(interval)
   }, [drawerProductId])
 
-  return { isAnalyzing, lastReasoning, products, refreshProducts, currentWeights }
+  return { isAnalyzing, lastMessage, products, refreshProducts, currentWeights }
 }
