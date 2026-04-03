@@ -37,7 +37,7 @@ export default function ProductCard({ product, onCardClick, preferredColors }) {
   }, [product.id])
 
   function handleCardClick() {
-    tracker.onClick()
+    tracker.onClick(activeVariant.color)
     if (onCardClick) onCardClick(product, activeVariantIndex)
   }
 

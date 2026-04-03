@@ -9,7 +9,7 @@ export default function ProductDrawer({ product, initialVariantIndex = 0, onClos
   const activeVariant = product.variants[activeVariantIndex]
   const hex = activeVariant?.hex || '#6B7280'
 
-  const { onVariantHover, onVariantClick } = useDrawerTracker(product, true)
+  const { onVariantHover, onVariantClick } = useDrawerTracker(product, true, initialVariantIndex)
 
   useEffect(() => {
     function handleKeyDown(e) {

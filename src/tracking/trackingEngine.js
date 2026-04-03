@@ -68,12 +68,13 @@ export function createPLPTracker(productId, variants) {
       } catch (_) { /* silent */ }
     },
 
-    onClick() {
+    onClick(color) {
       try {
         if (!cfg.cardClick.enabled) return
         insertEvent({
           eventType: 'plp.cardClick',
           productId,
+          color,
                   })
 
         // Check for revisit

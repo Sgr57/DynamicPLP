@@ -16,7 +16,7 @@ const openedProducts = new Set()
  * @param {boolean} isOpen - Whether the drawer is currently open
  * @returns {{ onVariantHover: function, onVariantClick: function }}
  */
-export function useDrawerTracker(product, isOpen) {
+export function useDrawerTracker(product, isOpen, initialVariantIndex = 0) {
   const openTimeRef = useRef(null)
   const visitedVariantsRef = useRef(new Set())
   const cyclingEmittedRef = useRef(false)
@@ -37,15 +37,19 @@ export function useDrawerTracker(product, isOpen) {
         openEmittedRef.current = true
         const isReopen = openedProducts.has(product.id)
 
+        const color = product.variants?.[initialVariantIndex]?.color || ''
+
         if (isReopen && cfg.reopen.enabled) {
           insertEvent({
             eventType: 'drawer.reopen',
             productId: product.id,
+            color,
           })
         } else if (cfg.open.enabled) {
           insertEvent({
             eventType: 'drawer.open',
             productId: product.id,
+            color,
           })
           openedProducts.add(product.id)
         }
