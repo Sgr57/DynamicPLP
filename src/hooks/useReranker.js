@@ -3,6 +3,7 @@ import { aggregateStats } from '../ai/statsAggregator'
 import { shouldTrigger } from '../ai/triggerEngine'
 import { buildPrompt } from '../lib/promptBuilder'
 import { parseResponse } from '../lib/responseParser'
+import { propagateColorWeights } from '../lib/colorFamilies'
 import { rankProducts } from '../lib/reranker'
 import { getProducts, updatePositions } from '../db/productsRepo'
 import {
@@ -87,7 +88,13 @@ export function useReranker(generate, engineReady, drawerProductId) {
         }
 
         if (weights) {
-          console.log('[DynamicPLP] LLM weights:', weights)
+          // Propagate color weights to related colors (families, shades)
+          try {
+            weights.color_weights = propagateColorWeights(weights.color_weights)
+          } catch (err) {
+            console.warn('[DynamicPLP] Color propagation failed, using raw weights:', err)
+          }
+          console.log('[DynamicPLP] LLM weights (with propagation):', weights)
           saveWeights(weights)
           setCurrentWeights(weights)
           if (weights.user_profile) {

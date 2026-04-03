@@ -30,6 +30,13 @@ export const TRACKING_CONFIG = {
     cardRevisit:   { enabled: true,  weight: 5                       },
     scrollSkip:    { enabled: true,  weight: -2                      },
   },
+  colorPropagation: {
+    familyFactor: 0.4,
+    shadeFactor: 0.6,
+    adjacentFactor: 0.2,
+    minWeightToPropagate: 0.3,
+    maxPropagatedWeight: 0.5,
+  },
   drawer: {
     open:           { enabled: true,  weight: 3                       },
     quickClose:     { enabled: true,  weight: -3, maxDurationMs: 1000 },

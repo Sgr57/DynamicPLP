@@ -1,8 +1,15 @@
+import { ALL_CATALOG_COLORS } from './colorFamilies'
+
+const CATALOG_COLORS_LIST = ALL_CATALOG_COLORS.join(', ')
+
 const SYSTEM_PROMPT = `Sei un motore di profilazione per un e-commerce di scarpe. Ricevi punteggi di interesse utente (0-100) per colori, stili e categorie.
+
+Catalogo colori disponibili: ${CATALOG_COLORS_LIST}
 
 Compiti:
 1. PROFILE: scrivi 1-2 frasi sui gusti ATTUALI. Se c'e' un profilo precedente, aggiornalo.
-2. COLOR, STYLE, CATEGORY: converti i punteggi in pesi. Regola: 100→1.0, 50→0.0, 0→-1.0. Usa SOLO le chiavi presenti nei dati.
+2. COLOR, STYLE, CATEGORY: converti i punteggi in pesi. Regola: 100→1.0, 50→0.0, 0→-1.0.
+   Per i COLORI: puoi aggiungere colori correlati dal catalogo con peso ridotto.
 3. REASON: 1 frase breve in italiano.
 
 Formato (5 righe, nient'altro):
@@ -12,21 +19,21 @@ STYLE <chiave>=<peso>, <chiave>=<peso>
 CATEGORY <chiave>=<peso>, <chiave>=<peso>
 REASON: <motivazione>`
 
-// Few-shot example uses synthetic keys that never appear in real catalog
+// Few-shot example shows the model adding a related color (bordeaux) not in input
 const FEWSHOT_USER = `Profilo precedente: nessuno. Crea un nuovo profilo basato sui dati.
 
 Interessi utente attuali:
-Colori: giallo 100, argento 45, turchese 20
+Colori: rosso 100, nero 40
 Stili: elegante 100, boho 60
 Categorie: sandal 100, mocassino 55
 
 Rispondi con le 5 righe:`
 
-const FEWSHOT_ASSISTANT = `PROFILE: Predilige sandali eleganti in giallo, con interesse per mocassini boho
-COLOR giallo=1.0, argento=-0.1, turchese=-0.6
+const FEWSHOT_ASSISTANT = `PROFILE: Predilige sandali eleganti in rosso, con interesse per mocassini boho
+COLOR rosso=1.0, bordeaux=0.4, nero=-0.2
 STYLE elegante=1.0, boho=0.2
 CATEGORY sandal=1.0, mocassino=0.1
-REASON: Forte preferenza per sandali gialli eleganti`
+REASON: Forte preferenza per sandali rossi eleganti, affinita' con toni caldi`
 
 function normalizeKey(key) {
   return key.replace(/ /g, '_')
