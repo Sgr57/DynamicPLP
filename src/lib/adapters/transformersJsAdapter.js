@@ -43,11 +43,16 @@ export class TransformersJsAdapter {
 
     throttledProgress('Download pesi del modello...', 10)
 
+    const fileSizes = {}
     this.model = await Gemma4ForConditionalGeneration.from_pretrained(this.modelId, {
       dtype: this.dtype,
       device: this.device,
       progress_callback: (p) => {
-        if (p.status === 'progress_total') {
+        if (p.status === 'progress') {
+          fileSizes[p.file] = p.loaded
+          const loadedMB = (Object.values(fileSizes).reduce((s, v) => s + v, 0) / 1024 / 1024).toFixed(0)
+          throttledProgress(`Download: ${loadedMB} MB`, 10 + (p.progress || 0) * 0.9)
+        } else if (p.status === 'progress_total') {
           throttledProgress('Download pesi del modello...', 10 + (p.progress || 0) * 0.9)
         }
       },

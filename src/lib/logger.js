@@ -27,6 +27,14 @@ export const logger = {
   parse:   (ok, msg) => log('parse', ok ? '\u2713' : '\u2717', msg),
   reorder: (msg) => log('reorder', '\u2713', msg),
   model:   (msg) => log('model', '\u2192', msg),
+  modelLoaded: (ms) => log('model', '\u2713', `caricato in ${ms}ms`),
+  pipeline: (phases) => {
+    const total = Object.values(phases).reduce((s, v) => s + v, 0)
+    console.groupCollapsed(`${PREFIX} llm      \u23F1 pipeline ${total}ms`)
+    for (const [name, ms] of Object.entries(phases))
+      console.log(`  ${name.padEnd(14)} ${ms}ms`)
+    console.groupEnd()
+  },
   modelError: (err) => console.error(`${PREFIX} model    \u2717`, err),
   warn:    (phase, msg) => console.warn(`${PREFIX} ${phase.padEnd(8)} \u26A0`, msg),
 }

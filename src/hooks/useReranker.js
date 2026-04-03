@@ -53,28 +53,37 @@ export function useReranker(generate, engineReady, drawerProductId) {
       if (isAnalyzingRef.current) return
 
       try {
+        const tFmt0 = performance.now()
         const { text: eventsText, totalEvents } = formatEvents()
+        const tFmt = Math.round(performance.now() - tFmt0)
         if (totalEvents === 0) return
 
+        const tTrig0 = performance.now()
         if (!shouldTrigger()) return
+        const tTrig = Math.round(performance.now() - tTrig0)
 
         isAnalyzingRef.current = true
         setIsAnalyzing(true)
 
+        const tBuild0 = performance.now()
         const userProfile = getMemoryValue('user_profile') || ''
         const messages = buildPrompt(eventsText, userProfile)
+        const tBuild = Math.round(performance.now() - tBuild0)
 
         logger.llmSend(totalEvents)
         logger.llmSendDetail(messages)
 
         let weights
+        let tInfer = 0, tParse = 0, tProp = 0
         const t0 = performance.now()
         try {
           const text = await generate(messages)
-          const ms = Math.round(performance.now() - t0)
-          logger.llmRecv(ms)
+          tInfer = Math.round(performance.now() - t0)
+          logger.llmRecv(tInfer)
           logger.llmRecvDetail(text)
+          const tParse0 = performance.now()
           weights = parseResponse(text, getWeights())
+          tParse = Math.round(performance.now() - tParse0)
         } catch (err) {
           logger.llmError(err)
           weights = getWeights()
@@ -82,10 +91,20 @@ export function useReranker(generate, engineReady, drawerProductId) {
 
         if (weights) {
           try {
+            const tProp0 = performance.now()
             weights.color_weights = propagateColorWeights(weights.color_weights)
+            tProp = Math.round(performance.now() - tProp0)
           } catch (err) {
             logger.warn('llm', 'color propagation fallita, uso pesi raw')
           }
+          logger.pipeline({
+            formatEvents: tFmt,
+            trigger: tTrig,
+            buildPrompt: tBuild,
+            inference: tInfer,
+            parseResponse: tParse,
+            colorPropag: tProp,
+          })
           logger.llmWeights(weights)
           saveWeights(weights)
           setCurrentWeights(weights)

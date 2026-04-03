@@ -15,10 +15,14 @@ export function useModelLoader() {
       setStatus('loading')
       try {
         const adapter = await createModelAdapter()
+        logger.model('caricamento modello...')
+        const loadT0 = performance.now()
         await adapter.load((p) => {
           if (cancelled) return
           setProgress(p)
         })
+        const loadMs = Math.round(performance.now() - loadT0)
+        logger.modelLoaded(loadMs)
         if (cancelled) {
           adapter.dispose()
           return

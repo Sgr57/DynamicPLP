@@ -2,6 +2,7 @@ export const TRACKING_CONFIG = {
   triggers: {
     minInteractions: 5,           // eventi minimi prima di triggerare l'analisi
     cooldownAfterAnalysis: 5,     // secondi di attesa tra un'analisi e la successiva (0 = disabilitato)
+    minNewEvents: 5,              // nuovi eventi minimi dall'ultima analisi prima di ri-triggerare
     mouseThrottleMs: 500,         // throttle eventi mouse in ms
     reorderInactivitySeconds: 1,  // secondi di inattività prima di triggerare il reorder
   },
