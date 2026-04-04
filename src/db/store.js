@@ -40,9 +40,13 @@ function seedIfNeeded() {
 }
 
 export async function initStore() {
-  persister = createIndexedDbPersister(store, 'plp_demo')
-  await persister.startAutoLoad()
-  await persister.startAutoSave()
+  try {
+    persister = createIndexedDbPersister(store, 'plp_demo')
+    await persister.startAutoLoad()
+    await persister.startAutoSave()
+  } catch (err) {
+    console.warn('[PLP] IndexedDB non disponibile, modalità in-memory:', err.message)
+  }
   seedIfNeeded()
   return store
 }

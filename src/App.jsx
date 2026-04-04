@@ -8,6 +8,7 @@ import { startMouseTracking, stopMouseTracking } from './tracking/mouseActivityT
 import { useModelLoader } from './hooks/useModelLoader'
 import { useReranker } from './hooks/useReranker'
 import { exportData } from './lib/dbExporter'
+import { getDeviceCapabilities } from './lib/deviceCapabilities'
 import catalog from './data/products.json'
 import PLPGrid from './components/PLPGrid'
 import ProductDrawer from './components/ProductDrawer'
@@ -25,10 +26,12 @@ export default function App() {
 
   const { status: modelStatus, progress, generate } = useModelLoader()
   const engineReady = modelStatus === 'ready'
+  const aiUnsupported = modelStatus === 'unsupported'
+  const effectiveAiEnabled = aiEnabled && !aiUnsupported
 
   const { isAnalyzing, lastMessage, products, refreshProducts, currentWeights } = useReranker(
-    aiEnabled ? generate : null,
-    aiEnabled && engineReady,
+    effectiveAiEnabled ? generate : null,
+    effectiveAiEnabled && engineReady,
     drawerProduct?.id
   )
 
@@ -52,7 +55,7 @@ export default function App() {
       }
       setStoreReady(true)
       refreshProducts()
-      setAppState('model_loading')
+      setAppState(getDeviceCapabilities().canRunModel ? 'model_loading' : 'browsing')
     })
 
     if ('serviceWorker' in navigator && import.meta.env.PROD) {
@@ -61,10 +64,10 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    if (modelStatus === 'ready' || modelStatus === 'error') {
+    if (storeReady && (modelStatus === 'ready' || modelStatus === 'error' || modelStatus === 'unsupported')) {
       setAppState('browsing')
     }
-  }, [modelStatus])
+  }, [modelStatus, storeReady])
 
   const handleToggleAI = useCallback(() => {
     setAiEnabled(prev => {
@@ -139,7 +142,8 @@ export default function App() {
         <AIReasoningPanel
           isAnalyzing={isAnalyzing}
           lastMessage={lastMessage}
-          aiEnabled={aiEnabled}
+          aiEnabled={effectiveAiEnabled}
+          aiUnsupported={aiUnsupported}
           onToggleAI={handleToggleAI}
           onResetEvents={resetPreferences}
         />
