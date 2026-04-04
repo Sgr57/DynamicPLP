@@ -3,6 +3,17 @@ import {
   Gemma4ForConditionalGeneration,
 } from '@huggingface/transformers'
 
+async function detectDevice(preferred) {
+  if (preferred !== 'webgpu') return preferred
+  if (typeof navigator === 'undefined' || !navigator.gpu) return 'wasm'
+  try {
+    const adapter = await navigator.gpu.requestAdapter()
+    return adapter ? 'webgpu' : 'wasm'
+  } catch {
+    return 'wasm'
+  }
+}
+
 export class TransformersJsAdapter {
   constructor(backendConfig, sharedConfig) {
     this.modelId = backendConfig.model
@@ -29,6 +40,12 @@ export class TransformersJsAdapter {
       if (!isMilestone && now - lastUpdate < THROTTLE_MS) return
       lastUpdate = now
       onProgress({ text, percentage })
+    }
+
+    const resolvedDevice = await detectDevice(this.device)
+    if (resolvedDevice !== this.device) {
+      console.warn('[PLP] WebGPU non disponibile, fallback a WASM')
+      this.device = resolvedDevice
     }
 
     throttledProgress('Caricamento tokenizer...', 0)
@@ -93,7 +110,12 @@ export class TransformersJsAdapter {
     return decoded[0]
   }
 
-  dispose() {
+  async dispose() {
+    try {
+      await this.model?.dispose?.()
+    } catch {
+      // Ignore errors during cleanup
+    }
     this.model = null
     this.tokenizer = null
   }
