@@ -1,0 +1,193 @@
+<h2>Animazione "Analisi in corso" — Quale effetto magico preferisci?</h2>
+<p class="subtitle">Queste animazioni si attiverebbero nel pannello AI in cima alla pagina durante l'analisi</p>
+
+<div class="cards">
+
+  <!-- Option A: Sparkle Constellation -->
+  <div class="card" data-choice="a" onclick="toggleSelect(this)" style="overflow:hidden; position:relative;">
+    <div class="card-image" style="height: 180px; background: linear-gradient(135deg, #1e1b4b, #312e81, #4c1d95); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+      <!-- Animated sparkles -->
+      <style>
+        @keyframes sparkle-float {
+          0%, 100% { opacity: 0; transform: translateY(0) scale(0); }
+          20% { opacity: 1; transform: translateY(-10px) scale(1); }
+          80% { opacity: 0.6; transform: translateY(-40px) scale(0.5); }
+        }
+        @keyframes sparkle-pulse {
+          0%, 100% { text-shadow: 0 0 4px rgba(165,180,252,0.5); }
+          50% { text-shadow: 0 0 16px rgba(165,180,252,1), 0 0 30px rgba(139,92,246,0.5); }
+        }
+        .sparkle-container { position:relative; width:100%; height:100%; }
+        .sparkle {
+          position: absolute;
+          font-size: 12px;
+          animation: sparkle-float 2s ease-in-out infinite;
+          color: #c4b5fd;
+        }
+        .sparkle:nth-child(1) { left:15%; top:60%; animation-delay:0s; }
+        .sparkle:nth-child(2) { left:35%; top:70%; animation-delay:0.4s; font-size:8px; }
+        .sparkle:nth-child(3) { left:55%; top:50%; animation-delay:0.8s; }
+        .sparkle:nth-child(4) { left:75%; top:65%; animation-delay:1.2s; font-size:10px; }
+        .sparkle:nth-child(5) { left:90%; top:55%; animation-delay:1.6s; font-size:6px; }
+        .sparkle:nth-child(6) { left:25%; top:40%; animation-delay:0.2s; font-size:14px; color:#a78bfa; }
+        .sparkle:nth-child(7) { left:65%; top:75%; animation-delay:1s; font-size:9px; }
+        .main-star {
+          font-size: 28px;
+          color: #e0e7ff;
+          animation: sparkle-pulse 1.5s ease-in-out infinite;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          z-index: 2;
+        }
+      </style>
+      <div class="sparkle-container">
+        <span class="sparkle">&#10022;</span>
+        <span class="sparkle">&#10022;</span>
+        <span class="sparkle">&#10022;</span>
+        <span class="sparkle">&#10022;</span>
+        <span class="sparkle">&#10022;</span>
+        <span class="sparkle">&#10022;</span>
+        <span class="sparkle">&#10022;</span>
+        <span class="main-star">&#10022;</span>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>A — Sparkle Constellation</h3>
+      <p>Particelle scintillanti che fluttuano verso l'alto attorno a una stella centrale pulsante con glow. Effetto "polvere di stelle" leggero ed elegante.</p>
+    </div>
+  </div>
+
+  <!-- Option B: Aurora Gradient Wave -->
+  <div class="card" data-choice="b" onclick="toggleSelect(this)" style="overflow:hidden; position:relative;">
+    <div class="card-image" style="height: 180px; position:relative; overflow:hidden; border-radius: 8px 8px 0 0;">
+      <style>
+        @keyframes aurora-shift {
+          0% { background-position: 0% 50%; }
+          50% { background-position: 100% 50%; }
+          100% { background-position: 0% 50%; }
+        }
+        @keyframes aurora-border {
+          0% { background-position: 0% 0%; }
+          100% { background-position: 200% 0%; }
+        }
+        .aurora-bg {
+          width: 100%; height: 100%;
+          background: linear-gradient(270deg, #6366f1, #8b5cf6, #a78bfa, #c084fc, #8b5cf6, #6366f1);
+          background-size: 300% 100%;
+          animation: aurora-shift 4s ease-in-out infinite;
+          display: flex; align-items: center; justify-content: center;
+          position: relative;
+        }
+        .aurora-text {
+          color: white;
+          font-size: 13px;
+          font-weight: 500;
+          letter-spacing: 0.5px;
+          text-shadow: 0 0 20px rgba(255,255,255,0.3);
+        }
+        .aurora-border-line {
+          position: absolute;
+          bottom: 0; left: 0; right: 0;
+          height: 3px;
+          background: linear-gradient(90deg, transparent, #c4b5fd, #e9d5ff, #c4b5fd, transparent);
+          background-size: 200% 100%;
+          animation: aurora-border 2s linear infinite;
+        }
+        .aurora-star {
+          font-size: 16px;
+          margin-right: 8px;
+          animation: sparkle-pulse 2s ease-in-out infinite;
+        }
+      </style>
+      <div class="aurora-bg">
+        <span class="aurora-star">&#10022;</span>
+        <span class="aurora-text">Analisi in corso...</span>
+        <div class="aurora-border-line"></div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>B — Aurora Gradient Wave</h3>
+      <p>Sfondo gradiente che ondeggia lentamente tra indigo e viola, con una linea luminosa che scorre sul bordo inferiore. Effetto "aurora boreale" ipnotico.</p>
+    </div>
+  </div>
+
+  <!-- Option C: Orbiting Rings -->
+  <div class="card" data-choice="c" onclick="toggleSelect(this)" style="overflow:hidden; position:relative;">
+    <div class="card-image" style="height: 180px; background: linear-gradient(135deg, #0f0a2e, #1a1145); display:flex; align-items:center; justify-content:center; position:relative; overflow:hidden;">
+      <style>
+        @keyframes orbit-1 {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+        @keyframes orbit-2 {
+          from { transform: rotate(120deg); }
+          to { transform: rotate(480deg); }
+        }
+        @keyframes orbit-3 {
+          from { transform: rotate(240deg); }
+          to { transform: rotate(600deg); }
+        }
+        @keyframes core-glow {
+          0%, 100% { box-shadow: 0 0 15px rgba(139,92,246,0.4), 0 0 30px rgba(99,102,241,0.2); }
+          50% { box-shadow: 0 0 25px rgba(139,92,246,0.8), 0 0 50px rgba(99,102,241,0.4); }
+        }
+        .orbit-system {
+          position: relative;
+          width: 120px; height: 120px;
+        }
+        .orbit-ring {
+          position: absolute;
+          border: 1px solid rgba(165,180,252,0.2);
+          border-radius: 50%;
+        }
+        .orbit-ring-1 {
+          width: 120px; height: 120px;
+          top: 0; left: 0;
+          animation: orbit-1 4s linear infinite;
+        }
+        .orbit-ring-2 {
+          width: 90px; height: 90px;
+          top: 15px; left: 15px;
+          animation: orbit-2 3s linear infinite;
+        }
+        .orbit-ring-3 {
+          width: 60px; height: 60px;
+          top: 30px; left: 30px;
+          animation: orbit-3 2s linear infinite;
+        }
+        .orbit-dot {
+          position: absolute;
+          width: 6px; height: 6px;
+          background: #a78bfa;
+          border-radius: 50%;
+          top: -3px; left: 50%;
+          margin-left: -3px;
+          box-shadow: 0 0 8px rgba(167,139,250,0.8);
+        }
+        .orbit-core {
+          position: absolute;
+          width: 20px; height: 20px;
+          background: radial-gradient(circle, #c4b5fd, #8b5cf6);
+          border-radius: 50%;
+          top: 50px; left: 50px;
+          animation: core-glow 2s ease-in-out infinite;
+          display: flex; align-items: center; justify-content: center;
+          color: white; font-size: 10px;
+        }
+      </style>
+      <div class="orbit-system">
+        <div class="orbit-ring orbit-ring-1"><div class="orbit-dot"></div></div>
+        <div class="orbit-ring orbit-ring-2"><div class="orbit-dot" style="background:#c084fc;"></div></div>
+        <div class="orbit-ring orbit-ring-3"><div class="orbit-dot" style="background:#e9d5ff;"></div></div>
+        <div class="orbit-core">&#10022;</div>
+      </div>
+    </div>
+    <div class="card-body">
+      <h3>C — Orbiting Rings</h3>
+      <p>Anelli orbitanti con particelle luminose che girano attorno a un nucleo pulsante. Effetto "portale magico" o "incantesimo in caricamento".</p>
+    </div>
+  </div>
+
+</div>
