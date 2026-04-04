@@ -52,25 +52,38 @@ export class TransformersJsAdapter {
 
     this.tokenizer = await AutoTokenizer.from_pretrained(this.modelId, {
       progress_callback: (p) => {
-        if (p.status === 'progress_total') {
-          throttledProgress('Caricamento tokenizer...', (p.progress || 0) * 0.1)
+        // v4: tokenizer doesn't emit progress_total, use per-file progress
+        if (p.status === 'progress' && p.progress > 0) {
+          throttledProgress('Caricamento tokenizer...', p.progress * 0.1)
         }
       },
     })
 
     throttledProgress('Download pesi del modello...', 10)
 
-    const fileSizes = {}
+    let initiatedFiles = 0
+    let doneFiles = 0
+    let hasTotalProgress = false
+
     this.model = await Gemma4ForConditionalGeneration.from_pretrained(this.modelId, {
       dtype: this.dtype,
       device: this.device,
       progress_callback: (p) => {
-        if (p.status === 'progress') {
-          fileSizes[p.file] = p.loaded
-          const loadedMB = (Object.values(fileSizes).reduce((s, v) => s + v, 0) / 1024 / 1024).toFixed(0)
-          throttledProgress(`Download: ${loadedMB} MB`, 10 + (p.progress || 0) * 0.9)
-        } else if (p.status === 'progress_total') {
-          throttledProgress('Download pesi del modello...', 10 + (p.progress || 0) * 0.9)
+        if (p.status === 'initiate') {
+          initiatedFiles++
+        } else if (p.status === 'progress_total' && p.progress > 0) {
+          // Best signal: aggregated progress across all files (fresh download)
+          hasTotalProgress = true
+          const loadedMB = (p.loaded / 1024 / 1024).toFixed(0)
+          throttledProgress(`Download: ${loadedMB} MB`, 10 + p.progress * 0.9)
+        } else if (p.status === 'done') {
+          doneFiles++
+          // Fallback for cache hits: progress_total stays at 0 when
+          // content-length is missing, so use file-count ratio instead
+          if (!hasTotalProgress && initiatedFiles > 0) {
+            const fileProgress = (doneFiles / initiatedFiles) * 100
+            throttledProgress('Caricamento dalla cache...', 10 + fileProgress * 0.9)
+          }
         }
       },
     })
