@@ -11,61 +11,94 @@ export function useModelLoader() {
   const pendingRef = useRef({})
 
   useEffect(() => {
-    const worker = new Worker(
-      new URL('../lib/modelWorker.js', import.meta.url),
-      { type: 'module' }
-    )
-    workerRef.current = worker
+    const MAX_RETRIES = 2
+    let retryCount = 0
+    let currentWorker = null
+    let cancelled = false
 
-    setStatus('loading')
-    logger.model('caricamento modello...')
-    const loadT0 = performance.now()
+    function startWorker() {
+      if (cancelled) return
 
-    worker.onmessage = (e) => {
-      const { type, id, output, message, progress: prog } = e.data
+      const worker = new Worker(
+        new URL('../lib/modelWorker.js', import.meta.url),
+        { type: 'module' }
+      )
+      currentWorker = worker
+      workerRef.current = worker
 
-      if (type === 'progress') {
-        setProgress(prog)
-        return
-      }
+      setStatus('loading')
+      logger.model(retryCount > 0
+        ? `retry ${retryCount}/${MAX_RETRIES}...`
+        : 'caricamento modello...'
+      )
+      const loadT0 = performance.now()
 
-      if (type === 'ready') {
-        const loadMs = Math.round(performance.now() - loadT0)
-        logger.modelLoaded(loadMs)
-        setStatus('ready')
-        return
-      }
+      worker.onmessage = (e) => {
+        if (cancelled) return
+        const { type, id, output, message, progress: prog } = e.data
 
-      if (type === 'result') {
-        pendingRef.current[id]?.resolve(output)
-        delete pendingRef.current[id]
-        return
-      }
+        if (type === 'progress') {
+          setProgress(prog)
+          return
+        }
 
-      if (type === 'error') {
-        if (id != null) {
-          pendingRef.current[id]?.reject(new Error(message))
+        if (type === 'ready') {
+          const loadMs = Math.round(performance.now() - loadT0)
+          logger.modelLoaded(loadMs)
+          retryCount = 0
+          setStatus('ready')
+          return
+        }
+
+        if (type === 'result') {
+          pendingRef.current[id]?.resolve(output)
           delete pendingRef.current[id]
-        } else {
-          logger.modelError(new Error(message))
-          setStatus('error')
+          return
+        }
+
+        if (type === 'error') {
+          if (id != null) {
+            pendingRef.current[id]?.reject(new Error(message))
+            delete pendingRef.current[id]
+          } else {
+            handleWorkerFailure(new Error(message))
+          }
         }
       }
+
+      worker.onerror = (err) => handleWorkerFailure(err)
+
+      worker.postMessage({ type: 'load' })
     }
 
-    worker.onerror = (err) => {
+    function handleWorkerFailure(err) {
+      if (cancelled) return
       logger.modelError(err)
-      setStatus('error')
+
+      for (const { reject } of Object.values(pendingRef.current)) {
+        reject(new Error('Worker failed'))
+      }
+      pendingRef.current = {}
+
+      currentWorker?.terminate()
+
+      if (retryCount < MAX_RETRIES) {
+        retryCount++
+        startWorker()
+      } else {
+        setStatus('error')
+      }
     }
 
-    worker.postMessage({ type: 'load' })
+    startWorker()
 
     return () => {
+      cancelled = true
       for (const { reject } of Object.values(pendingRef.current)) {
         reject(new Error('Worker terminated'))
       }
       pendingRef.current = {}
-      worker.terminate()
+      currentWorker?.terminate()
       workerRef.current = null
     }
   }, [])
@@ -76,17 +109,29 @@ export function useModelLoader() {
 
     const id = ++requestId
 
-    const timeoutPromise = new Promise((_, reject) =>
-      setTimeout(() => reject(new Error('LLM inference timeout')), MODEL_CONFIG.inferenceTimeout)
-    )
+    return new Promise((resolve, reject) => {
+      const timer = setTimeout(() => {
+        delete pendingRef.current[id]
+        worker.postMessage({ type: 'abort' })
+        reject(new Error('LLM inference timeout'))
+      }, MODEL_CONFIG.inferenceTimeout)
 
-    const inferencePromise = new Promise((resolve, reject) => {
-      pendingRef.current[id] = { resolve, reject }
+      pendingRef.current[id] = {
+        resolve: (value) => { clearTimeout(timer); resolve(value) },
+        reject: (err) => { clearTimeout(timer); reject(err) },
+      }
+
       worker.postMessage({ type: 'generate', id, data: { messages } })
     })
-
-    return Promise.race([inferencePromise, timeoutPromise])
   }, [])
 
-  return { status, progress, generate }
+  const cancel = useCallback(() => {
+    for (const { reject } of Object.values(pendingRef.current)) {
+      reject(new Error('Inference cancelled'))
+    }
+    pendingRef.current = {}
+    workerRef.current?.postMessage({ type: 'abort' })
+  }, [])
+
+  return { status, progress, generate, cancel }
 }

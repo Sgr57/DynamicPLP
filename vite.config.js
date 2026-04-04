@@ -9,6 +9,21 @@ export default defineConfig({
   worker: {
     format: 'es',
   },
+  // COOP/COEP headers enable SharedArrayBuffer for ONNX Runtime multi-thread WASM.
+  // For production hosting (Vercel, Netlify, Cloudflare), configure these headers
+  // in the hosting provider's config file (vercel.json, _headers, etc.)
+  server: {
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+    },
+  },
+  preview: {
+    headers: {
+      'Cross-Origin-Opener-Policy': 'same-origin',
+      'Cross-Origin-Embedder-Policy': 'require-corp',
+    },
+  },
   plugins: [
     react(),
     VitePWA({

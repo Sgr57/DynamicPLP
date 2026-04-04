@@ -1,6 +1,7 @@
 import { createModelAdapter } from './modelAdapter'
 
 let adapter = null
+let aborted = false
 
 self.addEventListener('message', async (e) => {
   const { type, id, data } = e.data
@@ -16,8 +17,16 @@ self.addEventListener('message', async (e) => {
     }
 
     if (type === 'generate') {
+      aborted = false
       const result = await adapter.generate(data.messages)
-      self.postMessage({ type: 'result', id, output: result })
+      if (!aborted) {
+        self.postMessage({ type: 'result', id, output: result })
+      }
+      return
+    }
+
+    if (type === 'abort') {
+      aborted = true
       return
     }
 
@@ -27,6 +36,8 @@ self.addEventListener('message', async (e) => {
       self.postMessage({ type: 'disposed' })
     }
   } catch (error) {
-    self.postMessage({ type: 'error', id, message: error.message })
+    if (!aborted) {
+      self.postMessage({ type: 'error', id, message: error.message })
+    }
   }
 })
