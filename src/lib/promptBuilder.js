@@ -23,7 +23,7 @@ STYLE <stile>=<peso>, ...
 CATEGORY <categoria>=<peso>, ...
 CONFIDENCE: <0.0-1.0, quanto sei sicuro del profilo>
 INTENT: <exploring|deciding|focused>
-MESSAGE: <frase diretta all'utente in italiano, es. "Ho notato che ti piacciono le scarpe rosse!">`
+MESSAGE: <2-3 frasi in italiano rivolte all'utente, come un assistente personale amichevole. Descrivi cosa hai osservato del suo comportamento e dai un suggerimento su cosa guardare. Varia il tono: a volte curioso, a volte entusiasta, a volte rassicurante. Non iniziare sempre con "Ho notato". Non usare emoji.>`
 
 const FEWSHOT_USER = `Interazioni:
 T+0s | aperto dettaglio | flat, elegant | rosso
@@ -44,7 +44,7 @@ STYLE elegant=0.7, casual=0.8, sporty=-0.5
 CATEGORY flat=1.0, running=-0.4
 CONFIDENCE: 0.8
 INTENT: exploring
-MESSAGE: Ho notato che ti piacciono le flat rosse! Ti mostro piu' opzioni in colori caldi.`
+MESSAGE: Sembra che le flat rosse abbiano catturato la tua attenzione, e hai dato un'occhiata anche al bordeaux. Ho riordinato i prodotti mettendo in evidenza le opzioni in tonalita' calde che potrebbero piacerti.`
 
 export function buildPrompt(eventsText, userProfile) {
   const hasProfile = userProfile && userProfile.length > 0

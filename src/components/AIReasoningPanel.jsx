@@ -52,6 +52,43 @@ function WeightBars({ title, data, colorMode }) {
   )
 }
 
+const SPARKLES = [
+  { left: '5%', delay: '0s', size: 12, opacity: 0.9 },
+  { left: '14%', delay: '0.5s', size: 9, opacity: 0.7 },
+  { left: '26%', delay: '1.1s', size: 14, opacity: 0.85 },
+  { left: '38%', delay: '0.2s', size: 10, opacity: 0.7 },
+  { left: '48%', delay: '0.8s', size: 13, opacity: 0.8 },
+  { left: '60%', delay: '1.5s', size: 11, opacity: 0.75 },
+  { left: '72%', delay: '0.4s', size: 8, opacity: 0.65 },
+  { left: '82%', delay: '1.0s', size: 14, opacity: 0.85 },
+  { left: '92%', delay: '1.7s', size: 10, opacity: 0.7 },
+  { left: '18%', delay: '1.3s', size: 12, opacity: 0.75 },
+  { left: '55%', delay: '0.7s', size: 11, opacity: 0.8 },
+  { left: '35%', delay: '1.9s', size: 9, opacity: 0.7 },
+]
+
+function SparkleLayer() {
+  return (
+    <div className="absolute inset-0 pointer-events-none overflow-hidden">
+      {SPARKLES.map((s, i) => (
+        <span
+          key={i}
+          className="absolute bottom-0.5"
+          style={{
+            left: s.left,
+            fontSize: `${s.size}px`,
+            color: `rgba(167,139,250,${s.opacity})`,
+            filter: 'drop-shadow(0 0 3px rgba(167,139,250,0.8))',
+            animation: `sparkle-rise 2s ease-out ${s.delay} infinite`,
+          }}
+        >
+          &#10022;
+        </span>
+      ))}
+    </div>
+  )
+}
+
 export default function AIReasoningPanel({ isAnalyzing, lastMessage, aiEnabled, onToggleAI, onResetEvents }) {
   const [isOpen, setIsOpen] = useState(false)
   const [debugOpen, setDebugOpen] = useState(false)
@@ -96,41 +133,73 @@ export default function AIReasoningPanel({ isAnalyzing, lastMessage, aiEnabled, 
         : 'text-gray-400'
 
   return (
-    <div className="bg-gradient-to-r from-indigo-50/80 to-purple-50/80 border-b border-indigo-100">
-      <div className="max-w-7xl mx-auto px-4">
+    <div className={`relative border-b transition-colors duration-500 ${
+      isAnalyzing
+        ? 'border-purple-200/60'
+        : 'border-indigo-100'
+    }`}>
+      {/* Aurora background */}
+      <div
+        className={`absolute inset-0 transition-opacity duration-700 ${
+          isAnalyzing ? 'opacity-100' : 'opacity-0'
+        }`}
+        style={{
+          background: 'linear-gradient(270deg, rgba(99,102,241,0.08), rgba(139,92,246,0.12), rgba(168,85,247,0.08), rgba(192,132,252,0.1), rgba(139,92,246,0.12), rgba(99,102,241,0.08))',
+          backgroundSize: '300% 100%',
+          animation: isAnalyzing ? 'aurora 4s ease-in-out infinite' : 'none',
+        }}
+      />
+      {/* Static background when not analyzing */}
+      <div
+        className={`absolute inset-0 bg-gradient-to-r from-indigo-50/80 to-purple-50/80 transition-opacity duration-700 ${
+          isAnalyzing ? 'opacity-0' : 'opacity-100'
+        }`}
+      />
+      {/* Border sweep */}
+      {isAnalyzing && (
+        <div
+          className="absolute bottom-0 left-0 right-0 h-0.5"
+          style={{
+            background: 'linear-gradient(90deg, transparent, rgba(196,181,253,0.6), rgba(233,213,255,0.8), rgba(196,181,253,0.6), transparent)',
+            backgroundSize: '200% 100%',
+            animation: 'border-sweep 2.5s linear infinite',
+          }}
+        />
+      )}
+      {/* Sparkles */}
+      {isAnalyzing && <SparkleLayer />}
+
+      <div className="relative max-w-7xl mx-auto px-4">
         <button
           onClick={() => setIsOpen(!isOpen)}
-          className="w-full flex items-center justify-between py-2.5 text-left"
+          className="w-full flex flex-col gap-1 py-3 text-left"
         >
-          <div className="flex items-center gap-2">
-            <span className={`text-sm ${isAnalyzing ? 'animate-pulse' : ''} ${aiEnabled ? 'text-indigo-500' : 'text-gray-400'}`}>
-              &#10022;
-            </span>
-            <span className={`text-xs font-medium ${statusColor}`}>
-              {statusLabel}
-            </span>
-            {aiEnabled && (
-              <span className="text-[10px] text-gray-400 font-mono">
-                {MODEL_LABEL}
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-2">
+              <span
+                className={`text-sm ${aiEnabled ? 'text-indigo-500' : 'text-gray-400'}`}
+                style={isAnalyzing ? { animation: 'star-glow 1.8s ease-in-out infinite' } : undefined}
+              >
+                &#10022;
               </span>
-            )}
-            {lastMessage && aiEnabled && !isOpen && (
-              <span className="text-xs text-gray-400 max-w-xs truncate hidden sm:inline">
-                — {lastMessage}
+              <span className={`text-xs font-medium ${statusColor}`}>
+                {statusLabel}
               </span>
-            )}
-          </div>
-
-          <div className="flex items-center gap-3">
-            {lastMessage && aiEnabled && (
-              <span className="text-[10px] bg-indigo-100 text-indigo-600 px-1.5 py-0.5 rounded font-medium">
-                AI Pick
-              </span>
-            )}
+              {aiEnabled && (
+                <span className="text-[10px] text-gray-400 font-mono">
+                  {MODEL_LABEL}
+                </span>
+              )}
+            </div>
             <span className="text-xs text-gray-400">
               {isOpen ? '\u25B2' : '\u25BC'}
             </span>
           </div>
+          {lastMessage && aiEnabled && !isOpen && (
+            <p className="text-xs text-gray-500 line-clamp-4 pl-5">
+              {lastMessage}
+            </p>
+          )}
         </button>
 
         <AnimatePresence>

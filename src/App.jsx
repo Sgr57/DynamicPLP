@@ -128,10 +128,10 @@ export default function App() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <div className="sticky top-0 z-10">
         <header className="bg-white shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 py-2">
+          <div className="max-w-7xl mx-auto px-4 py-1">
             <div className="flex items-center justify-between">
-              <h1 className="text-lg font-bold text-gray-900">DynamicPLP</h1>
-              <span className="text-xs text-gray-400">{products.length} prodotti</span>
+              <h1 className="text-sm font-bold text-gray-900">DynamicPLP</h1>
+              <span className="text-[10px] text-gray-400">{products.length} prodotti</span>
             </div>
           </div>
         </header>
