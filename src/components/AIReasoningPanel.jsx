@@ -89,7 +89,7 @@ function SparkleLayer() {
   )
 }
 
-export default function AIReasoningPanel({ isAnalyzing, lastMessage, aiEnabled, onToggleAI, onResetEvents }) {
+export default function AIReasoningPanel({ isAnalyzing, lastMessage, aiEnabled, aiUnsupported, onToggleAI, onResetEvents }) {
   const [isOpen, setIsOpen] = useState(false)
   const [debugOpen, setDebugOpen] = useState(false)
   const [stats, setStats] = useState({ total: 0, unanalyzed: 0 })
@@ -116,21 +116,25 @@ export default function AIReasoningPanel({ isAnalyzing, lastMessage, aiEnabled, 
     return () => clearInterval(interval)
   }, [debugOpen])
 
-  const statusLabel = !aiEnabled
-    ? 'Disattivata'
-    : isAnalyzing
-      ? 'Analisi in corso...'
-      : lastMessage
-        ? 'Personalizzato'
-        : 'In attesa'
+  const statusLabel = aiUnsupported
+    ? 'AI non disponibile su questo device'
+    : !aiEnabled
+      ? 'Disattivata'
+      : isAnalyzing
+        ? 'Analisi in corso...'
+        : lastMessage
+          ? 'Personalizzato'
+          : 'In attesa'
 
-  const statusColor = !aiEnabled
-    ? 'text-gray-400'
-    : isAnalyzing
-      ? 'text-purple-500'
-      : lastMessage
-        ? 'text-indigo-600'
-        : 'text-gray-400'
+  const statusColor = aiUnsupported
+    ? 'text-amber-500'
+    : !aiEnabled
+      ? 'text-gray-400'
+      : isAnalyzing
+        ? 'text-purple-500'
+        : lastMessage
+          ? 'text-indigo-600'
+          : 'text-gray-400'
 
   return (
     <div className={`relative border-b transition-colors duration-500 ${
@@ -225,19 +229,21 @@ export default function AIReasoningPanel({ isAnalyzing, lastMessage, aiEnabled, 
                     )}
                   </div>
 
-                  <label className="flex items-center gap-2 cursor-pointer">
-                    <span className="text-xs text-gray-500">AI</span>
-                    <div className="relative">
-                      <input
-                        type="checkbox"
-                        checked={aiEnabled}
-                        onChange={onToggleAI}
-                        className="sr-only peer"
-                      />
-                      <div className="w-8 h-4 bg-gray-300 rounded-full peer-checked:bg-indigo-500 transition-colors" />
-                      <div className="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full shadow peer-checked:translate-x-4 transition-transform" />
-                    </div>
-                  </label>
+                  {!aiUnsupported && (
+                    <label className="flex items-center gap-2 cursor-pointer">
+                      <span className="text-xs text-gray-500">AI</span>
+                      <div className="relative">
+                        <input
+                          type="checkbox"
+                          checked={aiEnabled}
+                          onChange={onToggleAI}
+                          className="sr-only peer"
+                        />
+                        <div className="w-8 h-4 bg-gray-300 rounded-full peer-checked:bg-indigo-500 transition-colors" />
+                        <div className="absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full shadow peer-checked:translate-x-4 transition-transform" />
+                      </div>
+                    </label>
+                  )}
                 </div>
 
                 {lastMessage && aiEnabled && (
@@ -246,7 +252,14 @@ export default function AIReasoningPanel({ isAnalyzing, lastMessage, aiEnabled, 
                   </div>
                 )}
 
-                {!aiEnabled && (
+                {aiUnsupported && (
+                  <div className="text-xs text-amber-600 bg-amber-50/60 rounded-lg p-2.5">
+                    Questo dispositivo non supporta WebGPU o SharedArrayBuffer.
+                    I prodotti sono ordinati con le ultime preferenze salvate.
+                  </div>
+                )}
+
+                {!aiEnabled && !aiUnsupported && (
                   <div className="text-xs text-gray-400 italic">
                     L&apos;AI &egrave; disattivata. I prodotti sono mostrati nell&apos;ordine predefinito.
                   </div>

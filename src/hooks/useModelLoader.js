@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
 import { MODEL_CONFIG } from '../data/modelConfig'
 import { logger } from '../lib/logger'
+import { getDeviceCapabilities } from '../lib/deviceCapabilities'
 
 let requestId = 0
 
@@ -11,6 +12,13 @@ export function useModelLoader() {
   const pendingRef = useRef({})
 
   useEffect(() => {
+    const caps = getDeviceCapabilities()
+    if (!caps.canRunModel) {
+      setStatus('unsupported')
+      logger.model(`AI non disponibile: ${caps.reason}`)
+      return
+    }
+
     const MAX_RETRIES = 2
     let retryCount = 0
     let currentWorker = null
