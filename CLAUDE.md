@@ -10,7 +10,7 @@ DynamicPLP is a **Local First** proof-of-concept: an AI-powered Product Listing 
 
 - **React 18** + **Vite 5** + **Tailwind CSS 3** + **Framer Motion 11**
 - **TinyBase** (~10 KB) reactive tabular store with IndexedDB auto-persist
-- **@mlc-ai/web-llm** with Qwen 2.5 3B for in-browser inference via WebGPU
+- **@huggingface/transformers** with Gemma 4 E2B for in-browser inference via WebGPU
 - **Workbox 7** Service Worker for full offline capability
 - Language: JavaScript (JSX), no TypeScript
 
@@ -35,7 +35,7 @@ TinyBase store `plp_demo` persisted on IndexedDB with 4 tables: `products`, `var
 2. **statsAggregator** (`src/ai/`) applies **dual decay** (temporal half-life 120s + quantitative every 15 events) and **per-product caps** (max 25 pts/product), aggregates into color/style/category affinities. Two modes: `aggregateStats()` (unanalyzed only, for pipeline) and `aggregateAllStats()` (all events, for debug)
 3. **triggerEngine** (`src/ai/`) evaluates trigger conditions: ≥10 interactions, ≥8s inactivity, ≥30s cooldown, significant delta (>2 points vs last snapshot)
 4. **promptBuilder** assembles: system prompt + affinities normalized 0-100 + user profile + few-shot example (~400 tokens total, **no catalog in prompt**)
-5. **WebLLM** (Qwen 2.5 3B) returns JSON with continuous weights (-1.0 to 1.0) for colors/styles/categories + evolving user profile. **Resilient JSON parser** with balanced brace extraction and auto-repair (unquoted keys, missing quotes) handles common LLM output issues.
+5. **Transformers.js** (Gemma 4 E2B) returns JSON with continuous weights (-1.0 to 1.0) for colors/styles/categories + evolving user profile. **Resilient JSON parser** with balanced brace extraction and auto-repair (unquoted keys, missing quotes) handles common LLM output issues.
 6. **reranker** scores each product: `colorScore×40 + styleScore×20 + categoryScore×30 + stockBonus×5` → updates `position` in TinyBase store
 7. **PLPGrid** re-renders with Framer Motion layout animations + **preselects preferred color variant** on each card
 
