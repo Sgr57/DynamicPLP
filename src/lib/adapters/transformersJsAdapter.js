@@ -1,6 +1,6 @@
 import {
   AutoTokenizer,
-  Gemma4ForConditionalGeneration,
+  AutoModelForCausalLM,
 } from '@huggingface/transformers'
 
 async function detectDevice(preferred) {
@@ -24,6 +24,12 @@ export class TransformersJsAdapter {
     this.model = null
   }
 
+  /**
+   * Load tokenizer and model. If the tokenizer lacks a chat_template
+   * (e.g. Gemma 4 ships it as a separate .jinja file), it is fetched
+   * from HuggingFace Hub and injected before the model loads.
+   * On fetch failure, the error propagates to useModelLoader for retry/disable.
+   */
   async load(onProgress) {
     let lastUpdate = 0
     let maxPercentage = 0
@@ -59,13 +65,35 @@ export class TransformersJsAdapter {
       },
     })
 
+    // Generic: auto-detect and fetch chat_template for any model that ships it separately (D-03)
+    if (!this.tokenizer.chat_template) {
+      const templateUrl = `https://huggingface.co/${this.modelId}/resolve/main/chat_template.jinja`
+      try {
+        const response = await fetch(templateUrl)
+        if (response.ok) {
+          this.tokenizer.chat_template = await response.text()
+        } else if (response.status === 404) {
+          throw new Error(
+            `Modello ${this.modelId}: chat_template mancante (non in tokenizer_config.json ne' come file .jinja)`
+          )
+        } else {
+          throw new Error(
+            `Impossibile scaricare chat_template: ${response.status} ${response.statusText}`
+          )
+        }
+      } catch (err) {
+        if (err.message.includes('chat_template')) throw err
+        throw new Error(`Errore di rete scaricando chat_template: ${err.message}`)
+      }
+    }
+
     throttledProgress('Download pesi del modello...', 10)
 
     let initiatedFiles = 0
     let doneFiles = 0
     let hasTotalProgress = false
 
-    this.model = await Gemma4ForConditionalGeneration.from_pretrained(this.modelId, {
+    this.model = await AutoModelForCausalLM.from_pretrained(this.modelId, {
       dtype: this.dtype,
       device: this.device,
       progress_callback: (p) => {
@@ -94,11 +122,15 @@ export class TransformersJsAdapter {
   async generate(messages) {
     if (!this.tokenizer || !this.model) throw new Error('Model not ready')
 
-    const prompt = this.tokenizer.apply_chat_template(messages, {
+    const templateOpts = {
       tokenize: false,
       add_generation_prompt: true,
-      enable_thinking: false,
-    })
+    }
+    // enable_thinking is Qwen3-specific; other tokenizers may reject it
+    if (this._enableThinking !== undefined) {
+      templateOpts.enable_thinking = this._enableThinking
+    }
+    const prompt = this.tokenizer.apply_chat_template(messages, templateOpts)
 
     const inputs = await this.tokenizer(prompt, {
       add_special_tokens: false,

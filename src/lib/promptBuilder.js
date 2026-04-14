@@ -4,26 +4,25 @@ const CATALOG_COLORS_LIST = ALL_CATALOG_COLORS.join(', ')
 const CATALOG_CATEGORIES = 'flat, high_heel, hiking_boot, mans_shoe, running, womans_boot'
 const CATALOG_STYLES = 'casual, classic, elegant, minimal, sporty, urban'
 
-const SYSTEM_PROMPT = `Sei un profiler per un e-commerce di scarpe. Ricevi la lista cronologica delle interazioni di un utente.
-Ogni riga: <T+secondi> | <azione> | <categoria, stili> | <colore>
-I timestamp sono secondi dall'inizio sessione. Usa le differenze tra eventi per dedurre durate e ritmi di navigazione.
+const SYSTEM_PROMPT = `Sei un profiler e-commerce scarpe. Analizza le interazioni utente e assegna pesi.
 
-Azioni positive (dall'interesse piu' debole al piu' forte):
-aperto dettaglio, tempo nel dettaglio, click colore, click variante, esplorato varianti, rivisitato, riaperto dettaglio
+Formato evento: T+Ns | azione | categoria, stili | colore
+Azioni positive (debole→forte): aperto dettaglio, tempo nel dettaglio, click colore, click variante, esplorato varianti, rivisitato, riaperto dettaglio
 Azioni negative: scrollato via, chiuso subito
 
-Colori catalogo: ${CATALOG_COLORS_LIST}
-Categorie catalogo: ${CATALOG_CATEGORIES}
-Stili catalogo: ${CATALOG_STYLES}
+Colori: ${CATALOG_COLORS_LIST}
+Categorie: ${CATALOG_CATEGORIES}
+Stili: ${CATALOG_STYLES}
 
-Rispondi SOLO con 7 righe:
-PROFILE: <1-2 frasi sui gusti attuali>
-COLOR <colore>=<peso>, ... (peso da -1.0 a 1.0, puoi aggiungere colori correlati dal catalogo)
-STYLE <stile>=<peso>, ...
-CATEGORY <categoria>=<peso>, ...
-CONFIDENCE: <0.0-1.0, quanto sei sicuro del profilo>
-INTENT: <exploring|deciding|focused>
-MESSAGE: <2-3 frasi in italiano rivolte all'utente, come un assistente personale amichevole. Descrivi cosa hai osservato del suo comportamento e dai un suggerimento su cosa guardare. Varia il tono: a volte curioso, a volte entusiasta, a volte rassicurante. Non iniziare sempre con "Ho notato". Non usare emoji.>`
+Rispondi SOLO con 6 righe, formato esatto:
+COLOR colore=peso, colore=peso
+STYLE stile=peso, stile=peso
+CATEGORY categoria=peso, categoria=peso
+CONFIDENCE 0.0-1.0
+INTENT exploring|deciding|focused
+MESSAGE 1-2 frasi in italiano: cosa hai osservato e un suggerimento
+
+Pesi: -1.0 (rifiutato) a 1.0 (molto interessato). Includi solo valori presenti nelle interazioni.`
 
 const FEWSHOT_USER = `Interazioni:
 T+0s | aperto dettaglio | flat, elegant | rosso
@@ -34,17 +33,14 @@ T+32s | chiuso subito (2s) | running, sporty | nero
 T+45s | click colore | flat, casual | rosso
 T+50s | aperto dettaglio | flat, casual | rosso
 T+58s | tempo nel dettaglio (8s) | flat, casual | rosso
-T+70s | riaperto dettaglio | flat, casual | rosso
+T+70s | riaperto dettaglio | flat, casual | rosso`
 
-Rispondi con le 7 righe:`
-
-const FEWSHOT_ASSISTANT = `PROFILE: Ama le flat, soprattutto rosse. Preferisce stili eleganti e casual. Ha ignorato le running sporty nere.
-COLOR rosso=1.0, bordeaux=0.5, nero=-0.3
+const FEWSHOT_ASSISTANT = `COLOR rosso=1.0, bordeaux=0.5, nero=-0.3
 STYLE elegant=0.7, casual=0.8, sporty=-0.5
 CATEGORY flat=1.0, running=-0.4
-CONFIDENCE: 0.8
-INTENT: exploring
-MESSAGE: Sembra che le flat rosse abbiano catturato la tua attenzione, e hai dato un'occhiata anche al bordeaux. Ho riordinato i prodotti mettendo in evidenza le opzioni in tonalita' calde che potrebbero piacerti.`
+CONFIDENCE 0.8
+INTENT exploring
+MESSAGE Le flat rosse hanno catturato la tua attenzione, hai guardato anche il bordeaux. Ti mostro opzioni in tonalita' calde.`
 
 export function buildPrompt(eventsText, userProfile) {
   const hasProfile = userProfile && userProfile.length > 0
@@ -54,9 +50,7 @@ export function buildPrompt(eventsText, userProfile) {
     : ''
 
   const userMessage = `${profileSection}${profileSection ? '\n\n' : ''}Interazioni:
-${eventsText}
-
-Rispondi con le 7 righe:`
+${eventsText}`
 
   return [
     { role: 'system', content: SYSTEM_PROMPT },

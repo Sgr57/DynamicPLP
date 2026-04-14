@@ -1,11 +1,12 @@
 /**
  * Line-based LLM response parser.
  * Expected format:
- *   PROFILE: <text>
- *   COLOR key=val, key=val, ...
- *   STYLE key=val, key=val, ...
- *   CATEGORY key=val, key=val, ...
- *   REASON: <text>
+ *   COLOR colore=peso, colore=peso
+ *   STYLE stile=peso, stile=peso
+ *   CATEGORY categoria=peso, categoria=peso
+ *   CONFIDENCE 0.0-1.0
+ *   INTENT exploring|deciding|focused
+ *   MESSAGE testo in italiano
  *
  * Falls back to JSON parsing if line-based fails.
  */
@@ -13,7 +14,6 @@
 import { logger } from './logger'
 
 const LINE_PREFIXES = {
-  PROFILE: 'user_profile',
   COLOR: 'color_weights',
   STYLE: 'style_weights',
   CATEGORY: 'category_weights',

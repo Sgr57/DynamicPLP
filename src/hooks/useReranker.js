@@ -13,6 +13,28 @@ import {
   getMemoryValue,
 } from '../db/aiMemoryRepo'
 import { isUserIdle } from '../tracking/mouseActivityTracker'
+
+function buildSyntheticProfile(weights) {
+  const top = (obj, n = 3) =>
+    Object.entries(obj || {})
+      .filter(([, v]) => v > 0.2)
+      .sort((a, b) => b[1] - a[1])
+      .slice(0, n)
+      .map(([k]) => k)
+
+  const colors = top(weights.color_weights)
+  const styles = top(weights.style_weights)
+  const cats = top(weights.category_weights)
+
+  if (!colors.length && !styles.length && !cats.length) return ''
+
+  const parts = []
+  if (colors.length) parts.push(`colori: ${colors.join(', ')}`)
+  if (styles.length) parts.push(`stili: ${styles.join(', ')}`)
+  if (cats.length) parts.push(`categorie: ${cats.join(', ')}`)
+  if (weights.intent) parts.push(`intent: ${weights.intent}`)
+  return parts.join('. ') + '.'
+}
 import { TRACKING_CONFIG } from '../tracking/trackingConfig'
 import { logger } from '../lib/logger'
 
@@ -108,8 +130,10 @@ export function useReranker(generate, engineReady, drawerProductId) {
           logger.llmWeights(weights)
           saveWeights(weights)
           setCurrentWeights(weights)
-          if (weights.user_profile) {
-            setMemoryValue('user_profile', weights.user_profile)
+          // Build synthetic profile from weights for the next prompt cycle
+          const synthProfile = buildSyntheticProfile(weights)
+          if (synthProfile) {
+            setMemoryValue('user_profile', synthProfile)
           }
           setMemoryValue('last_analysis_at', Date.now())
           setMemoryValue('last_event_count', totalEvents)

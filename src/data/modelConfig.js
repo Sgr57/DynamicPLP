@@ -1,9 +1,24 @@
+const MODELS = {
+  'qwen3-0.6b': {
+    model: 'onnx-community/Qwen3-0.6B-ONNX',
+    dtype: 'q4f16',
+    device: 'webgpu',
+    label: 'Qwen3 0.6B',
+    enableThinking: false,
+  },
+  'gemma4-e2b': {
+    model: 'onnx-community/gemma-4-E2B-it-ONNX',
+    dtype: 'q4f16',
+    device: 'webgpu',
+    label: 'Gemma 4 E2B',
+  },
+}
+
+// ← Switch active model here
+const ACTIVE_MODEL = 'gemma4-e2b'
+
 export const MODEL_CONFIG = {
-  // Transformers.js backend (Gemma 4 E2B)
-  model: 'onnx-community/gemma-4-E2B-it-ONNX',
-  dtype: 'q4f16',
-  device: 'webgpu',
-  label: 'Gemma 4 E2B',
+  ...MODELS[ACTIVE_MODEL],
 
   // Shared inference parameters
   temperature: 0.3,
