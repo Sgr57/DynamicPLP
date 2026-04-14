@@ -60,25 +60,25 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFER-01 | — | Pending |
-| INFER-02 | — | Pending |
-| CLEAN-01 | — | Pending |
-| CLEAN-02 | — | Pending |
-| CLEAN-03 | — | Pending |
-| REFAC-01 | — | Pending |
-| REFAC-02 | — | Pending |
-| REFAC-03 | — | Pending |
-| REFAC-04 | — | Pending |
-| SETT-01 | — | Pending |
-| SETT-02 | — | Pending |
-| SETT-03 | — | Pending |
-| SETT-04 | — | Pending |
+| INFER-01 | Phase 1 | Pending |
+| INFER-02 | Phase 1 | Pending |
+| CLEAN-01 | Phase 2 | Pending |
+| CLEAN-02 | Phase 2 | Pending |
+| CLEAN-03 | Phase 2 | Pending |
+| REFAC-01 | Phase 3 | Pending |
+| REFAC-02 | Phase 3 | Pending |
+| REFAC-03 | Phase 3 | Pending |
+| REFAC-04 | Phase 3 | Pending |
+| SETT-01 | Phase 4 | Pending |
+| SETT-02 | Phase 4 | Pending |
+| SETT-03 | Phase 4 | Pending |
+| SETT-04 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 13 total
-- Mapped to phases: 0
-- Unmapped: 13
+- Mapped to phases: 13
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-04-14*
-*Last updated: 2026-04-14 after initial definition*
+*Last updated: 2026-04-14 after roadmap phase mapping*
