@@ -28,10 +28,10 @@ Decimal phases appear between their surrounding integers in numeric order.
   2. After browsing for 10-15 seconds (hovering, clicking products), the product grid visibly reorders
   3. The AIReasoningPanel (debug overlay) shows updated weights and a parsed LLM response
   4. Reordering persists across page reloads (pre-personalized startup from saved weights)
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 01-01: TBD
+- [ ] 01-01-PLAN.md — Fix chat_template regression, evaluate working tree diffs, verify end-to-end reranking
 
 ### Phase 2: Dead Code Removal
 **Goal**: The codebase contains only code that serves the running application
@@ -84,7 +84,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Restore Inference | 0/0 | Not started | - |
+| 1. Restore Inference | 0/1 | Planning complete | - |
 | 2. Dead Code Removal | 0/0 | Not started | - |
 | 3. Code Review & Refactor | 0/0 | Not started | - |
 | 4. Settings Page | 0/0 | Not started | - |
