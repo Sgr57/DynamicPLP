@@ -41,6 +41,7 @@ yarn-error.log*
 .stylelintcache
 
 # Local tooling
+.claude/
 .planning/
 .superpowers/
 .playwright-mcp/
