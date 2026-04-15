@@ -10,18 +10,19 @@ export default defineConfig({
     format: 'es',
   },
   // COOP/COEP headers enable SharedArrayBuffer for ONNX Runtime multi-thread WASM.
-  // For production hosting (Vercel, Netlify, Cloudflare), configure these headers
-  // in the hosting provider's config file (vercel.json, _headers, etc.)
+  // Using 'credentialless' (not 'require-corp') so cross-origin fetches to HuggingFace
+  // CDN work without requiring CORP headers from the remote server.
+  // Production headers are configured in vercel.json (must match these values).
   server: {
     headers: {
       'Cross-Origin-Opener-Policy': 'same-origin',
-      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Embedder-Policy': 'credentialless',
     },
   },
   preview: {
     headers: {
       'Cross-Origin-Opener-Policy': 'same-origin',
-      'Cross-Origin-Embedder-Policy': 'require-corp',
+      'Cross-Origin-Embedder-Policy': 'credentialless',
     },
   },
   plugins: [
