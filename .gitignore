@@ -39,3 +39,9 @@ yarn-error.log*
 *.tgz
 .eslintcache
 .stylelintcache
+
+# Local tooling
+.planning/
+.superpowers/
+.playwright-mcp/
+graphify-out/
