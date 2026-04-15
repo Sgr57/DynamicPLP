@@ -137,7 +137,15 @@ export default function App() {
               <h1 className="text-sm font-bold text-gray-900">DynamicPLP</h1>
               <div className="flex items-center gap-3">
                 <span className="text-[10px] text-gray-400">{products.length} prodotti</span>
-                <GitHubButton href="https://github.com/Sgr57/DynamicPLP" data-icon="octicon-star" data-show-count="true" data-size="small" aria-label="Star Sgr57/DynamicPLP on GitHub">Star</GitHubButton>
+                <GitHubButton
+                  href="https://github.com/Sgr57/DynamicPLP"
+                  data-color-scheme="no-preference: light; light: light; dark: light;"
+                  data-size="large"
+                  data-show-count="true"
+                  aria-label="Star Sgr57/DynamicPLP on GitHub"
+                >
+                  Star
+                </GitHubButton>
               </div>
             </div>
           </div>
