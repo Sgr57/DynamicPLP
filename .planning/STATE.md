@@ -28,7 +28,7 @@ See: .planning/PROJECT.md (updated 2026-04-14)
 Phase: 2
 Plan: Not started
 Status: Executing Phase 01
-Last activity: 2026-04-15
+Last activity: 2026-04-15 - Completed quick task 260415-ms1: Fix WebGPU/SharedArrayBuffer warning on Vercel
 
 Progress: [░░░░░░░░░░] 0%
 
@@ -70,6 +70,12 @@ None yet.
 ### Blockers/Concerns
 
 - LLM inference is broken (chat_template regression) -- blocks all demo capability
+
+### Quick Tasks Completed
+
+| # | Description | Date | Commit | Status | Directory |
+|---|-------------|------|--------|--------|-----------|
+| 260415-ms1 | Fix WebGPU/SharedArrayBuffer warning on Vercel (missing COOP/COEP headers) | 2026-04-15 | 13a7b38 | Needs Review | [260415-ms1-investigate-webgpu-sharedarraybuffer-war](./quick/260415-ms1-investigate-webgpu-sharedarraybuffer-war/) |
 
 ## Session Continuity
 
