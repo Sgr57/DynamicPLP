@@ -24,11 +24,11 @@ The PLP must dynamically reorder products based on user behavior, powered by a l
 - ✓ Product drawer with variant cycling and tracking — existing
 - ✓ Debug overlay (AIReasoningPanel) — existing
 - ✓ Service Worker offline support — existing
+- ✓ Fix LLM chat_template regression — Validated in Phase 1: Restore Inference
 
 ### Active
 
 - [ ] Remove sandbox page and all related unused code
-- [ ] Fix LLM chat_template regression (apply_chat_template error)
 - [ ] Code scan and review for quality issues
 - [ ] Targeted refactor based on review findings
 - [ ] Hidden settings page for LLM selection (swap models, custom fine-tuned)
@@ -43,12 +43,12 @@ The PLP must dynamically reorder products based on user behavior, powered by a l
 ## Context
 
 - Brownfield codebase, already mapped (`.planning/codebase/`)
-- LLM inference was working, now broken (chat_template regression) — likely related to model config changes in `src/data/modelConfig.js`
+- LLM inference restored (Phase 1) — chat_template auto-injection from HuggingFace Hub, multi-model config registry, simplified 6-line prompt format
 - `sandbox.html` is an untracked test page with possible dead code dependencies
 - Reference project for LLM settings page: `/Users/emanuele/Projects/CompareLocalLLM`
 - Stack: React 18 + Vite 5 + Tailwind 3 + Framer Motion 11 + TinyBase 5 + @huggingface/transformers 4.0.1
 - Model adapter pattern already exists (`src/lib/adapters/transformersJsAdapter.js`) — good foundation for multi-model support
-- Modified files in working tree: `modelConfig.js`, `useReranker.js`, `transformersJsAdapter.js`, `modelAdapter.js`, `promptBuilder.js`, `responseParser.js`, `vite.config.js`
+- Phase 1 complete: all 7 working tree diffs evaluated, 6 kept, vite.config.js reverted
 
 ## Constraints
 
@@ -84,4 +84,4 @@ This document evolves at phase transitions and milestone boundaries.
 4. Update Context with current state
 
 ---
-*Last updated: 2026-04-14 after initialization*
+*Last updated: 2026-04-15 after Phase 1 completion*
