@@ -31,7 +31,7 @@ Decimal phases appear between their surrounding integers in numeric order.
 **Plans**: 1 plan
 
 Plans:
-- [ ] 01-01-PLAN.md — Fix chat_template regression, evaluate working tree diffs, verify end-to-end reranking
+- [x] 01-01-PLAN.md — Fix chat_template regression, evaluate working tree diffs, verify end-to-end reranking
 
 ### Phase 2: Dead Code Removal
 **Goal**: The codebase contains only code that serves the running application
