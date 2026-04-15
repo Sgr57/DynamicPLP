@@ -33,7 +33,12 @@ export default defineConfig({
       filename: 'sw.js',
       injectRegister: 'auto',
       injectManifest: {
+        // Exclude Worker scripts and their heavy dependencies from precache.
+        // Module Workers served from SW cache can fail in Chrome with opaque
+        // errors. The Worker and ONNX adapter are loaded on-demand from the
+        // network instead.
         globPatterns: ['**/*.{js,css,html,ico,png,svg}'],
+        globIgnores: ['**/modelWorker-*.js', '**/transformersJsAdapter-*.js'],
         maximumFileSizeToCacheInBytes: 10 * 1024 * 1024,
       },
     }),

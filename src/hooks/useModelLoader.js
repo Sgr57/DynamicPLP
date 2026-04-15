@@ -27,6 +27,8 @@ export function useModelLoader() {
     function startWorker() {
       if (cancelled) return
 
+      // Keep new URL() inline inside new Worker() — Vite's static analysis
+      // requires this exact pattern to detect and bundle the Worker script.
       const worker = new Worker(
         new URL('../lib/modelWorker.js', import.meta.url),
         { type: 'module' }
@@ -74,7 +76,14 @@ export function useModelLoader() {
         }
       }
 
-      worker.onerror = (err) => handleWorkerFailure(err)
+      worker.onerror = (err) => {
+        // Worker onerror receives an Event, not an Error.
+        // Extract whatever info is available for diagnostics.
+        const info = err instanceof ErrorEvent
+          ? `${err.message} (${err.filename}:${err.lineno})`
+          : 'Opaque worker error — script may have failed to load or evaluate'
+        handleWorkerFailure(new Error(info))
+      }
 
       worker.postMessage({ type: 'load' })
     }
