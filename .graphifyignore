@@ -1,0 +1,5 @@
+# .graphifyignore
+
+.idea
+node_modules/
+dist/

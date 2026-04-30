@@ -46,3 +46,4 @@ yarn-error.log*
 .superpowers/
 .playwright-mcp/
 graphify-out/
+fine-tuning/
