@@ -1,8 +1,4 @@
-import { ALL_CATALOG_COLORS } from './colorFamilies'
-
-const CATALOG_COLORS_LIST = ALL_CATALOG_COLORS.join(', ')
-const CATALOG_CATEGORIES = 'flat, high_heel, hiking_boot, mans_shoe, running, womans_boot'
-const CATALOG_STYLES = 'casual, classic, elegant, minimal, sporty, urban'
+import { MODEL_CONFIG } from '../data/modelConfig'
 
 const SYSTEM_PROMPT = `Sei un profiler e-commerce scarpe. Analizza le interazioni utente e assegna pesi.
 
@@ -10,9 +6,15 @@ Formato evento: T+Ns | azione | categoria, stili | colore
 Azioni positive (debole→forte): aperto dettaglio, tempo nel dettaglio, click colore, click variante, esplorato varianti, rivisitato, riaperto dettaglio
 Azioni negative: scrollato via, chiuso subito
 
-Colori: ${CATALOG_COLORS_LIST}
-Categorie: ${CATALOG_CATEGORIES}
-Stili: ${CATALOG_STYLES}
+I timestamp T+Ns indicano il tempo relativo dall'inizio della sessione. Usa i timestamp per capire:
+- Quali interessi sono piu' recenti (piu' rilevanti)
+- Quanto tempo l'utente dedica a ogni prodotto
+- Se l'interesse cambia nel tempo (shift di preferenza)
+
+ATTENZIONE: Non confondere le dimensioni! Ogni valore va SOLO nella sua riga:
+- Colori (riga COLOR): rosso, arancione, giallo, corallo, bordeaux, beige, cammello, cuoio, panna, marrone, marrone chiaro, blu, blu scuro, celeste, verde, verde scuro, oliva, viola, nero, bianco, grigio, grigio chiaro, rosa
+- Categorie (riga CATEGORY): flat, high_heel, hiking_boot, mans_shoe, running, womans_boot
+- Stili (riga STYLE): casual, classic, elegant, minimal, sporty, urban
 
 Rispondi SOLO con 6 righe, formato esatto:
 COLOR colore=peso, colore=peso
@@ -22,7 +24,7 @@ CONFIDENCE 0.0-1.0
 INTENT exploring|deciding|focused
 MESSAGE 1-2 frasi in italiano: cosa hai osservato e un suggerimento
 
-Pesi: -1.0 (rifiutato) a 1.0 (molto interessato). Includi solo valori presenti nelle interazioni.`
+Pesi: -1.0 (rifiutato) a 1.0 (molto interessato). Includi solo valori non-zero presenti nelle interazioni.`
 
 const FEWSHOT_USER = `Interazioni:
 T+0s | aperto dettaglio | flat, elegant | rosso
@@ -44,6 +46,7 @@ MESSAGE Le flat rosse hanno catturato la tua attenzione, hai guardato anche il b
 
 export function buildPrompt(eventsText, userProfile) {
   const hasProfile = userProfile && userProfile.length > 0
+  const useFewShot = MODEL_CONFIG.useFewShot !== false
 
   const profileSection = hasProfile
     ? `Profilo precedente: "${userProfile}"`
@@ -52,10 +55,13 @@ export function buildPrompt(eventsText, userProfile) {
   const userMessage = `${profileSection}${profileSection ? '\n\n' : ''}Interazioni:
 ${eventsText}`
 
-  return [
-    { role: 'system', content: SYSTEM_PROMPT },
-    { role: 'user', content: FEWSHOT_USER },
-    { role: 'assistant', content: FEWSHOT_ASSISTANT },
-    { role: 'user', content: userMessage },
-  ]
+  const messages = [{ role: 'system', content: SYSTEM_PROMPT }]
+  if (useFewShot) {
+    messages.push(
+      { role: 'user', content: FEWSHOT_USER },
+      { role: 'assistant', content: FEWSHOT_ASSISTANT },
+    )
+  }
+  messages.push({ role: 'user', content: userMessage })
+  return messages
 }

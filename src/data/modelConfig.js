@@ -12,10 +12,17 @@ const MODELS = {
     device: 'webgpu',
     label: 'Gemma 4 E2B',
   },
+  'gemma3-270m-plp': {
+    model: 'edorazio/gemma-3-270m-it-dynamicplp',
+    dtype: 'q4f16',
+    device: 'webgpu',
+    label: 'Gemma 3 270M (PLP fine-tune)',
+    useFewShot: false,
+  },
 }
 
 // ← Switch active model here
-const ACTIVE_MODEL = 'gemma4-e2b'
+const ACTIVE_MODEL = 'gemma3-270m-plp'
 
 export const MODEL_CONFIG = {
   ...MODELS[ACTIVE_MODEL],
